@@ -1,3 +1,4 @@
+import logging
 from collections import OrderedDict
 
 
@@ -27,6 +28,10 @@ class Environment:
         raise NotImplementedError
 
     def next_states(self, state, action):
+        """
+        Returns a list of possible next environment states
+        :rtype: list
+        """
         raise NotImplementedError
 
 
@@ -59,10 +64,6 @@ class WalkAB(Environment):
 
     # Note: if there are many actions
     def next_states(self, state, action):
-        """
-        Returns a list of possible next environment states
-        :rtype: list
-        """
         n, vis_b = state
         vis_b |= action == +1 and n == 4
         n_ = n + action
@@ -115,9 +116,10 @@ class Controller:
 
     def __str__(self):
         n = self.num_states
-        s = "States: {}".format(n)
-        for i in sorted(self.transitions.items(), key=lambda k, v: k[0]*n + v[0]):
-            s += str(i)
+        s = f"States: {n}\n"
+        for i in sorted(self.transitions.items(), key=lambda x: x[0][0] * n + x[1][0]):
+            s += f"{i}\n"
+        return s
 
 
 class AndOrPlanner:
@@ -125,9 +127,11 @@ class AndOrPlanner:
         self.env = env
 
     def synth_plan(self, bound):
-        self.bound = bound
         self.backtrack_stack = []
         self.contr = Controller(bound)
+        # Note: this creates a controller first for one init state,
+        #       and if it fails for another then backtracks it transition by transition.
+        #       Is there a better method?
         return self.and_step(self.contr.init_state, self.env.init_states, [])
 
     # Note: history and controller could be moved from function arguments to class properties
@@ -139,6 +143,7 @@ class AndOrPlanner:
     #       (and_step is needed for synth_plan though)
     def and_step(self, q, sl_next, history):
         for s in sl_next:
+            logging.info("Simulating s:%s, q:%s", s, q)
             self.or_step(q, s, history)
 
     def or_step(self, q, env_state, history):
@@ -151,14 +156,15 @@ class AndOrPlanner:
         history.append((q, env_state))
         obs = self.env.get_obs(env_state)
 
-        try:
+        if (q, obs) in self.contr.transitions:
             q_next, action = self.contr[q, obs]
             if action not in self.env.legal_actions(env_state):
                 raise PandorBacktrackException
             sl_next = self.env.next_states(env_state, action)
             self.and_step(q_next, sl_next, history)
+            return
 
-        except KeyError:  # no (q_next,act) defined for (q,obs) ⇒ define new one
+        else:  # no (q_next,act) defined for (q,obs) ⇒ define new one
             # non-det branching of q',a
 
             # save function arguments for bracktracking
@@ -169,25 +175,36 @@ class AndOrPlanner:
             # Note: for memory efficiency, can store len(history) instead of history
             # Note: if the state transitions of the controller were ordered according to their
             #       being added, then we needn't make a copy of it either.
+            # Note: memory - env_state need not be saved either, I guess
             self.backtrack_stack.append((q, env_state, len(history)))
+            logging.debug("%s\n", self.backtrack_stack)
 
             # important: q_next first, so we only add new states when necessary
             for q_next in range(self.contr.num_states+1):
                 for action in self.env.legal_actions(env_state):
                     # extend controller
                     self.contr[q, obs] = q_next, action
+                    logging.info("Added: %s -> %s", (q, obs), (q_next, action))
 
                     sl_next = self.env.next_states(env_state, action)
 
                     try:
                         self.and_step(q_next, sl_next, history)
+                        return
                     except PandorBacktrackException:
                         q, env_state, len_history = self.backtrack_stack[-1]
+                        logging.info("Backstep: %s", list(reversed(history[len_history:])))
                         history = history[:len_history]
-                        self.contr.transitions.popitem()
+                        t_backtracked = self.contr.transitions.popitem()
+                        logging.info("Deleted: %s -> %s", t_backtracked[0], t_backtracked[1])
+
+            assert False, "Are we ever here?"
+
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+
     planner = AndOrPlanner(env=WalkAB())
     planner.synth_plan(bound=2)
     print(planner.contr)
