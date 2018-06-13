@@ -42,9 +42,11 @@ class WalkAB(Environment):
     Goal states: { (1, True) }
     """
 
+    @property
     def init_states(self):
         return [(1, False), (2, False)]
 
+    @property
     def goal_states(self):
         return [(1, True)]
 
@@ -111,6 +113,12 @@ class Controller:
 
         self.transitions[key] = value
 
+    def __str__(self):
+        n = self.num_states
+        s = "States: {}".format(n)
+        for i in sorted(self.transitions.items(), key=lambda k, v: k[0]*n + v[0]):
+            s += str(i)
+
 
 class AndOrPlanner:
     def __init__(self, env):
@@ -127,6 +135,8 @@ class AndOrPlanner:
     #       and there is a single instance of each
     #       (actually the whole and_step function could be removed)
     #       (maybe it's useful for the other two uses of the planner in Hu2013)
+    #       (the and_step didn't even make the recursion step clearer)
+    #       (and_step is needed for synth_plan though)
     def and_step(self, q, sl_next, history):
         for s in sl_next:
             self.or_step(q, s, history)
@@ -180,3 +190,4 @@ class AndOrPlanner:
 if __name__ == '__main__':
     planner = AndOrPlanner(env=WalkAB())
     planner.synth_plan(bound=2)
+    print(planner.contr)
