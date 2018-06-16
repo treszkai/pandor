@@ -1,6 +1,8 @@
 import logging
 from collections import OrderedDict
 
+import time
+
 
 class PandorBacktrackException(Exception):
     pass
@@ -34,6 +36,18 @@ class Environment:
         """
         raise NotImplementedError
 
+    @staticmethod
+    def str_state(s):
+        return s
+
+    @staticmethod
+    def str_action(a):
+        return a
+
+    @staticmethod
+    def str_obs(o):
+        return o
+
 
 class WalkAB(Environment):
     """ Environment of Fig. 1 of BPG2009
@@ -46,6 +60,21 @@ class WalkAB(Environment):
     Init states: { (1, False), (2, False) }
     Goal states: { (1, True) }
     """
+
+    @staticmethod
+    def str_state(s):
+        return "({}, {})".format(s[0], 'T' if s[1] else 'F')
+
+    @staticmethod
+    def str_action(a):
+        if a == -1:  return "Left"
+        elif a == 1: return "Right"
+        else: assert False, f"Nonsense action: {a}"
+
+    @staticmethod
+    def str_obs(o):
+        return "({}, {})".format(" A" if o[0] else "¬A",
+                                 " B" if o[1] else "¬B")
 
     @property
     def init_states(self):
@@ -76,7 +105,15 @@ class WalkAB(Environment):
         return [(n, vis_b)]
 
 
-class Controller:
+class PrizeA:
+    """ Prize-A environment, from Bonet2009
+    States: {}
+    Action set: {(0,1), (0,-1), (1,0), (-1,0)} = {right, left, up, down}
+    """
+    pass
+
+
+class MealyController:
     """ An N-bounded Mealy machine
     States: 0, 1, 2, ... k-1  where k <= N
     Observations
@@ -128,7 +165,7 @@ class AndOrPlanner:
 
     def synth_plan(self, bound):
         self.backtrack_stack = []
-        self.contr = Controller(bound)
+        self.contr = MealyController(bound)
         # Note: this creates a controller first for one init state,
         #       and if it fails for another then backtracks it transition by transition.
         #       Is there a better method?
@@ -143,7 +180,7 @@ class AndOrPlanner:
     #       (and_step is needed for synth_plan though)
     def and_step(self, q, sl_next, history):
         for s in sl_next:
-            logging.info("Simulating s:%s, q:%s", s, q)
+            logging.info("Simulating s:%s, q:%s", self.env.str_state(s), q)
             self.or_step(q, s, history)
 
     def or_step(self, q, env_state, history):
@@ -184,7 +221,9 @@ class AndOrPlanner:
                 for action in self.env.legal_actions(env_state):
                     # extend controller
                     self.contr[q, obs] = q_next, action
-                    logging.info("Added: %s -> %s", (q, obs), (q_next, action))
+                    logging.info("Added:   (%s,%s) -> (%s,%s)",
+                                 q, self.env.str_obs(obs),
+                                 q_next, self.env.str_action(action))
 
                     sl_next = self.env.next_states(env_state, action)
 
@@ -193,10 +232,26 @@ class AndOrPlanner:
                         return
                     except PandorBacktrackException:
                         q, env_state, len_history = self.backtrack_stack[-1]
-                        logging.info("Backstep: %s", list(reversed(history[len_history:])))
+                        logging.info("Backstep: %s",
+                                     [(q,self.env.str_state(s))
+                                            for q,s in history[-1:len_history-1:-1]])
                         history = history[:len_history]
-                        t_backtracked = self.contr.transitions.popitem()
-                        logging.info("Deleted: %s -> %s", t_backtracked[0], t_backtracked[1])
+
+                        # TODO XXX As a result of the above line, some function calls will see a different list than others do
+                        # (And in fact, this history clipping doesn't carry through AND steps.)
+                        # Use a single history, common to the Planner object
+                        # Is it correct if in the AND_step we save len_history and clip the history after the or_step succeeds?
+                        # What if I use
+                        #   del history[len_history:] ?
+                        # Same result, just no new object.
+                        # And do the history clipping in AND.
+                        # Why did it work in Prolog? I guess it passes arguments by value. Why am I messing with this again?
+                        # But even if I did that, this algo wouldn't backtrack over AND nodes – why?
+
+                        t = self.contr.transitions.popitem()
+                        logging.info("Deleted: (%s,%s) -> (%s,%s)",
+                                     t[0][0], self.env.str_obs(t[0][1]),
+                                     t[1][0], self.env.str_action(t[1][1]))
 
             assert False, "Are we ever here?"
 
@@ -207,4 +262,6 @@ if __name__ == '__main__':
 
     planner = AndOrPlanner(env=WalkAB())
     planner.synth_plan(bound=2)
+
+    time.sleep(1)
     print(planner.contr)
