@@ -6,8 +6,7 @@ from itertools import dropwhile
 from itertools import product
 
 
-class PandorBacktrackException(Exception):
-    pass
+v = True
 
 
 class PandorControllerNotFound(Exception):
@@ -205,13 +204,13 @@ class AndOrPlanner:
             try:
                 s_k = next(it)
             except StopIteration:
-                logging.info("AND: succeed at history %s", history)
+                logging.info("AND: succeed at history %s", history) if v else 0
                 return True
 
             if self.backtracking:
-                logging.info("AND: Redoing s: %s", self.env.str_state(s_k))
+                logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
             else:
-                logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q)
+                logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
 
             # Note: only need to copy the history if len(sl_next) > 1. I guess.
             #       Or alternatively, could save len(history) and clip it after each new or_step
@@ -223,9 +222,9 @@ class AndOrPlanner:
                 # Note: would be enough to compare only the second entry of histories
                 if history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
                     it = get_backtracked_iterator()
-                    logging.info("AND: Backtracking left")
+                    logging.info("AND: Backtracking left") if v else 0
                 else:
-                    logging.info("AND: Backtracking up")
+                    logging.info("AND: Backtracking up") if v else 0
                     return False
                 # Note: We set self.backtracking = True in and_step
                 #   when an or_step failed and we start looking for the last checkpoint
@@ -260,7 +259,7 @@ class AndOrPlanner:
             # store a new checkpoint iff we're not backtracking currently
             self.backtrack_stack.append(history[:])
             logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
-                         q, self.env.str_state(env_state), history)
+                         q, self.env.str_state(env_state), history) if v else 0
 
         else:  # backtracking
             history.append((q, env_state))
@@ -269,7 +268,7 @@ class AndOrPlanner:
             t = self.contr.transitions.popitem()
             logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
                          t[0][0], self.env.str_obs(t[0][1]),
-                         t[1][0], self.env.str_action(t[1][1]))
+                         t[1][0], self.env.str_action(t[1][1])) if v else 0
 
             q_next_last = t[1][0]
             action_last = t[1][1]
@@ -302,7 +301,7 @@ class AndOrPlanner:
                 self.contr[q, obs] = q_next, action
                 logging.info("OR: Added:   (%s,%s) -> (%s,%s)",
                              q, self.env.str_obs(obs),
-                             q_next, self.env.str_action(action))
+                             q_next, self.env.str_action(action)) if v else 0
 
             sl_next = self.env.next_states(env_state, action)
 
@@ -322,20 +321,21 @@ class AndOrPlanner:
                 len_history = len(self.backtrack_stack[-1])
 
                 logging.info("OR: Backstep: %s",
-                             [(q, self.env.str_state(s)) for q, s in history[-1:len_history-1:-1]])
+                             [(q, self.env.str_state(s)) for q, s in history[-1:len_history-1:-1]]) if v else 0
                 # it's enough to clip the history if we're backtracking in the or_step
                 del history[len_history:]
 
                 t = self.contr.transitions.popitem()
                 logging.info("OR: Deleted: (%s,%s) -> (%s,%s)",
                              t[0][0], self.env.str_obs(t[0][1]),
-                             t[1][0], self.env.str_action(t[1][1]))
+                             t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         return False
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    if v:
+        logging.basicConfig(level=logging.INFO)
 
     planner = AndOrPlanner(env=WalkAB())
     planner.synth_plan(bound=2)
