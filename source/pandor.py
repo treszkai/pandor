@@ -205,6 +205,7 @@ class AndOrPlanner:
             try:
                 s_k = next(it)
             except StopIteration:
+                logging.info("AND: succeed at history %s", history)
                 return True
 
             if self.backtracking:
@@ -219,12 +220,19 @@ class AndOrPlanner:
                 self.backtracking = True
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1])
+                # Note: would be enough to compare only the second entry of histories
                 if history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
                     it = get_backtracked_iterator()
                     logging.info("AND: Backtracking left")
                 else:
                     logging.info("AND: Backtracking up")
                     return False
+                # Note: We set self.backtracking = True in and_step
+                #   when an or_step failed and we start looking for the last checkpoint
+                # We set self.backtracking = False in or_step
+                #   when we start doing business as usual:
+                #   i.e. either when we arrive in an OR node from up
+                #     or when we arrive in it from the left
 
     def or_step(self, q, env_state, history):
         if not self.backtracking:
@@ -243,8 +251,7 @@ class AndOrPlanner:
                     return False
 
                 sl_next = self.env.next_states(env_state, action)
-                self.and_step(q_next, sl_next, history)
-                return True
+                return self.and_step(q_next, sl_next, history)
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
             it = product(range(self.contr.num_states+1),
@@ -252,7 +259,7 @@ class AndOrPlanner:
 
             # store a new checkpoint iff we're not backtracking currently
             self.backtrack_stack.append(history[:])
-            logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s\n",
+            logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
                          q, self.env.str_state(env_state), history)
 
         else:  # backtracking
@@ -290,17 +297,26 @@ class AndOrPlanner:
 
         # important: q_next first, so we only add new states when necessary
         for q_next, action in it:
-            # extend controller
-            self.contr[q, obs] = q_next, action
-            logging.info("OR: Added:   (%s,%s) -> (%s,%s)",
-                         q, self.env.str_obs(obs),
-                         q_next, self.env.str_action(action))
+            # extend controller if not backtracking
+            if not self.backtracking:
+                self.contr[q, obs] = q_next, action
+                logging.info("OR: Added:   (%s,%s) -> (%s,%s)",
+                             q, self.env.str_obs(obs),
+                             q_next, self.env.str_action(action))
 
             sl_next = self.env.next_states(env_state, action)
 
             if self.and_step(q_next, sl_next, history):
+                # If we're here then self.backtracking is already False
+                #   (if we came from up, then we cleared it;
+                #    if we came from left, then the above call just succeeded
+                assert not self.backtracking
                 return True
             else:
+                # Note: self.backtracking = True should be only when backtracking up and left, not when trying new branches of an OR node
+                # set backtracking to False: either there are more AND branches to try, or we'll set it to true in the and_step above.
+                self.backtracking = False
+
                 # restore saved values
                 q, env_state = q_saved, env_state_saved
                 len_history = len(self.backtrack_stack[-1])
