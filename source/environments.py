@@ -35,6 +35,15 @@ class Environment:
         return o
 
 
+class StochasticEnv(Environment):
+    def next_states(self, state, action):
+        """
+        Returns a list of possible next environment states
+        :rtype: list(state, likelihood)
+        """
+        raise NotImplementedError
+
+
 class WalkAB(Environment):
     """ Environment of Fig. 1 of BPG2009
     States: {(n, visB): n ∈ {1,2,3,4,5}, visB ∈ {True, False} }
@@ -67,7 +76,7 @@ class WalkAB(Environment):
 
     @property
     def init_states(self):
-        return [(1, False), (2, False)]
+        return [(5, True), (1, False), (2, False)]
 
     @property
     def goal_states(self):
@@ -94,9 +103,73 @@ class WalkAB(Environment):
         return [(n, vis_b)]
 
 
-class PrizeA:
-    """ Prize-A environment, from Bonet2009
-    States: {}
-    Action set: {(0,1), (0,-1), (1,0), (-1,0)} = {right, left, up, down}
+class WalkThroughFlap(Environment):
+    """ Environment to test AND backtracking
+    States: {1(goal), 2(init0), 3(init1), 4(goal)}
+    Actions: Left/Right, but Right in 2 leaves you in 2.
+    Obs: Goal or not
     """
-    pass
+
+    @property
+    def init_states(self):
+        return [2, 3]
+
+    @property
+    def goal_states(self):
+        return [1, 4]
+
+    def legal_actions(self, state):
+        return [-1, +1]
+
+    def get_obs(self, state):
+        return state in self.goal_states
+
+    def next_states(self, state, action):
+        if action == -1:
+            if state == 3:
+                return [3]
+            else:
+                return [max(state + action, 1)]
+        if action == 1:
+            return [min(state + action, 4)]
+
+
+class TreeChop(Environment):
+    """ TreeChop problem from Levesque 2005 (slightly modified: observation actions removed)
+    fluents: axe_stored ∈ {T, F},
+    states:
+    actions: store, chop, TODO
+    observables: up = (thickness == 0)
+
+    """
+
+    @staticmethod
+    def str_state(s):
+        pass
+
+    @staticmethod
+    def str_action(a):
+        pass
+
+    @staticmethod
+    def str_obs(o):
+        pass
+
+    @property
+    def init_states(self):
+        pass
+
+    @property
+    def goal_states(self):
+        pass
+
+    def legal_actions(self, state):
+        pass
+
+    def get_obs(self, state):
+        pass
+
+    # Note: if there are many actions
+    def next_states(self, state, action):
+        pass
+

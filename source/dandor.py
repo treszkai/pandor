@@ -62,7 +62,7 @@ class MealyController:
         return s
 
 
-class PAndOrPlanner:
+class AndOrPlanner:
     def __init__(self, env):
         self.env = env
         # attributes used by synth_plan() - def'd here only to suppress warnings
@@ -230,12 +230,13 @@ class PAndOrPlanner:
 
         return False
 
+
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = PAndOrPlanner(env=environments.WalkAB())
-    planner.synth_plan(bound=2)
+    planner = AndOrPlanner(env=environments.WalkThroughFlap())
+    planner.synth_plan(bound=1)
 
     time.sleep(1)
     print(planner.contr)
