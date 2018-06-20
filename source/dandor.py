@@ -1,3 +1,10 @@
+"""
+AND-OR search algorithm for a finite-state controller
+
+Based on the Prolog implementation in Hu and De Giacomo: A Generic Technique for Synthesizing Bounded Finite-State Controllers (2013).
+"""
+
+
 import environments
 
 import logging

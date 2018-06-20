@@ -1,3 +1,13 @@
+"""
+AND-OR search algorithm for a finite-state controller in a probabilistic environment
+
+Based on ./dandor.py.
+(Originally based on Hu and De Giacomo: A Generic Technique for Synthesizing Bounded Finite-State Controllers (2013).)
+
+   !! STILL IN DEVELOPMENT !!
+
+"""
+
 import environments
 
 import logging
@@ -72,18 +82,8 @@ class PAndOrPlanner:
         self.backtracking = False
         self.backtrack_stack = []
         self.contr = MealyController(bound)
-        # Note: this creates a controller first for one init state,
-        #       and if it fails for another then backtracks it transition by transition.
-        #       Is there a better method?
         return self.and_step(self.contr.init_state, self.env.init_states, [])
 
-    # Note: history and controller could be moved from function arguments to class properties
-    #       because both of them were just passed through and_step unmodified
-    #       and there is a single instance of each
-    #       (actually the whole and_step function could be removed)
-    #       (maybe it's useful for the other two uses of the planner in Hu2013)
-    #       (the and_step didn't even make the recursion step clearer)
-    #       (and_step is needed for synth_plan though)
     def and_step(self, q, sl_next, history):
 
         def get_backtracked_iterator():
@@ -111,22 +111,16 @@ class PAndOrPlanner:
             else:
                 logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
 
-            # Note: only need to copy the history if len(sl_next) > 1. I guess.
-            #       Or alternatively, could save len(history) and clip it after each new or_step
-            #       (like we do in or_step already after backtracking)
             if not self.or_step(q, s_k, history[:]):
                 self.backtracking = True
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1])
-                # Note: would be enough to compare only the second entry of histories
                 if history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
                     it = get_backtracked_iterator()
                     logging.info("AND: Backtracking left") if v else 0
                 else:
                     logging.info("AND: Backtracking up") if v else 0
                     return False
-                # Note: We set self.backtracking = True in and_step
-                #   when an or_step failed and we start looking for the last checkpoint
                 # We set self.backtracking = False in or_step
                 #   when we start doing business as usual:
                 #   i.e. either when we arrive in an OR node from up
@@ -183,11 +177,7 @@ class PAndOrPlanner:
                 _ = next(it)
 
         # non-det branching of q',a
-
         # save function arguments for bracktracking (history is already in backtrack_stack)
-        # Note: we have to make a shallow copy of the history b/c we modify it during recursion
-        # Note: as the state transitions of the controller are ordered according to their
-        #       being added, then we needn't store it in backtrack_stack.
 
         env_state_saved = env_state
         q_saved = q
@@ -210,8 +200,8 @@ class PAndOrPlanner:
                 assert not self.backtracking
                 return True
             else:
-                # Note: self.backtracking = True should be only when backtracking up and left, not when trying new branches of an OR node
-                # set backtracking to False: either there are more AND branches to try, or we'll set it to true in the and_step above.
+                # set backtracking to False: either there are more AND branches to try,
+                #   or we'll set it to true in the and_step above.
                 self.backtracking = False
 
                 # restore saved values
@@ -229,6 +219,7 @@ class PAndOrPlanner:
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         return False
+
 
 if __name__ == '__main__':
     if v:

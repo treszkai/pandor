@@ -106,7 +106,7 @@ class WalkAB(Environment):
 class WalkThroughFlap(Environment):
     """ Environment to test AND backtracking
     States: {1(goal), 2(init0), 3(init1), 4(goal)}
-    Actions: Left/Right, but Right in 2 leaves you in 2.
+    Actions: Left/Right, but Left in 3 leaves you in 3.
     Obs: Goal or not
     """
 
