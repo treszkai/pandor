@@ -82,7 +82,8 @@ class PAndOrPlanner:
         self.backtracking = False
         self.backtrack_stack = []
         self.contr = MealyController(bound)
-        return self.and_step(self.contr.init_state, self.env.init_states, [])
+
+        self.and_step(self.contr.init_state, self.env.init_states, [])
 
     def and_step(self, q, sl_next, history):
 
@@ -91,7 +92,7 @@ class PAndOrPlanner:
             # history == self.backtrack_stack[-1][0:len(history)]
             # so the relevant element of sl_next is
             #  self.backtrack_stack[-1][len(history)]
-            return dropwhile(lambda x: x != self.backtrack_stack[-1][len(history)][1],
+            return dropwhile(lambda x: x[0] != self.backtrack_stack[-1][len(history)][1],
                              iter(sl_next))
 
         if self.backtracking:
@@ -101,7 +102,8 @@ class PAndOrPlanner:
 
         while True:
             try:
-                s_k = next(it)
+                # Note: tp = transition probability
+                s_k, p_k = next(it)
             except StopIteration:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 return True
@@ -111,7 +113,7 @@ class PAndOrPlanner:
             else:
                 logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
 
-            if not self.or_step(q, s_k, history[:]):
+            if not self.or_step(q, s_k, p_k, history[:]):
                 self.backtracking = True
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1])
@@ -126,37 +128,44 @@ class PAndOrPlanner:
                 #   i.e. either when we arrive in an OR node from up
                 #     or when we arrive in it from the left
 
-    def or_step(self, q, env_state, history):
+    def or_step(self, q, s, p, history):
         if not self.backtracking:
-            if env_state in self.env.goal_states:
+            if s in self.env.goal_states:
+                # TODO - increase self.max_lpc, return (note the log scale)
                 return True
 
-            if (q, env_state) in history:
+            if (q, s, _) in history:
+                # TODO - decrease self.min_lpc, return
                 return False
 
-            history.append((q, env_state))
-            obs = self.env.get_obs(env_state)
+            l = history[-1][2] + p
+
+            history.append((q, s, l))
+            obs = self.env.get_obs(s)
 
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
-                if action not in self.env.legal_actions(env_state):
+                if action not in self.env.legal_actions(s):
+                    # TODO - decrease self.min_lpc, return
                     return False
 
-                sl_next = self.env.next_states(env_state, action)
+                sl_next = self.env.next_states(s, action)
+                # TODO - leave this as it is
                 return self.and_step(q_next, sl_next, history)
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
             it = product(range(self.contr.num_states+1),
-                         self.env.legal_actions(env_state))
+                         self.env.legal_actions(s))
 
             # store a new checkpoint iff we're not backtracking currently
             self.backtrack_stack.append(history[:])
             logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
-                         q, self.env.str_state(env_state), history) if v else 0
+                         q, self.env.str_state(s), history) if v else 0
 
         else:  # backtracking
-            history.append((q, env_state))
-            obs = self.env.get_obs(env_state)
+            l = history[-1][2] + p
+            history.append((q, s, l))
+            obs = self.env.get_obs(s)
 
             t = self.contr.transitions.popitem()
             logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
@@ -167,7 +176,7 @@ class PAndOrPlanner:
 
             it = dropwhile(lambda x: x[1] != action_last,
                            product(range(q_next_last, self.contr.num_states + 1),
-                                   self.env.legal_actions(env_state)))
+                                   self.env.legal_actions(s)))
 
             # this is the node of the last checkpoint
             # (enough to check the length because we're in the right branch now)
@@ -178,8 +187,7 @@ class PAndOrPlanner:
 
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
-
-        env_state_saved = env_state
+        s_saved = s
         q_saved = q
 
         # important: q_next first, so we only add new states when necessary
@@ -191,7 +199,7 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next, self.env.str_action(action)) if v else 0
 
-            sl_next = self.env.next_states(env_state, action)
+            sl_next = self.env.next_states(s, action)
 
             if self.and_step(q_next, sl_next, history):
                 # If we're here then self.backtracking is already False
@@ -205,7 +213,7 @@ class PAndOrPlanner:
                 self.backtracking = False
 
                 # restore saved values
-                q, env_state = q_saved, env_state_saved
+                q, s = q_saved, s_saved
                 len_history = len(self.backtrack_stack[-1])
 
                 logging.info("OR: Backstep: %s",
@@ -218,6 +226,7 @@ class PAndOrPlanner:
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
+        # TODO - decreas min lpc and return
         return False
 
 

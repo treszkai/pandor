@@ -35,10 +35,11 @@ class Environment:
         return o
 
 
-class StochasticEnv(Environment):
+class NoisyEnv(Environment):
     def next_states(self, state, action):
         """
-        Returns a list of possible next environment states
+        Returns a list of possible next environment states and their likelihoods
+
         :rtype: list(state, likelihood)
         """
         raise NotImplementedError
