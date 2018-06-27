@@ -56,7 +56,8 @@ class MealyController:
         assert q < self.num_states and q_next <= self.num_states, \
             "Invalid controller state transition: %s → %s".format(key, value)
 
-        if q_next == self.bound:
+        # Note: unused, I think.
+        if q_next >= self.bound:
             raise PandorControllerNotFound("Too many controller states")
 
         self.transitions[key] = value
@@ -159,7 +160,7 @@ class AndOrPlanner:
                 return self.and_step(q_next, sl_next, history)
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
-            it = product(range(self.contr.num_states+1),
+            it = product(range(min(self.contr.num_states+1, self.contr.bound)),
                          self.env.legal_actions(env_state))
 
             # store a new checkpoint iff we're not backtracking currently
@@ -179,7 +180,7 @@ class AndOrPlanner:
             q_next_last, action_last = t[1]
 
             it = dropwhile(lambda x: x[1] != action_last,
-                           product(range(q_next_last, self.contr.num_states + 1),
+                           product(range(q_next_last, min(self.contr.num_states + 1, self.contr.bound)),
                                    self.env.legal_actions(env_state)))
 
             # this is the node of the last checkpoint
@@ -235,6 +236,7 @@ class AndOrPlanner:
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
+        self.backtrack_stack.pop()
         return False
 
 
