@@ -36,7 +36,7 @@ class Environment:
 
 
 class NoisyEnv(Environment):
-    def next_states(self, state, action):
+    def next_states_p(self, state, action):
         """
         Returns a list of possible next environment states and their likelihoods
 

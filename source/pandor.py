@@ -14,12 +14,18 @@ import logging
 from collections import OrderedDict
 
 import time
-from itertools import dropwhile
-from itertools import product
+from itertools import dropwhile, product
 
+
+AND_FAILURE = -1
+AND_UNKNOWN = 0
 
 # verbose flag
 v = True
+
+
+class PandorControllerFound(Exception):
+    pass
 
 
 class PandorControllerNotFound(Exception):
@@ -59,8 +65,7 @@ class MealyController:
         assert q < self.num_states and q_next <= self.num_states, \
             "Invalid controller state transition: %s → %s".format(key, value)
 
-        if q_next == self.bound:
-            raise PandorControllerNotFound("Too many controller states")
+        assert q_next < self.bound
 
         self.transitions[key] = value
 
@@ -72,27 +77,78 @@ class MealyController:
         return s
 
 
+class HistoryItem:
+    def __init__(self, q, s, l):
+        self.q = q
+        self.s = s
+        self.l = l
+
+    def __str__(self):
+        return f"(q: {self.q}, s: {self.s}, l: {self.l:0.3f})"
+
+    def __eq__(self, other):
+        return self.q == other.q and \
+               self.s == other.s and \
+               self.l == other.l
+
+
+class StackItem:
+    def __init__(self, history, lpc_lower, lpc_upper):
+        self.history = history
+        self.lpc_lower = lpc_lower
+        self.lpc_upper = lpc_upper
+
+    def __eq__(self, other):
+        return self.history == other.history and \
+               self.lpc_lower == other.lpc_lower and \
+               self.lpc_upper == other.lpc_upper
+
+
 class PAndOrPlanner:
     def __init__(self, env):
         self.env = env
         # attributes used by synth_plan() - def'd here only to suppress warnings
         self.contr, self.backtracking, self.backtrack_stack = None, None, None
+        # Lower/upper bound for the log LPC of the current controller
+        self.lpc_lower_bound = None
+        self.lpc_upper_bound = None
+        self.lpc_desired = None
 
-    def synth_plan(self, bound):
+    def synth_plan(self, states_bound, lpc_desired=0.0):
         self.backtracking = False
         self.backtrack_stack = []
-        self.contr = MealyController(bound)
+        self.contr = MealyController(states_bound)
+        self.lpc_desired = lpc_desired
+        self.lpc_lower_bound = -1000.
+        self.lpc_upper_bound = 0.
 
-        self.and_step(self.contr.init_state, self.env.init_states, [])
+        init_states = [(x, 0.0) for x in self.env.init_states]
+
+        try:
+            self.and_step(self.contr.init_state, init_states, [])
+        except PandorControllerFound:
+            return True
+
+        return False
 
     def and_step(self, q, sl_next, history):
+        """
 
+        :param q:
+        :param sl_next:
+        :param history:
+        :return:
+            - FAILURE if self.lpc_max < self.lpc_desired
+            - AND_UNKNOWN otherwise
+        :raises:
+            - PandorControllerFound if a controller is found
+        """
         def get_backtracked_iterator():
             # don't care about or_steps that succeeded and to which we don't want to backtrack
             # history == self.backtrack_stack[-1][0:len(history)]
             # so the relevant element of sl_next is
             #  self.backtrack_stack[-1][len(history)]
-            return dropwhile(lambda x: x[0] != self.backtrack_stack[-1][len(history)][1],
+            return dropwhile(lambda x: x[0] != self.backtrack_stack[-1].history[len(history)].s,
                              iter(sl_next))
 
         if self.backtracking:
@@ -102,69 +158,85 @@ class PAndOrPlanner:
 
         while True:
             try:
-                # Note: tp = transition probability
+                # Note: p = transition probability
                 s_k, p_k = next(it)
             except StopIteration:
-                logging.info("AND: succeed at history %s", history) if v else 0
-                return True
+                logging.info("AND: not fail at history %s", history) if v else 0
+                return AND_UNKNOWN
 
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
             else:
                 logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
 
-            if not self.or_step(q, s_k, p_k, history[:]):
+            self.or_step(q, s_k, p_k, history[:])
+
+            if self.lpc_lower_bound >= self.lpc_desired:
+                logging.info("AND: succeed at history %s", history) if v else 0
+                raise PandorControllerFound
+            elif self.lpc_upper_bound < self.lpc_desired:
+                logging.info("AND: fail at history %s", history) if v else 0
                 self.backtracking = True
                 # decide if we should backtrack left or up
-                # (ignore the last element of self.backtrack_stack[-1])
-                if history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
+                # (ignore the last element of self.backtrack_stack[-1].history)
+                if history == self.backtrack_stack[-1].history[:min(len(history), len(self.backtrack_stack[-1])-1)]:
                     it = get_backtracked_iterator()
                     logging.info("AND: Backtracking left") if v else 0
                 else:
                     logging.info("AND: Backtracking up") if v else 0
-                    return False
+                    return AND_FAILURE
                 # We set self.backtracking = False in or_step
                 #   when we start doing business as usual:
                 #   i.e. either when we arrive in an OR node from up
                 #     or when we arrive in it from the left
 
     def or_step(self, q, s, p, history):
+        """
+
+        :param q:
+        :param s:
+        :param p:
+        :param history:
+        :return: None
+        """
         if not self.backtracking:
             if s in self.env.goal_states:
-                # TODO - increase self.max_lpc, return (note the log scale)
-                return True
+                self.lpc_upper_bound += history[-1].l + p
+                return
 
-            if (q, s, _) in history:
-                # TODO - decrease self.min_lpc, return
-                return False
+            if HistoryItem(q, s, _) in history:
+                self.lpc_lower_bound -= history[-1].l + p
+                return
 
-            l = history[-1][2] + p
+            l = history[-1].l + p
 
-            history.append((q, s, l))
+            history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
 
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(s):
-                    # TODO - decrease self.min_lpc, return
-                    return False
+                    self.lpc_lower_bound -= history[-1].l + p
+                    return
 
                 sl_next = self.env.next_states(s, action)
-                # TODO - leave this as it is
-                return self.and_step(q_next, sl_next, history)
+                self.and_step(q_next, sl_next, history)
+                return
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
             it = product(range(self.contr.num_states+1),
                          self.env.legal_actions(s))
 
             # store a new checkpoint iff we're not backtracking currently
-            self.backtrack_stack.append(history[:])
+            self.backtrack_stack.append(StackItem(history[:],
+                                                  self.lpc_lower_bound,
+                                                  self.lpc_upper_bound))
             logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
                          q, self.env.str_state(s), history) if v else 0
 
         else:  # backtracking
-            l = history[-1][2] + p
-            history.append((q, s, l))
+            l = history[-1].l + p
+            history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
 
             t = self.contr.transitions.popitem()
@@ -180,7 +252,7 @@ class PAndOrPlanner:
 
             # this is the node of the last checkpoint
             # (enough to check the length because we're in the right branch now)
-            if len(history) == len(self.backtrack_stack[-1]):
+            if len(history) == len(self.backtrack_stack[-1].history):
                 self.backtracking = False
                 # burn the controller extension that caused the trouble earlier
                 _ = next(it)
@@ -201,12 +273,12 @@ class PAndOrPlanner:
 
             sl_next = self.env.next_states(s, action)
 
-            if self.and_step(q_next, sl_next, history):
+            if self.and_step(q_next, sl_next, history) != AND_FAILURE:
                 # If we're here then self.backtracking is already False
                 #   (if we came from up, then we cleared it;
                 #    if we came from left, then the above call just succeeded
                 assert not self.backtracking
-                return True
+                return
             else:
                 # set backtracking to False: either there are more AND branches to try,
                 #   or we'll set it to true in the and_step above.
@@ -214,10 +286,12 @@ class PAndOrPlanner:
 
                 # restore saved values
                 q, s = q_saved, s_saved
-                len_history = len(self.backtrack_stack[-1])
+                len_history = len(self.backtrack_stack[-1].history)
+                self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
+                self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
                 logging.info("OR: Backstep: %s",
-                             [(q, self.env.str_state(s)) for q, s in history[-1:len_history-1:-1]]) if v else 0
+                             [(q, self.env.str_state(s), l) for q, s, l in history[-1:len_history-1:-1]]) if v else 0
                 # it's enough to clip the history if we're backtracking in the or_step
                 del history[len_history:]
 
@@ -226,8 +300,9 @@ class PAndOrPlanner:
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
-        # TODO - decreas min lpc and return
-        return False
+        self.backtrack_stack.pop()
+        self.lpc_lower_bound -= history[-1].l
+        return
 
 
 if __name__ == '__main__':
