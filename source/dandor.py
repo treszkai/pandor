@@ -244,7 +244,8 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = AndOrPlanner(env=environments.WalkThroughFlap())
+    # planner = AndOrPlanner(env=environments.WalkThroughFlap())
+    planner = AndOrPlanner(env=environments.Climber())
     planner.synth_plan(bound=1)
 
     time.sleep(1)

@@ -86,10 +86,14 @@ class HistoryItem:
     def __str__(self):
         return f"(q: {self.q}, s: {self.s}, l: {self.l:0.3f})"
 
+    def __repr__(self):
+        return self.__str__()
+
     def __eq__(self, other):
+        """ self.l == 99 is a wildcard"""
         return self.q == other.q and \
                self.s == other.s and \
-               self.l == other.l
+               (self.l == 99 or self.l == other.l)
 
 
 class StackItem:
@@ -114,7 +118,7 @@ class PAndOrPlanner:
         self.lpc_upper_bound = None
         self.lpc_desired = None
 
-    def synth_plan(self, states_bound, lpc_desired=0.0):
+    def synth_plan(self, states_bound, lpc_desired):
         self.backtracking = False
         self.backtrack_stack = []
         self.contr = MealyController(states_bound)
@@ -171,6 +175,7 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
+            # TODO: epsilon
             if self.lpc_lower_bound >= self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 raise PandorControllerFound
@@ -200,15 +205,17 @@ class PAndOrPlanner:
         :return: None
         """
         if not self.backtracking:
+            l_old = 0. if len(history) == 0 else history[-1].l
+
             if s in self.env.goal_states:
                 self.lpc_upper_bound += history[-1].l + p
                 return
 
-            if HistoryItem(q, s, _) in history:
+            if HistoryItem(q, s, 99) in history:
                 self.lpc_lower_bound -= history[-1].l + p
                 return
 
-            l = history[-1].l + p
+            l = l_old + p
 
             history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
@@ -219,7 +226,7 @@ class PAndOrPlanner:
                     self.lpc_lower_bound -= history[-1].l + p
                     return
 
-                sl_next = self.env.next_states(s, action)
+                sl_next = self.env.next_states_p(s, action)
                 self.and_step(q_next, sl_next, history)
                 return
 
@@ -271,7 +278,7 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next, self.env.str_action(action)) if v else 0
 
-            sl_next = self.env.next_states(s, action)
+            sl_next = self.env.next_states_p(s, action)
 
             if self.and_step(q_next, sl_next, history) != AND_FAILURE:
                 # If we're here then self.backtracking is already False
@@ -309,8 +316,8 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = PAndOrPlanner(env=environments.WalkAB())
-    planner.synth_plan(bound=2)
+    planner = PAndOrPlanner(env=environments.Climber())
+    planner.synth_plan(states_bound=1, lpc_desired=1.0)
 
     time.sleep(1)
     print(planner.contr)

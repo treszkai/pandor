@@ -1,3 +1,6 @@
+from math import log
+
+
 class Environment:
     """ Class that describes the environment but does not simulate it """
 
@@ -38,11 +41,14 @@ class Environment:
 class NoisyEnv(Environment):
     def next_states_p(self, state, action):
         """
-        Returns a list of possible next environment states and their likelihoods
+        Returns a list of possible next environment states and their transition probabilities
 
-        :rtype: list(state, likelihood)
+        :rtype: list(state, probability)
         """
         raise NotImplementedError
+
+    def next_states(self, state, action):
+        return [s_next for s_next, _ in self.next_states_p(state, action)]
 
 
 class WalkAB(Environment):
@@ -173,4 +179,46 @@ class TreeChop(Environment):
     # Note: if there are many actions
     def next_states(self, state, action):
         pass
+
+
+class Climber(NoisyEnv):
+    """ Climber toy problem from Little 2007
+    States: {up, down, dead, waiting}
+    Actions: {try_jump, call_help, climb_down}
+    Fully observable
+    """
+
+    S_UP = 0
+    S_DOWN = 1
+    S_UP_WAITING = 2
+    S_DEAD = 3
+
+    A_TRY_JUMP = 10
+    A_CALL_HELP = 11
+    A_CLIMB_DOWN = 12
+
+    def get_obs(self, state):
+        return state
+
+    def legal_actions(self, state):
+        return [Climber.A_TRY_JUMP, Climber.A_CALL_HELP, Climber.A_CLIMB_DOWN]
+
+    @property
+    def goal_states(self):
+        return [Climber.S_DOWN]
+
+    @property
+    def init_states(self):
+        return [Climber.S_UP]
+
+    def next_states_p(self, state, action):
+        C = Climber
+        if state in [C.S_UP, C.S_UP_WAITING] and action == C.A_TRY_JUMP:
+            return [(C.S_DOWN, log(0.7)), (C.S_DEAD, log(0.3))]
+        elif state == C.S_UP and action == C.A_CALL_HELP:
+            return [(C.S_UP_WAITING, 0.)]
+        elif state == C.S_UP_WAITING and action == C.A_CLIMB_DOWN:
+            return [(C.S_DOWN, 0.)]
+        else:
+            return [(state, 0.)]
 
