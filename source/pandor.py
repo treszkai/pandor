@@ -4,8 +4,6 @@ AND-OR search algorithm for a finite-state controller in a probabilistic environ
 Based on ./dandor.py.
 (Originally based on Hu and De Giacomo: A Generic Technique for Synthesizing Bounded Finite-State Controllers (2013).)
 
-   !! STILL IN DEVELOPMENT !!
-
 """
 
 import environments
@@ -172,8 +170,13 @@ class PAndOrPlanner:
                 # Note: p = transition probability
                 s_k, p_k = next(it)
             except StopIteration:
-                logging.info("AND: not fail at history %s", history) if v else 0
-                return AND_UNKNOWN
+                if len(history) == 0:
+                    logging.info("AND: not fail at empty history; try harder") if v else 0
+                    it = get_backtracked_iterator()
+                    continue
+                else:
+                    logging.info("AND: not fail at history %s", history) if v else 0
+                    return AND_UNKNOWN
 
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
@@ -216,11 +219,13 @@ class PAndOrPlanner:
             l_old = 0. if len(history) == 0 else history[-1].l
 
             if s in self.env.goal_states:
-                self.lpc_upper_bound += exp(history[-1].l + p)
+                self.lpc_lower_bound += exp(history[-1].l + p)
+                logging.info("OR: in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
                 return
 
             if HistoryItem(q, s, 99) in history:
-                self.lpc_lower_bound -= exp(history[-1].l + p)
+                self.lpc_upper_bound -= exp(history[-1].l + p)
+                logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
                 return
 
             l = l_old + p
@@ -293,6 +298,7 @@ class PAndOrPlanner:
                 #   (if we came from up, then we cleared it;
                 #    if we came from left, then the above call just succeeded
                 assert not self.backtracking
+                logging.info("OR: AND step didn't fail") if v else 0
                 return
             else:
                 # set backtracking to False: either there are more AND branches to try,
@@ -316,8 +322,8 @@ class PAndOrPlanner:
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         self.backtrack_stack.pop()
-        # TODO: log scale!
-        self.lpc_lower_bound -= exp(history[-1].l)
+        self.lpc_upper_bound -= exp(history[-1].l)
+        logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
 
 
@@ -326,7 +332,7 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.INFO)
 
     planner = PAndOrPlanner(env=environments.Climber())
-    planner.synth_plan(states_bound=1, lpc_desired=0.999)
+    planner.synth_plan(states_bound=1, lpc_desired=0.69)
 
     time.sleep(1)
     print(planner.contr)
