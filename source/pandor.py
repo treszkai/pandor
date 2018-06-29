@@ -15,6 +15,7 @@ from collections import OrderedDict
 
 import time
 from itertools import dropwhile, product
+from math import exp
 
 
 AND_FAILURE = -1
@@ -114,7 +115,7 @@ class PAndOrPlanner:
         self.env = env
         # attributes used by synth_plan() - def'd here only to suppress warnings
         self.contr, self.backtracking, self.backtrack_stack = None, None, None
-        # Lower/upper bound for the log LPC of the current controller
+        # Lower/upper bound for the LPC of the current controller
         self.lpc_lower_bound = None
         self.lpc_upper_bound = None
         self.lpc_desired = None
@@ -124,16 +125,21 @@ class PAndOrPlanner:
         self.backtrack_stack = []
         self.contr = MealyController(states_bound)
         self.lpc_desired = lpc_desired
-        self.lpc_lower_bound = -1000.
-        self.lpc_upper_bound = 0.
+        self.lpc_lower_bound = 0.
+        self.lpc_upper_bound = 1.
+
+        # Note: for numerical stability, lpc_desired must be lower than 1.
+        assert lpc_desired < 1.0
 
         init_states = [(x, 0.0) for x in self.env.init_states]
 
         try:
             self.and_step(self.contr.init_state, init_states, [])
         except PandorControllerFound:
+            print("Controller found with", states_bound, "states.")
             return True
 
+        print("No controller found with", states_bound, "states.")
         return False
 
     def and_step(self, q, sl_next, history):
@@ -176,8 +182,7 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
-            # TODO: epsilon
-            if self.lpc_lower_bound >= self.lpc_desired:
+            if self.lpc_lower_bound > self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 raise PandorControllerFound
             elif self.lpc_upper_bound < self.lpc_desired:
@@ -211,11 +216,11 @@ class PAndOrPlanner:
             l_old = 0. if len(history) == 0 else history[-1].l
 
             if s in self.env.goal_states:
-                self.lpc_upper_bound += history[-1].l + p
+                self.lpc_upper_bound += exp(history[-1].l + p)
                 return
 
             if HistoryItem(q, s, 99) in history:
-                self.lpc_lower_bound -= history[-1].l + p
+                self.lpc_lower_bound -= exp(history[-1].l + p)
                 return
 
             l = l_old + p
@@ -226,7 +231,7 @@ class PAndOrPlanner:
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(s):
-                    self.lpc_lower_bound -= history[-1].l + p
+                    self.lpc_lower_bound -= exp(history[-1].l + p)
                     return
 
                 sl_next = self.env.next_states_p(s, action)
@@ -312,7 +317,7 @@ class PAndOrPlanner:
 
         self.backtrack_stack.pop()
         # TODO: log scale!
-        self.lpc_lower_bound -= history[-1].l
+        self.lpc_lower_bound -= exp(history[-1].l)
         return
 
 
@@ -321,7 +326,7 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.INFO)
 
     planner = PAndOrPlanner(env=environments.Climber())
-    planner.synth_plan(states_bound=1, lpc_desired=0.0)
+    planner.synth_plan(states_bound=1, lpc_desired=0.999)
 
     time.sleep(1)
     print(planner.contr)
