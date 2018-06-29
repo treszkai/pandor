@@ -43,7 +43,7 @@ class NoisyEnv(Environment):
         """
         Returns a list of possible next environment states and their transition probabilities
 
-        :rtype: list(state, probability)
+        :rtype: list(state, log probability)
         """
         raise NotImplementedError
 

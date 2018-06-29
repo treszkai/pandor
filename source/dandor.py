@@ -127,7 +127,10 @@ class AndOrPlanner:
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1])
                 # Note: would be enough to compare only the second entry of histories
-                if history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
+                if len(self.backtrack_stack) == 0:
+                    logging.info("AND: Backtracking up; empty stack") if v else 0
+                    return False
+                elif history == self.backtrack_stack[-1][:min(len(history), len(self.backtrack_stack[-1])-1)]:
                     it = get_backtracked_iterator()
                     logging.info("AND: Backtracking left") if v else 0
                 else:

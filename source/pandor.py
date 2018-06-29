@@ -65,7 +65,8 @@ class MealyController:
         assert q < self.num_states and q_next <= self.num_states, \
             "Invalid controller state transition: %s → %s".format(key, value)
 
-        assert q_next < self.bound
+        if not q_next < self.bound:
+            assert q_next < self.bound
 
         self.transitions[key] = value
 
@@ -149,9 +150,9 @@ class PAndOrPlanner:
         """
         def get_backtracked_iterator():
             # don't care about or_steps that succeeded and to which we don't want to backtrack
-            # history == self.backtrack_stack[-1][0:len(history)]
+            # history == self.backtrack_stack[-1].history[0:len(history)]
             # so the relevant element of sl_next is
-            #  self.backtrack_stack[-1][len(history)]
+            #  self.backtrack_stack[-1].history[len(history)]
             return dropwhile(lambda x: x[0] != self.backtrack_stack[-1].history[len(history)].s,
                              iter(sl_next))
 
@@ -182,9 +183,15 @@ class PAndOrPlanner:
             elif self.lpc_upper_bound < self.lpc_desired:
                 logging.info("AND: fail at history %s", history) if v else 0
                 self.backtracking = True
+
+                if len(self.backtrack_stack) == 0:
+                    logging.info("AND: Backtracking up; empty stack") if v else 0
+                    return AND_FAILURE
+
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1].history)
-                if history == self.backtrack_stack[-1].history[:min(len(history), len(self.backtrack_stack[-1])-1)]:
+                if history == self.backtrack_stack[-1].history[:min(len(history),
+                                                                    len(self.backtrack_stack[-1].history)-1)]:
                     it = get_backtracked_iterator()
                     logging.info("AND: Backtracking left") if v else 0
                 else:
@@ -197,11 +204,7 @@ class PAndOrPlanner:
 
     def or_step(self, q, s, p, history):
         """
-
-        :param q:
-        :param s:
-        :param p:
-        :param history:
+        :param p: probability of next state transition
         :return: None
         """
         if not self.backtracking:
@@ -231,7 +234,7 @@ class PAndOrPlanner:
                 return
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
-            it = product(range(self.contr.num_states+1),
+            it = product(range(min(self.contr.bound, self.contr.num_states + 1)),
                          self.env.legal_actions(s))
 
             # store a new checkpoint iff we're not backtracking currently
@@ -254,7 +257,7 @@ class PAndOrPlanner:
             q_next_last, action_last = t[1]
 
             it = dropwhile(lambda x: x[1] != action_last,
-                           product(range(q_next_last, self.contr.num_states + 1),
+                           product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
                                    self.env.legal_actions(s)))
 
             # this is the node of the last checkpoint
@@ -308,6 +311,7 @@ class PAndOrPlanner:
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         self.backtrack_stack.pop()
+        # TODO: log scale!
         self.lpc_lower_bound -= history[-1].l
         return
 
@@ -317,7 +321,7 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.INFO)
 
     planner = PAndOrPlanner(env=environments.Climber())
-    planner.synth_plan(states_bound=1, lpc_desired=1.0)
+    planner.synth_plan(states_bound=1, lpc_desired=0.0)
 
     time.sleep(1)
     print(planner.contr)
