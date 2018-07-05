@@ -54,9 +54,23 @@ class NoisyEnv(Environment):
         assert type(self.next_states_p(s, a))is list
         assert all(type(p) is float for _,p in self.next_states_p(s, a))
 
+    @property
+    def init_states_p(self):
+        """Initial belief distribution
+        A list of states and their log probabilities
+        Either init_states_p() or init_states() must be overwritten.
+        """
+        sl_0 = self.init_states
+        p_0 = 0.0 - log(len(sl_0))
+        return [(s_0, p_0) for s_0 in self.init_states]
+
+    @property
+    def init_states(self):
+        return [s_0 for s_0, p_0 in self.init_states_p]
+
     def next_states_p(self, state, action):
         """
-        Returns a list of possible next environment states and their transition probabilities
+        Returns a list of possible next environment states and their transition log probabilities
 
         :rtype: list(state, log probability)
         """

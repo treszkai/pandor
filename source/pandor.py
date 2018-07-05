@@ -129,10 +129,8 @@ class PAndOrPlanner:
         # Note: for numerical stability, lpc_desired must be lower than 1.
         assert lpc_desired < 1.0
 
-        init_states = [(x, 0.0) for x in self.env.init_states]
-
         try:
-            self.and_step(self.contr.init_state, init_states, [])
+            self.and_step(self.contr.init_state, self.env.init_states_p, [])
         except PandorControllerFound:
             print("Controller found with", states_bound, "states.")
             return True
