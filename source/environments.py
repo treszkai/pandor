@@ -4,6 +4,14 @@ from math import log
 class Environment:
     """ Class that describes the environment but does not simulate it """
 
+    def __init__(self):
+        assert type(self.init_states) is list
+        s = self.init_states[0]
+        assert type(self.goal_states) is list
+        assert type(self.legal_actions(s)) is list
+        a = self.legal_actions(s)[0]
+        assert type(self.next_states(s, a)) is list
+
     @property
     def init_states(self):
         raise NotImplementedError
@@ -39,6 +47,13 @@ class Environment:
 
 
 class NoisyEnv(Environment):
+    def __init__(self):
+        Environment.__init__(self)
+        s = self.init_states[0]
+        a = self.legal_actions(s)[0]
+        assert type(self.next_states_p(s, a))is list
+        assert all(type(p) is float for _,p in self.next_states_p(s, a))
+
     def next_states_p(self, state, action):
         """
         Returns a list of possible next environment states and their transition probabilities
@@ -222,3 +237,39 @@ class Climber(NoisyEnv):
         else:
             return [(state, 0.)]
 
+class DrunkBridgeWalk(NoisyEnv):
+    A_FWD = 0
+    A_LEFT = 1
+    A_RIGHT = 2
+
+    def get_obs(self, state):
+        return state[0]
+
+    def legal_actions(self, state):
+        return [0,1,2]
+
+    @property
+    def goal_states(self):
+        return [(0,5)]
+
+    @property
+    def init_states(self):
+        return [(0,0)]
+
+    def next_states_p(self, state, action):
+        if action == self.A_FWD and state[0] == 0:
+            s_next_1 = (0, min(state[1]+1, 5))
+            s_next_2 = (1, state[1])
+            return [(s_next_1, log(0.9)), (s_next_2, log(0.1))]
+        elif action == self.A_LEFT and state[0] == 0:
+            return [((-1, state[1]), 0.)]
+        elif action == self.A_RIGHT and state[0] == 0:
+            return [((+1, state[1]), 0.)]
+        elif state[0] == 1:  # dead
+            return [(state, 0.)]
+        elif action == self.A_FWD and state[0] == -1:
+            return [((-1, min(state[1]+1, 5)), 0.)]
+        elif action == self.A_RIGHT and state[0] == -1:
+            return [((0, state[1]), 0.)]
+        else:
+            return [(state, 0.)]

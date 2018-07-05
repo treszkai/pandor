@@ -142,15 +142,11 @@ class PAndOrPlanner:
 
     def and_step(self, q, sl_next, history):
         """
-
-        :param q:
-        :param sl_next:
-        :param history:
         :return:
             - FAILURE if self.lpc_max < self.lpc_desired
             - AND_UNKNOWN otherwise
         :raises:
-            - PandorControllerFound if a controller is found
+            - PandorControllerFound if a sufficiently correct controller is found
         """
         def get_backtracked_iterator():
             # don't care about or_steps that succeeded and to which we don't want to backtrack
@@ -331,8 +327,8 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = PAndOrPlanner(env=environments.Climber())
-    planner.synth_plan(states_bound=1, lpc_desired=0.69)
+    planner = PAndOrPlanner(env=environments.DrunkBridgeWalk())
+    planner.synth_plan(states_bound=1, lpc_desired=0.4)
 
     time.sleep(1)
     print(planner.contr)
