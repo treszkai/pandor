@@ -132,11 +132,13 @@ class PAndOrPlanner:
         try:
             self.and_step(self.contr.init_state, self.env.init_states_p, [])
         except PandorControllerFound:
-            print("Controller found with", states_bound, "states.")
+            print("Controller found with max ", states_bound, "states.")
             return True
+        except PandorControllerNotFound:
+            print("No controller found with max ", states_bound, "states.")
+            return False
 
-        print("No controller found with", states_bound, "states.")
-        return False
+        assert False, "This should not happen."  # len(self.backtrack_stack) > 0 ?
 
     def and_step(self, q, sl_next, history):
         """
@@ -187,11 +189,12 @@ class PAndOrPlanner:
                 self.backtracking = True
 
                 if len(self.backtrack_stack) == 0:
-                    logging.info("AND: Backtracking up; empty stack") if v else 0
-                    return AND_FAILURE
+                    logging.info("AND: Trying to backtrack but empty stack; fail.") if v else 0
+                    raise PandorControllerNotFound
 
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1].history)
+                # TODO make it iterative `is` instead of equality
                 if history == self.backtrack_stack[-1].history[:min(len(history),
                                                                     len(self.backtrack_stack[-1].history)-1)]:
                     it = get_backtracked_iterator()
@@ -247,27 +250,38 @@ class PAndOrPlanner:
                          q, self.env.str_state(s), history) if v else 0
 
         else:  # backtracking
-            l = history[-1].l + p
+            l = (history[-1].l + p) if len(history) > 0 else p
             history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
-
-            t = self.contr.transitions.popitem()
-            logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
-                         t[0][0], self.env.str_obs(t[0][1]),
-                         t[1][0], self.env.str_action(t[1][1])) if v else 0
-
-            q_next_last, action_last = t[1]
-
-            it = dropwhile(lambda x: x[1] != action_last,
-                           product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
-                                   self.env.legal_actions(s)))
 
             # this is the node of the last checkpoint
             # (enough to check the length because we're in the right branch now)
             if len(history) == len(self.backtrack_stack[-1].history):
                 self.backtracking = False
+
+                t = self.contr.transitions.popitem()
+                logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
+                             t[0][0], self.env.str_obs(t[0][1]),
+                             t[1][0], self.env.str_action(t[1][1])) if v else 0
+
+                q_next_last, action_last = t[1]
+
+                it = dropwhile(lambda x: x[1] != action_last,
+                               product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
+                                       self.env.legal_actions(s)))
+
                 # burn the controller extension that caused the trouble earlier
                 _ = next(it)
+            else:
+                # the controller transition and action should already be defined
+                assert (q, obs) in self.contr.transitions
+                q_next_last, action_last = self.contr[q, obs]
+                assert action_last in self.env.legal_actions(s)
+
+                # same as the iterator above
+                it = dropwhile(lambda x: x[1] != action_last,
+                               product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
+                                       self.env.legal_actions(s)))
 
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
@@ -304,7 +318,7 @@ class PAndOrPlanner:
                 self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
                 logging.info("OR: Backstep: %s",
-                             [(q, self.env.str_state(s), l) for q, s, l in history[-1:len_history-1:-1]]) if v else 0
+                             [ (x.q, self.env.str_state(x.s), x.l) for x in history[len_history:] ]) if v else 0
                 # it's enough to clip the history if we're backtracking in the or_step
                 del history[len_history:]
 
@@ -324,9 +338,8 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.INFO)
 
     planner = PAndOrPlanner(env=environments.BridgeWalk())
-    planner.synth_plan(states_bound=2, lpc_desired=0.4)
+    success = planner.synth_plan(states_bound=1, lpc_desired=0.99)
 
-    # TODO: debug with lpc_desired=.7
-
-    time.sleep(1)
-    print(planner.contr)
+    time.sleep(1)  # Wait for mesages of logging module
+    if success:
+        print(planner.contr)
