@@ -210,19 +210,17 @@ class PAndOrPlanner:
         :return: None
         """
         if not self.backtracking:
-            l_old = 0. if len(history) == 0 else history[-1].l
+            l = (history[-1].l + p) if len(history) > 0 else p
 
             if s in self.env.goal_states:
-                self.lpc_lower_bound += exp(history[-1].l + p)
+                self.lpc_lower_bound += exp(l)
                 logging.info("OR: in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
                 return
 
             if HistoryItem(q, s, 99) in history:
-                self.lpc_upper_bound -= exp(history[-1].l + p)
+                self.lpc_upper_bound -= exp(l)
                 logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
                 return
-
-            l = l_old + p
 
             history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
@@ -230,7 +228,7 @@ class PAndOrPlanner:
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(s):
-                    self.lpc_lower_bound -= exp(history[-1].l + p)
+                    self.lpc_upper_bound -= exp(l)
                     return
 
                 sl_next = self.env.next_states_p(s, action)
@@ -325,8 +323,10 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = PAndOrPlanner(env=environments.DrunkBridgeWalk())
-    planner.synth_plan(states_bound=1, lpc_desired=0.4)
+    planner = PAndOrPlanner(env=environments.BridgeWalk())
+    planner.synth_plan(states_bound=2, lpc_desired=0.4)
+
+    # TODO: debug with lpc_desired=.7
 
     time.sleep(1)
     print(planner.contr)

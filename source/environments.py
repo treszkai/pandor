@@ -251,7 +251,7 @@ class Climber(NoisyEnv):
         else:
             return [(state, 0.)]
 
-class DrunkBridgeWalk(NoisyEnv):
+class BridgeWalk(NoisyEnv):
     A_FWD = 0
     A_LEFT = 1
     A_RIGHT = 2
