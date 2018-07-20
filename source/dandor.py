@@ -80,9 +80,6 @@ class AndOrPlanner:
         self.backtracking = False
         self.backtrack_stack = []
         self.contr = MealyController(bound)
-        # Note: this creates a controller first for one init state,
-        #       and if it fails for another then backtracks it transition by transition.
-        #       Is there a better method?
         return self.and_step(self.contr.init_state, self.env.init_states, [])
 
     # Note: history and controller could be moved from function arguments to class properties
@@ -155,12 +152,23 @@ class AndOrPlanner:
             obs = self.env.get_obs(env_state)
 
             if (q, obs) in self.contr.transitions:
+                # Note: for Moore machine, this can be defined as action being only q-dependent
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(env_state):
                     return False
 
                 sl_next = self.env.next_states(env_state, action)
                 return self.and_step(q_next, sl_next, history)
+
+            # for a Moore machine:
+            # if δ(q,o) def'd then γ(q) also def'd.
+            # So maybe γ(q) def'd but δ(q,o) undef.
+            # if neither is defined:
+            #   iterate over possible q' and a.
+            # if γ def:
+            #   iterate over possible q', but a = γ(q).
+            #
+            # (the code below is designed for Mealy only)
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
             it = product(range(min(self.contr.num_states+1, self.contr.bound)),
