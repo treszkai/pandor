@@ -170,6 +170,7 @@ class PAndOrPlanner:
                     logging.info("AND: not fail at empty history; try harder") if v else 0
                     it = get_backtracked_iterator()
                     continue
+                    # this branch correct? why is this needed?
                 else:
                     logging.info("AND: not fail at history %s", history) if v else 0
                     return AND_UNKNOWN

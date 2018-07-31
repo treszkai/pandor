@@ -141,18 +141,18 @@ class WalkAB(Environment):
 
 class WalkThroughFlap(Environment):
     """ Environment to test AND backtracking
-    States: {1(goal), 2(init0), 3(init1), 4(goal)}
-    Actions: Left/Right, but Left in 3 leaves you in 3.
+    States: {0(goal), 1(init0), 2(init1), 3(goal)}
+    Actions: Left/Right, but Left in 2 leaves you in 2.
     Obs: Goal or not
     """
 
     @property
     def init_states(self):
-        return [2, 3]
+        return [1,2]
 
     @property
     def goal_states(self):
-        return [1, 4]
+        return [0,3]
 
     def legal_actions(self, state):
         return [-1, +1]
@@ -162,12 +162,12 @@ class WalkThroughFlap(Environment):
 
     def next_states(self, state, action):
         if action == -1:
-            if state == 3:
-                return [3]
+            if state == 2:
+                return [2]
             else:
-                return [max(state + action, 1)]
+                return [max(state + action, 0)]
         if action == 1:
-            return [min(state + action, 4)]
+            return [min(state + action, 3)]
 
 
 class TreeChop(Environment):
