@@ -240,8 +240,7 @@ class PAndOrPlanner:
                 return
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
-            it = product(range(min(self.contr.bound, self.contr.num_states + 1)),
-                         self.env.legal_actions(s))
+            it = self.get_mealy_qa_iterator(s)
 
             # store a new checkpoint iff we're not backtracking currently
             self.backtrack_stack.append(StackItem(history[:],
@@ -267,9 +266,9 @@ class PAndOrPlanner:
 
                 q_next_last, action_last = t[1]
 
-                it = dropwhile(lambda x: x[1] != action_last,
-                               product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
-                                       self.env.legal_actions(s)))
+                it = self.get_mealy_qa_iterator(s,
+                                                q_next_last,
+                                                lambda x: x[1] != action_last)
 
                 # burn the controller extension that caused the trouble earlier
                 _ = next(it)
@@ -280,9 +279,9 @@ class PAndOrPlanner:
                 assert action_last in self.env.legal_actions(s)
 
                 # same as the iterator above
-                it = dropwhile(lambda x: x[1] != action_last,
-                               product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
-                                       self.env.legal_actions(s)))
+                it = self.get_mealy_qa_iterator(s,
+                                                q_next_last,
+                                                lambda x: x[1] != action_last)
 
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
@@ -333,13 +332,19 @@ class PAndOrPlanner:
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
 
+    def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
+        it = dropwhile(drop_func,
+                       product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
+                               self.env.legal_actions(s)))
+
+        return it
 
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
     planner = PAndOrPlanner(env=environments.BridgeWalk())
-    success = planner.synth_plan(states_bound=1, lpc_desired=0.99)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
