@@ -166,14 +166,11 @@ class PAndOrPlanner:
                 # Note: p = transition probability
                 s_k, p_k = next(it)
             except StopIteration:
-                if len(history) == 0:
-                    logging.info("AND: not fail at empty history; try harder") if v else 0
-                    it = get_backtracked_iterator()
-                    self.backtracking = True
-                    continue
-                else:
-                    logging.info("AND: not fail at history %s", history) if v else 0
-                    return AND_UNKNOWN
+                # this cannot be the topmost AND step, because the early termination returns sooner
+                assert len(history) > 0
+
+                logging.info("AND: not fail at history %s", history) if v else 0
+                return AND_UNKNOWN
 
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
@@ -348,7 +345,7 @@ if __name__ == '__main__':
     env = environments.BridgeWalk()
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.8)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.59)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
