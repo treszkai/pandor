@@ -169,8 +169,8 @@ class PAndOrPlanner:
                 if len(history) == 0:
                     logging.info("AND: not fail at empty history; try harder") if v else 0
                     it = get_backtracked_iterator()
+                    self.backtracking = True
                     continue
-                    # this branch correct? why is this needed?
                 else:
                     logging.info("AND: not fail at history %s", history) if v else 0
                     return AND_UNKNOWN
@@ -195,7 +195,7 @@ class PAndOrPlanner:
 
                 # decide if we should backtrack left or up
                 # (ignore the last element of self.backtrack_stack[-1].history)
-                # TODO make it iterative `is` instead of equality
+                # Note: could make it iterative `is` instead of equality
                 if history == self.backtrack_stack[-1].history[:min(len(history),
                                                                     len(self.backtrack_stack[-1].history)-1)]:
                     it = get_backtracked_iterator()
@@ -333,18 +333,22 @@ class PAndOrPlanner:
         return
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
+        legal_acts = self.env.legal_actions(s)
         it = dropwhile(drop_func,
                        product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
-                               self.env.legal_actions(s)))
+                               legal_acts))
 
         return it
+
 
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    planner = PAndOrPlanner(env=environments.BridgeWalk())
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
+    env = environments.BridgeWalk()
+
+    planner = PAndOrPlanner(env)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.8)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
