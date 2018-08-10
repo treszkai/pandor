@@ -1,0 +1,464 @@
+/Users/L/miniconda3/bin/python /Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py
+AND: Simulating s: (0, 4), q: 0
+OR: checkpoint at q: 0, s: (0, 4)
+    with history [(q: 0, s: (0, 4), l: 0.000)]
+OR: Added:   (0,False) -> (0,0)
+AND: Simulating s: (0, 3), q: 0
+AND: Simulating s: (0, 2), q: 0
+AND: Simulating s: (0, 1), q: 0
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.656
+AND: Simulating s: (1, 1), q: 0
+AND: Simulating s: (1, 1), q: 0
+OR: repeated state, new upper bound: 0.927
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211), (q: 0, s: (0, 1), l: -0.316), (q: 0, s: (1, 1), l: -2.619)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211), (q: 0, s: (0, 1), l: -0.316)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (0, 3), l: -0.105)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,False) -> (0,0)
+OR: Added:   (0,False) -> (0,1)
+AND: Simulating s: (-1, 4), q: 0
+AND: Simulating s: (-1, 4), q: 0
+OR: repeated state, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (-1, 4), l: 0.000)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,False) -> (0,1)
+OR: Added:   (0,False) -> (0,2)
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 0
+OR: repeated state, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 0, s: (1, 4), l: 0.000)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,False) -> (0,2)
+OR: Added:   (0,False) -> (1,0)
+AND: Simulating s: (0, 3), q: 1
+OR: checkpoint at q: 1, s: (0, 3)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: Added:   (1,False) -> (0,0)
+AND: Simulating s: (0, 2), q: 0
+AND: Simulating s: (0, 1), q: 1
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.656
+AND: Simulating s: (1, 1), q: 0
+AND: Simulating s: (1, 1), q: 1
+AND: Simulating s: (1, 1), q: 0
+OR: repeated state, new upper bound: 0.927
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211), (q: 1, s: (0, 1), l: -0.316), (q: 0, s: (1, 1), l: -2.619), (q: 1, s: (1, 1), l: -2.619)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211), (q: 1, s: (0, 1), l: -0.316), (q: 0, s: (1, 1), l: -2.619)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211), (q: 1, s: (0, 1), l: -0.316)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (0, 2), l: -0.211)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (1,False) -> (0,0)
+OR: Added:   (1,False) -> (0,1)
+AND: Simulating s: (-1, 3), q: 0
+AND: Simulating s: (-1, 2), q: 1
+AND: Simulating s: (-1, 2), q: 0
+AND: Simulating s: (-1, 1), q: 1
+AND: Simulating s: (-1, 1), q: 0
+AND: Simulating s: (-1, 0), q: 1
+OR: checkpoint at q: 1, s: (-1, 0)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: Added:   (1,True) -> (0,0)
+AND: Simulating s: (-1, 0), q: 0
+OR: checkpoint at q: 0, s: (-1, 0)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: Added:   (0,True) -> (0,0)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,0)
+OR: Added:   (0,True) -> (0,1)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,1)
+OR: Added:   (0,True) -> (0,2)
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (0,True) -> (0,2)
+OR: Added:   (0,True) -> (1,0)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (1,0)
+OR: Added:   (0,True) -> (1,1)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (1,1)
+OR: Added:   (0,True) -> (1,2)
+AND: Simulating s: (0, 0), q: 1
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (0,True) -> (1,2)
+OR: all extensions failed, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (1,True) -> (0,0)
+OR: Added:   (1,True) -> (0,1)
+AND: Simulating s: (-1, 0), q: 0
+OR: checkpoint at q: 0, s: (-1, 0)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: Added:   (0,True) -> (0,0)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,0)
+OR: Added:   (0,True) -> (0,1)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,1)
+OR: Added:   (0,True) -> (0,2)
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (0,True) -> (0,2)
+OR: Added:   (0,True) -> (1,0)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (1,0)
+OR: Added:   (0,True) -> (1,1)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (1,1)
+OR: Added:   (0,True) -> (1,2)
+AND: Simulating s: (0, 0), q: 1
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (0,True) -> (1,2)
+OR: all extensions failed, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (1,True) -> (0,1)
+OR: Added:   (1,True) -> (0,2)
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (1,True) -> (0,2)
+OR: Added:   (1,True) -> (1,0)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (1,True) -> (1,0)
+OR: Added:   (1,True) -> (1,1)
+AND: Simulating s: (-1, 0), q: 1
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (1,True) -> (1,1)
+OR: Added:   (1,True) -> (1,2)
+AND: Simulating s: (0, 0), q: 1
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: Redoing s: (-1, 3)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 2)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 1)
+AND: Redoing s: (-1, 0)
+OR: (redoing) Deleted: (1,True) -> (1,2)
+OR: all extensions failed, new upper bound: 0.000
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: [(0, (-1, 3), -0.10536051565782628), (1, (-1, 2), -0.10536051565782628), (0, (-1, 2), -0.10536051565782628), (1, (-1, 1), -0.10536051565782628), (0, (-1, 1), -0.10536051565782628)]
+OR: Deleted: (1,False) -> (0,1)
+OR: Added:   (0,False) -> (1,1)
+AND: Simulating s: (-1, 3), q: 1
+OR: checkpoint at q: 1, s: (-1, 3)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105)]
+OR: Added:   (1,False) -> (0,0)
+AND: Simulating s: (-1, 2), q: 0
+AND: Simulating s: (-1, 2), q: 1
+AND: Simulating s: (-1, 1), q: 0
+AND: Simulating s: (-1, 1), q: 1
+AND: Simulating s: (-1, 0), q: 0
+OR: checkpoint at q: 0, s: (-1, 0)
+    with history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: Added:   (0,True) -> (0,0)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,0)
+OR: Added:   (0,True) -> (0,1)
+AND: Simulating s: (-1, 0), q: 0
+OR: repeated state, new upper bound: 0.100
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+AND: Backtracking up
+OR: Backstep: []
+OR: Deleted: (0,True) -> (0,1)
+OR: Added:   (0,True) -> (0,2)
+AND: Simulating s: (0, 0), q: 0
+OR: in goal state, new lower bound: 0.900
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 1), l: -0.105), (q: 0, s: (-1, 0), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 1), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 1, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105), (q: 1, s: (-1, 1), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105), (q: 0, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105), (q: 1, s: (-1, 2), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105), (q: 0, s: (-1, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+OR: AND step didn't fail
+AND: Simulating s: (1, 4), q: 1
+AND: Simulating s: (1, 4), q: 0
+AND: Simulating s: (1, 4), q: 1
+OR: repeated state, new upper bound: 0.900
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303), (q: 0, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (1, 4), l: -2.303)]
+AND: Backtracking up
+AND: fail at history [(q: 0, s: (0, 4), l: 0.000)]
+AND: Backtracking left
+AND: Redoing s: (0, 3)
+AND: not fail at history [(q: 0, s: (0, 4), l: 0.000), (q: 1, s: (0, 3), l: -0.105)]
+Traceback (most recent call last):
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 359, in <module>
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.95)
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 137, in synth_plan
+    self.and_step(self.contr.init_state, self.env.init_states_p, [], first_and_step=True)
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 193, in and_step
+    self.or_step(q, s_k, p_k, history[:])
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 310, in or_step
+    if self.and_step(q_next, action, history) != AND_FAILURE:
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 193, in and_step
+    self.or_step(q, s_k, p_k, history[:])
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 314, in or_step
+    assert not self.backtracking
+AssertionError

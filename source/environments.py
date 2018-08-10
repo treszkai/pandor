@@ -252,8 +252,8 @@ class Climber(NoisyEnv):
             return [(state, 0.)]
 
 class BridgeWalk(NoisyEnv):
-    A_FWD = 0
-    A_LEFT = 1
+    A_LEFT = 0
+    A_FWD = 1
     A_RIGHT = 2
 
     def __init__(self, init_N=4):
@@ -262,12 +262,11 @@ class BridgeWalk(NoisyEnv):
         super().__init__()
 
     def get_obs(self, state):
-        return state[0]
-        # return state[1] == 0
-
+        # return state[0]
+        return state[1] == 0
 
     def legal_actions(self, state):
-        return [0,1,2]  # A_*
+        return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
 
     @property
     def goal_states(self):
