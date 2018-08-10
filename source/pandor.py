@@ -333,7 +333,7 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next, self.env.str_action(action)) if v else 0
 
-            if self.and_step(q_next, action, history) != AND_FAILURE:
+            if self.and_step(q_next, action, history) == AND_UNKNOWN:
                 # If we're here then self.backtracking is already False
                 #   (if we came from up, then we cleared it;
                 #    if we came from left, then the above call just succeeded
@@ -351,12 +351,12 @@ class PAndOrPlanner:
                 self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
                 self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
-                logging.info("OR: Backstep: %s at (q {}, s {})".format(q,s),
+                logging.info("OR: Backstep: %s at (q {}, s {}) with len {}".format(q,s, len_history),
                              [ (x.q, self.env.str_state(x.s), x.l) for x in history[len_history:] ]) if v else 0
 
                 # # it's enough to clip the history if we're backtracking in the or_step
                 # del history[len_history:]
-                # TODO!!!!!!!!!!!!!!!!!!!!!
+                # but it's not needed here, is it. see lines below the for loop
 
                 t = self.contr.transitions.popitem()
 
@@ -364,6 +364,9 @@ class PAndOrPlanner:
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
+        # self.backtracking = True
+        self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
+        self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
         self.backtrack_stack.pop()
         self.lpc_upper_bound -= history[-1].l
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
