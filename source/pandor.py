@@ -112,6 +112,13 @@ class StackItem:
                self.lpc_upper == other.lpc_upper
 
 
+def set_test_controller(cont):
+    env = environments.BridgeWalk()
+    cont[0, False] = [1, env.A_LEFT]
+    cont[1, False] = [1, env.A_FWD]
+    cont[1, True] = [1, env.A_RIGHT]
+
+
 class PAndOrPlanner:
     def __init__(self, env):
         self.env = env
@@ -130,11 +137,13 @@ class PAndOrPlanner:
         self.lpc_lower_bound = 0.
         self.lpc_upper_bound = 1.
 
+        # set_test_controller(self.contr)
+
         # Note: for numerical stability, lpc_desired must be lower than 1.
         assert lpc_desired < 1.0
 
         try:
-            self.and_step(self.contr.init_state, self.env.init_states_p, [])
+            self.and_step(self.contr.init_state, self.env.init_states_p, [], first_and_step=True)
         except PandorControllerFound:
             print("Controller found with max ", states_bound, "states.")
             return True
@@ -144,7 +153,7 @@ class PAndOrPlanner:
 
         assert False, "This should not happen."  # len(self.backtrack_stack) > 0 ?
 
-    def and_step(self, q, sl_next, history):
+    def and_step(self, q, action, history, first_and_step=False):
         """
         :return:
             - FAILURE if self.lpc_max < self.lpc_desired
@@ -152,6 +161,14 @@ class PAndOrPlanner:
         :raises:
             - PandorControllerFound if a sufficiently correct controller is found
         """
+
+        if first_and_step:
+            sl_next = self.env.init_states_p
+        else:
+            sl_next = self.env.next_states_p(history[-1].s, action)
+
+        sl_next.sort(key=lambda sp: sp[1], reverse=True)
+
         def get_backtracked_iterator():
             # don't care about or_steps that succeeded and to which we don't want to backtrack
             # history == self.backtrack_stack[-1].history[0:len(history)]
@@ -174,6 +191,7 @@ class PAndOrPlanner:
                 assert len(history) > 0
 
                 logging.info("AND: not fail at history %s", history) if v else 0
+
                 return AND_UNKNOWN
 
             if self.backtracking:
@@ -236,8 +254,7 @@ class PAndOrPlanner:
                     self.lpc_upper_bound -= exp(l)
                     return
 
-                sl_next = self.env.next_states_p(s, action)
-                self.and_step(q_next, sl_next, history)
+                self.and_step(q_next, action, history)
                 return
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
@@ -299,9 +316,7 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next, self.env.str_action(action)) if v else 0
 
-            sl_next = self.env.next_states_p(s, action)
-
-            if self.and_step(q_next, sl_next, history) != AND_FAILURE:
+            if self.and_step(q_next, action, history) != AND_FAILURE:
                 # If we're here then self.backtracking is already False
                 #   (if we came from up, then we cleared it;
                 #    if we came from left, then the above call just succeeded
