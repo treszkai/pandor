@@ -17,6 +17,9 @@ from itertools import dropwhile, product
 
 AND_FAILURE = -1
 AND_UNKNOWN = 0
+S_WIN = "win"
+S_FAIL = "fail"
+A_STOP = "stop"
 
 # verbose flag
 v = True
@@ -164,7 +167,13 @@ class PAndOrPlanner:
         if first_and_step:
             sl_next = self.env.init_states_p
         else:
-            sl_next = self.env.next_states_p(history[-1].s, action)
+            s = history[-1].s
+            if action is A_STOP and s in self.env.goal_states:
+                sl_next = [(S_WIN, 1.0)]
+            elif action is A_STOP and s not in self.env.goal_states:
+                sl_next = [(S_FAIL, 1.0)]
+            else:
+                sl_next = self.env.next_states_p(s, action)
 
         sl_next.sort(key=lambda sp: sp[1], reverse=True)
 
@@ -240,9 +249,14 @@ class PAndOrPlanner:
         l = (history[-1].l * p) if len(history) > 0 else p
         q_next_last, action_last = None, None # for debugging only
 
-        if s in self.env.goal_states:
+        if s is S_WIN:
             self.lpc_lower_bound += l
-            logging.info("OR: in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
+            logging.info("OR: terminated in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
+            return
+
+        if s is S_FAIL:
+            self.lpc_upper_bound -= l
+            logging.info("OR: terminated in NOT goal state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
             return
 
         if HistoryItem(q, s, 99) in history:
@@ -375,7 +389,7 @@ class PAndOrPlanner:
         self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
-        legal_acts = self.env.legal_actions(s)
+        legal_acts = [A_STOP] + self.env.legal_actions(s)
         it = dropwhile(drop_func,
                        product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
                                legal_acts))
