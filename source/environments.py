@@ -263,10 +263,10 @@ class BridgeWalk(NoisyEnv):
         return state[0] == 0
 
     def legal_actions(self, state):
-        if state[1] == -1: # for debugging
-            return []
-        else:
-            return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
+        # if state[1] == -1: # for debugging
+        #     return []
+        # else:
+        return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
 
     @property
     def goal_states(self):

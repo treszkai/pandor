@@ -220,8 +220,9 @@ class PAndOrPlanner:
                 if history == self.backtrack_stack[-1].history[:min(len(history),
                                                                     len(self.backtrack_stack[-1].history)-1)]:
                     it = get_backtracked_iterator()
-                    list_it = list(it)  # for debugging
-                    it = iter(list_it)
+
+                    # list_it = list(it)  # for debugging
+                    # it = iter(list_it)
                     logging.info("AND: Backtracking left") if v else 0
                 else:
                     logging.info("AND: Backtracking up") if v else 0
@@ -321,8 +322,8 @@ class PAndOrPlanner:
         s_saved = s
         q_saved = q
 
-        list_it = list(it)
-        it = iter(list_it)
+        # list_it = list(it)  # for debugging
+        # it = iter(list_it)
 
         # important: q_next first, so we only add new states when necessary
         for q_next, action in it:
