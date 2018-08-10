@@ -1,6 +1,3 @@
-from math import log
-
-
 class Environment:
     """ Class that describes the environment but does not simulate it """
 
@@ -57,11 +54,11 @@ class NoisyEnv(Environment):
     @property
     def init_states_p(self):
         """Initial belief distribution
-        A list of states and their log probabilities
+        A list of states and their probabilities
         Either init_states_p() or init_states() must be overwritten.
         """
         sl_0 = self.init_states
-        p_0 = 0.0 - log(len(sl_0))
+        p_0 = 1. / len(sl_0)
         return [(s_0, p_0) for s_0 in self.init_states]
 
     @property
@@ -70,9 +67,9 @@ class NoisyEnv(Environment):
 
     def next_states_p(self, state, action):
         """
-        Returns a list of possible next environment states and their transition log probabilities
+        Returns a list of possible next environment states and their transition probabilities
 
-        :rtype: list(state, log probability)
+        :rtype: list(state, probability)
         """
         raise NotImplementedError
 
@@ -243,13 +240,13 @@ class Climber(NoisyEnv):
     def next_states_p(self, state, action):
         C = Climber
         if state in [C.S_UP, C.S_UP_WAITING] and action == C.A_TRY_JUMP:
-            return [(C.S_DOWN, log(0.7)), (C.S_DEAD, log(0.3))]
+            return [(C.S_DOWN, 0.7), (C.S_DEAD, 0.3)]
         elif state == C.S_UP and action == C.A_CALL_HELP:
-            return [(C.S_UP_WAITING, 0.)]
+            return [(C.S_UP_WAITING, 1.)]
         elif state == C.S_UP_WAITING and action == C.A_CLIMB_DOWN:
-            return [(C.S_DOWN, 0.)]
+            return [(C.S_DOWN, 1.)]
         else:
-            return [(state, 0.)]
+            return [(state, 1.)]
 
 class BridgeWalk(NoisyEnv):
     A_LEFT = 0
@@ -262,8 +259,8 @@ class BridgeWalk(NoisyEnv):
         super().__init__()
 
     def get_obs(self, state):
-        # return state[0]
-        return state[1] == 0
+        return state[0]
+        # return state[1] == 0
 
     def legal_actions(self, state):
         return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
@@ -280,18 +277,18 @@ class BridgeWalk(NoisyEnv):
         if action == self.A_FWD and state[0] == 0:
             s_next_1 = (0, max(state[1]-1, 0))
             s_next_2 = (1, state[1])
-            return [(s_next_1, log(0.9)), (s_next_2, log(0.1))]
+            return [(s_next_1, 0.9), (s_next_2, 0.1)]
         elif action == self.A_LEFT and state[0] == 0:
-            return [((-1, state[1]), 0.)]
+            return [((-1, state[1]), 1.)]
         elif action == self.A_RIGHT and state[0] == 0:
-            return [((+1, state[1]), 0.)]
+            return [((+1, state[1]), 1.)]
         elif state[0] == 1:  # dead
-            return [(state, 0.)]
+            return [(state, 1.)]
         elif action == self.A_FWD and state[0] == -1:
-            return [((-1, max(state[1]-1, 0)), 0.)]
+            return [((-1, max(state[1]-1, 0)), 1.)]
         elif action == self.A_RIGHT and state[0] == -1:
-            return [((0, state[1]), 0.)]
+            return [((0, state[1]), 1.)]
         elif action == self.A_LEFT and state[0] == -1:
-            return [(state, 0.)]
+            return [(state, 1.)]
         else:
             assert False, 'Illegal action'

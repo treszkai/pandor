@@ -13,7 +13,6 @@ from collections import OrderedDict
 
 import time
 from itertools import dropwhile, product
-from math import exp
 
 
 AND_FAILURE = -1
@@ -232,26 +231,26 @@ class PAndOrPlanner:
         :param p: probability of next state transition
         :return: None
         """
+        l = (history[-1].l * p) if len(history) > 0 else p
+
+        if s in self.env.goal_states:
+            self.lpc_lower_bound += l
+            logging.info("OR: in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
+            return
+
+        if HistoryItem(q, s, 99) in history:
+            self.lpc_upper_bound -= l
+            logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
+            return
+
         if not self.backtracking:
-            l = (history[-1].l + p) if len(history) > 0 else p
-
-            if s in self.env.goal_states:
-                self.lpc_lower_bound += exp(l)
-                logging.info("OR: in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
-                return
-
-            if HistoryItem(q, s, 99) in history:
-                self.lpc_upper_bound -= exp(l)
-                logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
-                return
-
             history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
 
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(s):
-                    self.lpc_upper_bound -= exp(l)
+                    self.lpc_upper_bound -= l
                     return
 
                 self.and_step(q_next, action, history)
@@ -268,7 +267,6 @@ class PAndOrPlanner:
                          q, self.env.str_state(s), history) if v else 0
 
         else:  # backtracking
-            l = (history[-1].l + p) if len(history) > 0 else p
             history.append(HistoryItem(q, s, l))
             obs = self.env.get_obs(s)
 
@@ -345,7 +343,7 @@ class PAndOrPlanner:
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         self.backtrack_stack.pop()
-        self.lpc_upper_bound -= exp(history[-1].l)
+        self.lpc_upper_bound -= history[-1].l
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
 
