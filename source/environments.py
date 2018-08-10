@@ -256,23 +256,30 @@ class BridgeWalk(NoisyEnv):
     A_LEFT = 1
     A_RIGHT = 2
 
+    def __init__(self, init_N=4):
+        self.init_N = init_N
+
+        super().__init__()
+
     def get_obs(self, state):
         return state[0]
+        # return state[1] == 0
+
 
     def legal_actions(self, state):
-        return [0,1,2]
+        return [0,1,2]  # A_*
 
     @property
     def goal_states(self):
-        return [(0,5)]
+        return [(0,0)]
 
     @property
     def init_states(self):
-        return [(0,0)]
+        return [(0,self.init_N)]
 
     def next_states_p(self, state, action):
         if action == self.A_FWD and state[0] == 0:
-            s_next_1 = (0, min(state[1]+1, 5))
+            s_next_1 = (0, max(state[1]-1, 0))
             s_next_2 = (1, state[1])
             return [(s_next_1, log(0.9)), (s_next_2, log(0.1))]
         elif action == self.A_LEFT and state[0] == 0:
@@ -282,8 +289,10 @@ class BridgeWalk(NoisyEnv):
         elif state[0] == 1:  # dead
             return [(state, 0.)]
         elif action == self.A_FWD and state[0] == -1:
-            return [((-1, min(state[1]+1, 5)), 0.)]
+            return [((-1, max(state[1]-1, 0)), 0.)]
         elif action == self.A_RIGHT and state[0] == -1:
             return [((0, state[1]), 0.)]
-        else:
+        elif action == self.A_LEFT and state[0] == -1:
             return [(state, 0.)]
+        else:
+            assert False, 'Illegal action'
