@@ -45,7 +45,11 @@ class MealyController:
         """ Counts the number of states already defined
         (returns 1 for the empty controller)
         """
-        return len(set(k for k, _ in self.transitions.values())) or 1
+
+        if len(self.transitions) == 0:
+            return 1
+        else:
+            return max(q for q, _ in self.transitions.values()) + 1
 
     @property
     def init_state(self):
@@ -62,7 +66,7 @@ class MealyController:
         q_next, act = value
 
         assert q < self.num_states and q_next <= self.num_states, \
-            "Invalid controller state transition: %s → %s".format(key, value)
+            "Invalid controller state transition: {} → {}".format(key, value)
 
         if not q_next < self.bound:
             assert q_next < self.bound
@@ -179,7 +183,7 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
-            if self.lpc_lower_bound > self.lpc_desired:
+            if self.lpc_lower_bound >= self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 raise PandorControllerFound
             elif self.lpc_upper_bound < self.lpc_desired:
@@ -257,6 +261,7 @@ class PAndOrPlanner:
                 self.backtracking = False
 
                 t = self.contr.transitions.popitem()
+                assert (q, obs) == t[0]
                 logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
@@ -345,7 +350,7 @@ if __name__ == '__main__':
     env = environments.BridgeWalk()
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.59)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.95)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
