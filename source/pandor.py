@@ -253,43 +253,24 @@ class PAndOrPlanner:
         obs = self.env.get_obs(s)
 
 
-        # we're not backtracking down now, or we are but it's not a checkpoint
-        #   => just call and_step again
-        if not (self.backtracking and
-                not any(history == bt_item.history
-                        for bt_item in self.backtrack_stack)
-                ):
-            if (q, obs) in self.contr.transitions:
-                q_next, action = self.contr[q, obs]
-                if action not in self.env.legal_actions(s):
-                    self.lpc_upper_bound -= l
-                    logging.info("OR: illegal action {} in state {}".format(action, s))
-                    return
 
-                res = self.and_step(q_next, action, history)
-                logging.info("OR: AND returned {} ".format(res) +
-                             ("and now backtracking" if self.backtracking else "")) if v else 0
+        # if not backtracking or we did not make a nondet choice last time here
+        if  ((not self.backtracking) and ((q, obs) in self.contr.transitions)) or \
+            (self.backtracking and (not any(history == bt_item.history
+                                            for bt_item in self.backtrack_stack))):
+            q_next, action = self.contr[q, obs]
+            if action not in self.env.legal_actions(s):
+                self.lpc_upper_bound -= l
+                logging.info("OR: illegal action {} in state {}".format(action, s))
                 return
 
+            res = self.and_step(q_next, action, history)
+            logging.info("OR: AND returned {} ".format(res) +
+                         ("and now backtracking" if self.backtracking else "")) if v else 0
+            return
 
-
-
-
-
-
+        # otherwise we make a nondet choice
         if not self.backtracking:
-            if (q, obs) in self.contr.transitions:
-                q_next, action = self.contr[q, obs]
-                if action not in self.env.legal_actions(s):
-                    self.lpc_upper_bound -= l
-                    logging.info("OR: illegal action {} in state {}".format(action, s))
-                    return
-
-                res = self.and_step(q_next, action, history)
-                logging.info("OR: AND returned {} ".format(res) +
-                             ("and now backtracking" if self.backtracking else "")) if v else 0
-                return
-
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
             it = self.get_mealy_qa_iterator(s)
 
@@ -331,20 +312,10 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next_last, self.env.str_action(action_last)) if v else 0
 
-                # did we make a choice at this node last time?
-                if any(history == bt_item.history
-                       for bt_item in self.backtrack_stack):
-                    # if so, then let's get the appropriate iterator (as above)
-                    it = self.get_mealy_qa_iterator(s,
-                                                    q_next_last,
-                                                    lambda x: x[1] != action_last)
-                else:
-                    # if not, then just do the same action again
-                    q_next, action = self.contr[q, obs]
+                it = self.get_mealy_qa_iterator(s,
+                                                q_next_last,
+                                                lambda x: x[1] != action_last)
 
-                    res = self.and_step(q_next, action, history)
-                    logging.info("OR: AND returned {} ".format(res) +
-                                 ("and now backtracking" if self.backtracking else "")) if v else 0
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
         s_saved = s
