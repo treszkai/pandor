@@ -181,6 +181,9 @@ class PAndOrPlanner:
         else:
             it = iter(sl_next)
 
+        list_it = list(it) # for debugging
+        it = iter(list_it)
+
         while True:
             try:
                 # Note: p = transition probability
@@ -217,6 +220,8 @@ class PAndOrPlanner:
                 if history == self.backtrack_stack[-1].history[:min(len(history),
                                                                     len(self.backtrack_stack[-1].history)-1)]:
                     it = get_backtracked_iterator()
+                    list_it = list(it)  # for debugging
+                    it = iter(list_it)
                     logging.info("AND: Backtracking left") if v else 0
                 else:
                     logging.info("AND: Backtracking up") if v else 0
@@ -232,6 +237,7 @@ class PAndOrPlanner:
         :return: None
         """
         l = (history[-1].l * p) if len(history) > 0 else p
+        q_next_last, action_last = None, None # for debugging only
 
         if s in self.env.goal_states:
             self.lpc_lower_bound += l
@@ -243,17 +249,45 @@ class PAndOrPlanner:
             logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
             return
 
-        if not self.backtracking:
-            history.append(HistoryItem(q, s, l))
-            obs = self.env.get_obs(s)
+        history.append(HistoryItem(q, s, l))
+        obs = self.env.get_obs(s)
 
+
+        # we're not backtracking down now, or we are but it's not a checkpoint
+        #   => just call and_step again
+        if not (self.backtracking and
+                not any(history == bt_item.history
+                        for bt_item in self.backtrack_stack)
+                ):
             if (q, obs) in self.contr.transitions:
                 q_next, action = self.contr[q, obs]
                 if action not in self.env.legal_actions(s):
                     self.lpc_upper_bound -= l
+                    logging.info("OR: illegal action {} in state {}".format(action, s))
                     return
 
-                self.and_step(q_next, action, history)
+                res = self.and_step(q_next, action, history)
+                logging.info("OR: AND returned {} ".format(res) +
+                             ("and now backtracking" if self.backtracking else "")) if v else 0
+                return
+
+
+
+
+
+
+
+        if not self.backtracking:
+            if (q, obs) in self.contr.transitions:
+                q_next, action = self.contr[q, obs]
+                if action not in self.env.legal_actions(s):
+                    self.lpc_upper_bound -= l
+                    logging.info("OR: illegal action {} in state {}".format(action, s))
+                    return
+
+                res = self.and_step(q_next, action, history)
+                logging.info("OR: AND returned {} ".format(res) +
+                             ("and now backtracking" if self.backtracking else "")) if v else 0
                 return
 
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
@@ -267,9 +301,6 @@ class PAndOrPlanner:
                          q, self.env.str_state(s), history) if v else 0
 
         else:  # backtracking
-            history.append(HistoryItem(q, s, l))
-            obs = self.env.get_obs(s)
-
             # this is the node of the last checkpoint
             # (enough to check the length because we're in the right branch now)
             if len(history) == len(self.backtrack_stack[-1].history):
@@ -300,15 +331,27 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next_last, self.env.str_action(action_last)) if v else 0
 
-                # same as the iterator above
-                it = self.get_mealy_qa_iterator(s,
-                                                q_next_last,
-                                                lambda x: x[1] != action_last)
+                # did we make a choice at this node last time?
+                if any(history == bt_item.history
+                       for bt_item in self.backtrack_stack):
+                    # if so, then let's get the appropriate iterator (as above)
+                    it = self.get_mealy_qa_iterator(s,
+                                                    q_next_last,
+                                                    lambda x: x[1] != action_last)
+                else:
+                    # if not, then just do the same action again
+                    q_next, action = self.contr[q, obs]
 
+                    res = self.and_step(q_next, action, history)
+                    logging.info("OR: AND returned {} ".format(res) +
+                                 ("and now backtracking" if self.backtracking else "")) if v else 0
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
         s_saved = s
         q_saved = q
+
+        list_it = list(it)
+        it = iter(list_it)
 
         # important: q_next first, so we only add new states when necessary
         for q_next, action in it:
@@ -337,12 +380,15 @@ class PAndOrPlanner:
                 self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
                 self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
-                logging.info("OR: Backstep: %s",
+                logging.info("OR: Backstep: %s at (q {}, s {})".format(q,s),
                              [ (x.q, self.env.str_state(x.s), x.l) for x in history[len_history:] ]) if v else 0
-                # it's enough to clip the history if we're backtracking in the or_step
-                del history[len_history:]
+
+                # # it's enough to clip the history if we're backtracking in the or_step
+                # del history[len_history:]
+                # TODO!!!!!!!!!!!!!!!!!!!!!
 
                 t = self.contr.transitions.popitem()
+
                 logging.info("OR: Deleted: (%s,%s) -> (%s,%s)",
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
