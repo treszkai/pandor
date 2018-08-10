@@ -259,8 +259,8 @@ class BridgeWalk(NoisyEnv):
         super().__init__()
 
     def get_obs(self, state):
-        return state[0]
-        # return state[1] == 0
+        return state[1]
+        # return state[0] == 0
 
     def legal_actions(self, state):
         return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
@@ -271,24 +271,24 @@ class BridgeWalk(NoisyEnv):
 
     @property
     def init_states(self):
-        return [(0,self.init_N)]
+        return [(self.init_N,0)]
 
     def next_states_p(self, state, action):
-        if action == self.A_FWD and state[0] == 0:
-            s_next_1 = (0, max(state[1]-1, 0))
-            s_next_2 = (1, state[1])
+        if action == self.A_FWD and state[1] == 0:
+            s_next_1 = (max(state[0]-1, 0), 0)
+            s_next_2 = (state[0], -1)
             return [(s_next_1, 0.9), (s_next_2, 0.1)]
-        elif action == self.A_LEFT and state[0] == 0:
-            return [((-1, state[1]), 1.)]
-        elif action == self.A_RIGHT and state[0] == 0:
-            return [((+1, state[1]), 1.)]
-        elif state[0] == 1:  # dead
+        elif action == self.A_LEFT and state[1] == 0:
+            return [((state[0], +1), 1.)]
+        elif action == self.A_RIGHT and state[1] == 0:
+            return [((state[0], -1), 1.)]
+        elif state[1] == -1:  # dead
             return [(state, 1.)]
-        elif action == self.A_FWD and state[0] == -1:
-            return [((-1, max(state[1]-1, 0)), 1.)]
-        elif action == self.A_RIGHT and state[0] == -1:
-            return [((0, state[1]), 1.)]
-        elif action == self.A_LEFT and state[0] == -1:
+        elif action == self.A_FWD and state[1] == +1:
+            return [((max(state[0]-1, 0), +1), 1.)]
+        elif action == self.A_RIGHT and state[1] == +1:
+            return [((state[0], 0), 1.)]
+        elif action == self.A_LEFT and state[1] == +1:
             return [(state, 1.)]
         else:
             assert False, 'Illegal action'

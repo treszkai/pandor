@@ -277,11 +277,12 @@ class PAndOrPlanner:
 
                 t = self.contr.transitions.popitem()
                 assert (q, obs) == t[0]
-                logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
-                             t[0][0], self.env.str_obs(t[0][1]),
-                             t[1][0], self.env.str_action(t[1][1])) if v else 0
 
                 q_next_last, action_last = t[1]
+
+                logging.info("OR: (redoing) Deleted: (%s,%s) -> (%s,%s)",
+                             q, self.env.str_obs(obs),
+                             q_next_last, self.env.str_action(action_last)) if v else 0
 
                 it = self.get_mealy_qa_iterator(s,
                                                 q_next_last,
@@ -294,6 +295,10 @@ class PAndOrPlanner:
                 assert (q, obs) in self.contr.transitions
                 q_next_last, action_last = self.contr[q, obs]
                 assert action_last in self.env.legal_actions(s)
+
+                logging.info("OR: redoing: (%s,%s) -> (%s,%s)",
+                             q, self.env.str_obs(obs),
+                             q_next_last, self.env.str_action(action_last)) if v else 0
 
                 # same as the iterator above
                 it = self.get_mealy_qa_iterator(s,

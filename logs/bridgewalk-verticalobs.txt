@@ -1,304 +1,304 @@
 /Users/L/miniconda3/bin/python /Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py
-INFO:root:AND: Simulating s: (0, 4), q: 0
-INFO:root:OR: checkpoint at q: 0, s: (0, 4)
-    with history [(q: 0, s: (0, 4), l: 1.000)]
+INFO:root:AND: Simulating s: (4, 0), q: 0
+INFO:root:OR: checkpoint at q: 0, s: (4, 0)
+    with history [(q: 0, s: (4, 0), l: 1.000)]
 INFO:root:OR: Added:   (0,0) -> (0,1)
-INFO:root:AND: Simulating s: (0, 3), q: 0
-INFO:root:AND: Simulating s: (0, 2), q: 0
-INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:AND: Simulating s: (3, 0), q: 0
+INFO:root:AND: Simulating s: (2, 0), q: 0
+INFO:root:AND: Simulating s: (1, 0), q: 0
 INFO:root:AND: Simulating s: (0, 0), q: 0
 INFO:root:OR: in goal state, new lower bound: 0.656
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: checkpoint at q: 0, s: (1, 1)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:OR: Added:   (0,1) -> (0,1)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (0,1)
-INFO:root:OR: Added:   (0,1) -> (0,0)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (0,0)
-INFO:root:OR: Added:   (0,1) -> (0,2)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (0,2)
-INFO:root:OR: Added:   (0,1) -> (1,1)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: checkpoint at q: 1, s: (1, 1)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:OR: Added:   (1,1) -> (0,1)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,1)
-INFO:root:OR: Added:   (1,1) -> (0,0)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,0)
-INFO:root:OR: Added:   (1,1) -> (0,2)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,2)
-INFO:root:OR: Added:   (1,1) -> (1,1)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,1)
-INFO:root:OR: Added:   (1,1) -> (1,0)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,0)
-INFO:root:OR: Added:   (1,1) -> (1,2)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,2)
-INFO:root:OR: all extensions failed, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (1,1)
-INFO:root:OR: Added:   (0,1) -> (1,0)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: checkpoint at q: 1, s: (1, 1)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:OR: Added:   (1,1) -> (0,1)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,1)
-INFO:root:OR: Added:   (1,1) -> (0,0)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,0)
-INFO:root:OR: Added:   (1,1) -> (0,2)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,2)
-INFO:root:OR: Added:   (1,1) -> (1,1)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,1)
-INFO:root:OR: Added:   (1,1) -> (1,0)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,0)
-INFO:root:OR: Added:   (1,1) -> (1,2)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,2)
-INFO:root:OR: all extensions failed, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (1,0)
-INFO:root:OR: Added:   (0,1) -> (1,2)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: checkpoint at q: 1, s: (1, 1)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:OR: Added:   (1,1) -> (0,1)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,1)
-INFO:root:OR: Added:   (1,1) -> (0,0)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,0)
-INFO:root:OR: Added:   (1,1) -> (0,2)
-INFO:root:AND: Simulating s: (1, 1), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (0,2)
-INFO:root:OR: Added:   (1,1) -> (1,1)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,1)
-INFO:root:OR: Added:   (1,1) -> (1,0)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,0)
-INFO:root:OR: Added:   (1,1) -> (1,2)
-INFO:root:AND: Simulating s: (1, 1), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073), (q: 1, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (1,1) -> (1,2)
-INFO:root:OR: all extensions failed, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729), (q: 0, s: (1, 1), l: 0.073)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,1) -> (1,2)
-INFO:root:OR: all extensions failed, new upper bound: 0.927
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810), (q: 0, s: (0, 1), l: 0.729)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900), (q: 0, s: (0, 2), l: 0.810)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (0, 3), l: 0.900)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:OR: Backstep: []
-INFO:root:OR: Deleted: (0,0) -> (0,1)
-INFO:root:OR: Added:   (0,0) -> (0,0)
-INFO:root:AND: Simulating s: (-1, 4), q: 0
-INFO:root:OR: checkpoint at q: 0, s: (-1, 4)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: checkpoint at q: 0, s: (1, -1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
 INFO:root:OR: Added:   (0,-1) -> (0,1)
-INFO:root:AND: Simulating s: (-1, 3), q: 0
-INFO:root:AND: Simulating s: (-1, 2), q: 0
-INFO:root:AND: Simulating s: (-1, 1), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.000
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 0), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 1), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 0, s: (-1, 3), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: []
 INFO:root:OR: Deleted: (0,-1) -> (0,1)
 INFO:root:OR: Added:   (0,-1) -> (0,0)
-INFO:root:AND: Simulating s: (-1, 4), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.000
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: []
 INFO:root:OR: Deleted: (0,-1) -> (0,0)
 INFO:root:OR: Added:   (0,-1) -> (0,2)
-INFO:root:AND: Simulating s: (0, 4), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.000
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: []
 INFO:root:OR: Deleted: (0,-1) -> (0,2)
 INFO:root:OR: Added:   (0,-1) -> (1,1)
-INFO:root:AND: Simulating s: (-1, 3), q: 1
-INFO:root:OR: checkpoint at q: 1, s: (-1, 3)
-    with history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: checkpoint at q: 1, s: (1, -1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
 INFO:root:OR: Added:   (1,-1) -> (0,1)
-INFO:root:AND: Simulating s: (-1, 2), q: 0
-INFO:root:AND: Simulating s: (-1, 1), q: 1
-INFO:root:AND: Simulating s: (-1, 0), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 1
-INFO:root:AND: Simulating s: (-1, 0), q: 0
-INFO:root:OR: repeated state, new upper bound: 0.000
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 0), l: 1.000), (q: 1, s: (-1, 0), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 0), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 2), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: []
 INFO:root:OR: Deleted: (1,-1) -> (0,1)
 INFO:root:OR: Added:   (1,-1) -> (0,0)
-INFO:root:AND: Simulating s: (-1, 3), q: 0
-INFO:root:AND: Simulating s: (-1, 2), q: 1
-INFO:root:AND: Simulating s: (-1, 2), q: 0
-INFO:root:AND: Simulating s: (-1, 1), q: 1
-INFO:root:AND: Simulating s: (-1, 1), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 1
-INFO:root:AND: Simulating s: (-1, 0), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 1
-INFO:root:OR: repeated state, new upper bound: 0.000
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 1), l: 1.000), (q: 1, s: (-1, 0), l: 1.000), (q: 0, s: (-1, 0), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 1), l: 1.000), (q: 1, s: (-1, 0), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (-1, 1), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000)]
-INFO:root:AND: Backtracking up
-INFO:root:AND: fail at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000)]
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: []
 INFO:root:OR: Deleted: (1,-1) -> (0,0)
 INFO:root:OR: Added:   (1,-1) -> (0,2)
-INFO:root:AND: Simulating s: (0, 3), q: 0
-INFO:root:AND: Simulating s: (-1, 3), q: 0
-INFO:root:AND: Simulating s: (-1, 2), q: 1
-INFO:root:AND: Simulating s: (0, 2), q: 0
-INFO:root:AND: Simulating s: (-1, 2), q: 0
-INFO:root:AND: Simulating s: (-1, 1), q: 1
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,2)
+INFO:root:OR: Added:   (1,-1) -> (1,1)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,1)
+INFO:root:OR: Added:   (1,-1) -> (1,0)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,0)
+INFO:root:OR: Added:   (1,-1) -> (1,2)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,2)
+INFO:root:OR: all extensions failed, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,-1) -> (1,1)
+INFO:root:OR: Added:   (0,-1) -> (1,0)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: checkpoint at q: 1, s: (1, -1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:OR: Added:   (1,-1) -> (0,1)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,1)
+INFO:root:OR: Added:   (1,-1) -> (0,0)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,0)
+INFO:root:OR: Added:   (1,-1) -> (0,2)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,2)
+INFO:root:OR: Added:   (1,-1) -> (1,1)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,1)
+INFO:root:OR: Added:   (1,-1) -> (1,0)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,0)
+INFO:root:OR: Added:   (1,-1) -> (1,2)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,2)
+INFO:root:OR: all extensions failed, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,-1) -> (1,0)
+INFO:root:OR: Added:   (0,-1) -> (1,2)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: checkpoint at q: 1, s: (1, -1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:OR: Added:   (1,-1) -> (0,1)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,1)
+INFO:root:OR: Added:   (1,-1) -> (0,0)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,0)
+INFO:root:OR: Added:   (1,-1) -> (0,2)
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (0,2)
+INFO:root:OR: Added:   (1,-1) -> (1,1)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,1)
+INFO:root:OR: Added:   (1,-1) -> (1,0)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,0)
+INFO:root:OR: Added:   (1,-1) -> (1,2)
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073), (q: 1, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,-1) -> (1,2)
+INFO:root:OR: all extensions failed, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729), (q: 0, s: (1, -1), l: 0.073)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,-1) -> (1,2)
+INFO:root:OR: all extensions failed, new upper bound: 0.927
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810), (q: 0, s: (1, 0), l: 0.729)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900), (q: 0, s: (2, 0), l: 0.810)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (3, 0), l: 0.900)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,0) -> (0,1)
+INFO:root:OR: Added:   (0,0) -> (0,0)
+INFO:root:AND: Simulating s: (4, 1), q: 0
+INFO:root:OR: checkpoint at q: 0, s: (4, 1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000)]
+INFO:root:OR: Added:   (0,1) -> (0,1)
+INFO:root:AND: Simulating s: (3, 1), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 0
 INFO:root:AND: Simulating s: (0, 1), q: 0
-INFO:root:AND: Simulating s: (-1, 1), q: 0
-INFO:root:AND: Simulating s: (-1, 0), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.000
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 0, s: (1, 1), l: 1.000), (q: 0, s: (0, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 0, s: (1, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,1) -> (0,1)
+INFO:root:OR: Added:   (0,1) -> (0,0)
+INFO:root:AND: Simulating s: (4, 1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.000
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,1) -> (0,0)
+INFO:root:OR: Added:   (0,1) -> (0,2)
+INFO:root:AND: Simulating s: (4, 0), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.000
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (0,1) -> (0,2)
+INFO:root:OR: Added:   (0,1) -> (1,1)
+INFO:root:AND: Simulating s: (3, 1), q: 1
+INFO:root:OR: checkpoint at q: 1, s: (3, 1)
+    with history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000)]
+INFO:root:OR: Added:   (1,1) -> (0,1)
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state, new upper bound: 0.000
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (0, 1), l: 1.000), (q: 1, s: (0, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (0, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,1) -> (0,1)
+INFO:root:OR: Added:   (1,1) -> (0,0)
+INFO:root:AND: Simulating s: (3, 1), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 1
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 1
+INFO:root:AND: Simulating s: (1, 1), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state, new upper bound: 0.000
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (1, 1), l: 1.000), (q: 1, s: (0, 1), l: 1.000), (q: 0, s: (0, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (1, 1), l: 1.000), (q: 1, s: (0, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (1, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000)]
+INFO:root:AND: Backtracking up
+INFO:root:OR: Backstep: []
+INFO:root:OR: Deleted: (1,1) -> (0,0)
+INFO:root:OR: Added:   (1,1) -> (0,2)
+INFO:root:AND: Simulating s: (3, 0), q: 0
+INFO:root:AND: Simulating s: (3, 1), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 1
+INFO:root:AND: Simulating s: (2, 0), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 1
+INFO:root:AND: Simulating s: (1, 0), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
 INFO:root:AND: Simulating s: (0, 0), q: 0
 INFO:root:OR: in goal state, new lower bound: 1.000
-INFO:root:AND: succeed at history [(q: 0, s: (0, 4), l: 1.000), (q: 0, s: (-1, 4), l: 1.000), (q: 1, s: (-1, 3), l: 1.000), (q: 0, s: (0, 3), l: 1.000), (q: 0, s: (-1, 3), l: 1.000), (q: 1, s: (-1, 2), l: 1.000), (q: 0, s: (0, 2), l: 1.000), (q: 0, s: (-1, 2), l: 1.000), (q: 1, s: (-1, 1), l: 1.000), (q: 0, s: (0, 1), l: 1.000), (q: 0, s: (-1, 1), l: 1.000), (q: 1, s: (-1, 0), l: 1.000)]
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), l: 1.000), (q: 0, s: (4, 1), l: 1.000), (q: 1, s: (3, 1), l: 1.000), (q: 0, s: (3, 0), l: 1.000), (q: 0, s: (3, 1), l: 1.000), (q: 1, s: (2, 1), l: 1.000), (q: 0, s: (2, 0), l: 1.000), (q: 0, s: (2, 1), l: 1.000), (q: 1, s: (1, 1), l: 1.000), (q: 0, s: (1, 0), l: 1.000), (q: 0, s: (1, 1), l: 1.000), (q: 1, s: (0, 1), l: 1.000)]
 Controller found with max  2 states.
 States: 2
 ((0, 0), (0, 0))
-((0, -1), (1, 1))
-((1, -1), (0, 2))
+((0, 1), (1, 1))
+((1, 1), (0, 2))
