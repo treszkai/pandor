@@ -249,9 +249,9 @@ class Climber(NoisyEnv):
             return [(state, 1.)]
 
 class BridgeWalk(NoisyEnv):
-    A_LEFT = 0
-    A_FWD = 1
-    A_RIGHT = 2
+    A_LEFT = 'left'
+    A_FWD = 'fwd'
+    A_RIGHT = 'right'
 
     def __init__(self, init_N=4):
         self.init_N = init_N
@@ -277,21 +277,21 @@ class BridgeWalk(NoisyEnv):
         return [(self.init_N,0)]
 
     def next_states_p(self, state, action):
-        if action == self.A_FWD and state[1] == 0:
+        if action is self.A_FWD and state[1] == 0:
             s_next_1 = (max(state[0]-1, 0), 0)
             s_next_2 = (state[0], -1)
             return [(s_next_1, 0.9), (s_next_2, 0.1)]
-        elif action == self.A_LEFT and state[1] == 0:
+        elif action is self.A_LEFT and state[1] == 0:
             return [((state[0], +1), 1.)]
-        elif action == self.A_RIGHT and state[1] == 0:
+        elif action is self.A_RIGHT and state[1] == 0:
             return [((state[0], -1), 1.)]
         elif state[1] == -1:  # dead
             return [(state, 1.)]
-        elif action == self.A_FWD and state[1] == +1:
+        elif action is self.A_FWD and state[1] == +1:
             return [((max(state[0]-1, 0), +1), 1.)]
-        elif action == self.A_RIGHT and state[1] == +1:
+        elif action is self.A_RIGHT and state[1] == +1:
             return [((state[0], 0), 1.)]
-        elif action == self.A_LEFT and state[1] == +1:
+        elif action is self.A_LEFT and state[1] == +1:
             return [(state, 1.)]
         else:
             assert False, 'Illegal action'

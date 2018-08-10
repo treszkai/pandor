@@ -253,8 +253,6 @@ class PAndOrPlanner:
         history.append(HistoryItem(q, s, l))
         obs = self.env.get_obs(s)
 
-
-
         # if not backtracking or we did not make a nondet choice last time here
         if  ((not self.backtracking) and ((q, obs) in self.contr.transitions)) or \
             (self.backtracking and (not any(history == bt_item.history
@@ -287,6 +285,7 @@ class PAndOrPlanner:
             # (enough to check the length because we're in the right branch now)
             if len(history) == len(self.backtrack_stack[-1].history):
                 self.backtracking = False
+                self.revert_variables()
 
                 t = self.contr.transitions.popitem()
                 assert (q, obs) == t[0]
@@ -345,12 +344,11 @@ class PAndOrPlanner:
                 # set backtracking to False: either there are more AND branches to try,
                 #   or we'll set it to true in the and_step above.
                 self.backtracking = False
+                self.revert_variables()
 
                 # restore saved values
                 q, s = q_saved, s_saved
                 len_history = len(self.backtrack_stack[-1].history)
-                self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
-                self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
                 logging.info("OR: Backstep: %s at (q {}, s {}) with len {}".format(q,s, len_history),
                              [ (x.q, self.env.str_state(x.s), x.l) for x in history[len_history:] ]) if v else 0
@@ -366,12 +364,15 @@ class PAndOrPlanner:
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
         # self.backtracking = True
-        self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
-        self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
+        self.revert_variables()
         self.backtrack_stack.pop()
         self.lpc_upper_bound -= history[-1].l
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
+
+    def revert_variables(self):
+        self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
+        self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
         legal_acts = self.env.legal_actions(s)
