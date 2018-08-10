@@ -239,8 +239,6 @@ class AndOrPlanner:
 
                 logging.info("OR: Backstep: %s",
                              [(q, self.env.str_state(s)) for q, s in history[-1:len_history-1:-1]]) if v else 0
-                # it's enough to clip the history if we're backtracking in the or_step
-                del history[len_history:]
 
                 t = self.contr.transitions.popitem()
                 logging.info("OR: Deleted: (%s,%s) -> (%s,%s)",
