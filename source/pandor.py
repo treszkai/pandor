@@ -22,7 +22,8 @@ S_FAIL = "fail"
 A_STOP = "stop"
 
 # verbose flag
-v = True
+v = False
+# v = True
 
 
 class PandorControllerFound(Exception):
@@ -138,6 +139,9 @@ class PAndOrPlanner:
         self.lpc_desired = lpc_desired
         self.lpc_lower_bound = 0.
         self.lpc_upper_bound = 1.
+        # counters for stats
+        self.num_backtracking = 0
+        self.num_steps = 0
 
         # set_test_controller(self.contr)
 
@@ -218,6 +222,7 @@ class PAndOrPlanner:
             elif self.lpc_upper_bound < self.lpc_desired:
                 logging.info("AND: fail at history %s", history) if v else 0
                 self.backtracking = True
+                self.num_backtracking += 1
 
                 if len(self.backtrack_stack) == 0:
                     logging.info("AND: Trying to backtrack but empty stack; fail.") if v else 0
@@ -247,7 +252,9 @@ class PAndOrPlanner:
         :return: None
         """
         l = (history[-1].l * p) if len(history) > 0 else p
-        q_next_last, action_last = None, None # for debugging only
+        # for debugging/stats only
+        q_next_last, action_last = None, None
+        self.num_steps += 1
 
         if s is S_WIN:
             self.lpc_lower_bound += l
@@ -401,11 +408,16 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    env = environments.BridgeWalk()
+    env = environments.BridgeWalk(4)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.95)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.7)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
         print(planner.contr)
+
+    print("Num. of backtracks: {}".format(planner.num_backtracking))
+    print("Num. of steps taken: {}".format(planner.num_steps))
+    print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
+    print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))

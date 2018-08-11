@@ -266,7 +266,9 @@ class BridgeWalk(NoisyEnv):
         # if state[1] == -1: # for debugging
         #     return []
         # else:
+        # return [self.A_LEFT, self.A_FWD, self.A_RIGHT]
         return [self.A_FWD, self.A_LEFT, self.A_RIGHT]
+        # return [self.A_RIGHT, self.A_LEFT, self.A_FWD]
 
     @property
     def goal_states(self):
