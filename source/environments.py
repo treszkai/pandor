@@ -297,3 +297,48 @@ class BridgeWalk(NoisyEnv):
             return [(state, 1.)]
         else:
             assert False, 'Illegal action'
+
+
+class LoopyTest(NoisyEnv):
+
+    def get_obs(self, state):
+        return 0
+
+    def legal_actions(self, state):
+        return [0]
+
+    @property
+    def goal_states(self):
+        return [1,3]
+
+    @property
+    def init_states(self):
+        return [0]
+
+    def next_states_p(self, state, action):
+        if state == 0:
+            return [(1, 0.5), (2, .4), (7, .1)]
+        elif state == 2:
+            return [(3,.4), (2, .3), (5, .2), (6, .1)]
+        elif state == 6:
+            return [(6, 1.)]
+        else:
+            return [(state, 1.)]
+        # if action is self.A_FWD and state[1] == 0:
+        #     s_next_1 = (max(state[0]-1, 0), 0)
+        #     s_next_2 = (state[0], -1)
+        #     return [(s_next_1, 0.9), (s_next_2, 0.1)]
+        # elif action is self.A_LEFT and state[1] == 0:
+        #     return [((state[0], +1), 1.)]
+        # elif action is self.A_RIGHT and state[1] == 0:
+        #     return [((state[0], -1), 1.)]
+        # elif state[1] == -1:  # dead
+        #     return [(state, 1.)]
+        # elif action is self.A_FWD and state[1] == +1:
+        #     return [((max(state[0]-1, 0), +1), 1.)]
+        # elif action is self.A_RIGHT and state[1] == +1:
+        #     return [((state[0], 0), 1.)]
+        # elif action is self.A_LEFT and state[1] == +1:
+        #     return [(state, 1.)]
+        # else:
+        #     assert False, 'Illegal action'

@@ -104,15 +104,13 @@ class HistoryItem:
 
 
 class StackItem:
-    def __init__(self, history, lpc_lower, lpc_upper):
+    def __init__(self, history, alpha):
         self.history = history
-        self.lpc_lower = lpc_lower
-        self.lpc_upper = lpc_upper
+        self.alpha = alpha
 
     def __eq__(self, other):
         return self.history == other.history and \
-               self.lpc_lower == other.lpc_lower and \
-               self.lpc_upper == other.lpc_upper
+               all(self.alpha[key] == other.alpha[key] for key in self.alpha)
 
 
 def set_test_controller(cont):
@@ -128,20 +126,22 @@ class PAndOrPlanner:
         # attributes used by synth_plan() - def'd here only to suppress warnings
         self.contr, self.backtracking, self.backtrack_stack = None, None, None
         # Lower/upper bound for the LPC of the current controller
-        self.lpc_lower_bound = None
-        self.lpc_upper_bound = None
         self.lpc_desired = None
+        self.alpha = None
 
     def synth_plan(self, states_bound, lpc_desired):
         self.backtracking = False
         self.backtrack_stack = []
         self.contr = MealyController(states_bound)
         self.lpc_desired = lpc_desired
-        self.lpc_lower_bound = 0.
-        self.lpc_upper_bound = 1.
         # counters for stats
         self.num_backtracking = 0
         self.num_steps = 0
+        MAX_HISTORY_LENGTH = 1000
+        self.alpha = {'win': [0.] * MAX_HISTORY_LENGTH,
+                      'fail': [0.] * MAX_HISTORY_LENGTH,
+                      'loop': [0.] * MAX_HISTORY_LENGTH,
+                      'noter': [0.] * MAX_HISTORY_LENGTH}
 
         # set_test_controller(self.contr)
 
@@ -189,6 +189,9 @@ class PAndOrPlanner:
             return dropwhile(lambda x: x[0] != self.backtrack_stack[-1].history[len(history)].s,
                              iter(sl_next))
 
+        for x in 'win', 'fail', 'noter', 'loop':
+            self.alpha[x][len(history)] = 0.
+
         if self.backtracking:
             it = get_backtracked_iterator()
         else:
@@ -207,6 +210,21 @@ class PAndOrPlanner:
 
                 logging.info("AND: not fail at history %s", history) if v else 0
 
+                # cumulate alpha values from last layer
+                n = len(history)
+
+                if len(history) == 1:
+                    p_this = history[0].l
+                else:
+                    p_this = history[-1].l / history[-2].l
+
+                for x in 'win', 'fail', 'noter':
+                    self.alpha[x][n-1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n-1])
+
+                # for x in 'win', 'fail', 'noter', 'loop':
+                #     self.alpha[x][n] = 0.
+                self.alpha['loop'][n-1] = 0.
+
                 return AND_UNKNOWN
 
             if self.backtracking:
@@ -216,10 +234,14 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
-            if self.lpc_lower_bound >= self.lpc_desired:
+            likelihoods = self.calc_lambda(history)
+            lpc_lower_bound = likelihoods['win']
+            lpc_upper_bound = 1 - likelihoods['fail'] - likelihoods['noter']
+
+            if lpc_lower_bound >= self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 raise PandorControllerFound
-            elif self.lpc_upper_bound < self.lpc_desired:
+            elif lpc_upper_bound < self.lpc_desired:
                 logging.info("AND: fail at history %s", history) if v else 0
                 self.backtracking = True
                 self.num_backtracking += 1
@@ -257,18 +279,25 @@ class PAndOrPlanner:
         self.num_steps += 1
 
         if s is S_WIN:
-            self.lpc_lower_bound += l
-            logging.info("OR: terminated in goal state, new lower bound: %0.3f", self.lpc_lower_bound) if v else 0
+            # len(history) is good because hist does not yet contain this step.
+            self.alpha['win'][len(history)] += p
+            logging.info("OR: terminated in goal state") if v else 0
             return
 
-        if s is S_FAIL:
-            self.lpc_upper_bound -= l
-            logging.info("OR: terminated in NOT goal state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
+        elif s is S_FAIL:
+            self.alpha['fail'][len(history)] += p
+            logging.info("OR: terminated in NOT goal state") if v else 0
             return
 
-        if HistoryItem(q, s, 99) in history:
-            self.lpc_upper_bound -= l
-            logging.info("OR: repeated state, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
+        elif HistoryItem(q, s, l) in history:
+            self.alpha['noter'][len(history)] += p
+            logging.info("OR: repeated state") if v else 0
+            return
+
+        elif HistoryItem(q, s, 99) in history:
+            looping_timestep = history.index(HistoryItem(q,s,99))
+            self.alpha['loop'][looping_timestep] += l / history[looping_timestep].l
+            logging.info("OR: loop to level %d", looping_timestep) if v else 0
             return
 
         history.append(HistoryItem(q, s, l))
@@ -280,7 +309,7 @@ class PAndOrPlanner:
                                             for bt_item in self.backtrack_stack))):
             q_next, action = self.contr[q, obs]
             if action not in self.env.legal_actions(s):
-                self.lpc_upper_bound -= l
+                self.alpha['fail'][len(history) - 1] += p
                 logging.info("OR: illegal action {} in state {}".format(action, s))
                 return
 
@@ -295,9 +324,10 @@ class PAndOrPlanner:
             it = self.get_mealy_qa_iterator(s)
 
             # store a new checkpoint iff we're not backtracking currently
-            self.backtrack_stack.append(StackItem(history[:],
-                                                  self.lpc_lower_bound,
-                                                  self.lpc_upper_bound))
+            alpha_copy = {}
+            for key in self.alpha:
+                alpha_copy[key] = self.alpha[key][:]
+            self.backtrack_stack.append(StackItem(history[:], alpha_copy))
             logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
                          q, self.env.str_state(s), history) if v else 0
 
@@ -387,16 +417,37 @@ class PAndOrPlanner:
         # self.backtracking = True
         self.revert_variables()
         self.backtrack_stack.pop()
-        self.lpc_upper_bound -= history[-1].l
+        self.alpha['fail'][len(history) - 1] += p
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
 
+    def calc_lambda(self, history):
+        assert len(history) >= 1
+
+        n = len(history)
+        likelihoods = {}
+        for x in 'win', 'fail', 'noter':
+            likelihoods[x] = self.alpha[x][n]
+        for k in range(n-1, -1, -1):
+            if k == 0:
+                p_k = history[k].l
+            else:
+                p_k = history[k].l / history[k-1].l
+
+            for key in likelihoods:
+                likelihoods[key] = self.alpha[key][k] + \
+                                    p_k * likelihoods[key] / (1 - self.alpha['loop'][k])
+        return likelihoods
+
     def revert_variables(self):
-        self.lpc_upper_bound = self.backtrack_stack[-1].lpc_upper
-        self.lpc_lower_bound = self.backtrack_stack[-1].lpc_lower
+        for key in self.alpha:
+            self.alpha[key] = self.backtrack_stack[-1].alpha[key]
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
-        legal_acts = [A_STOP] + self.env.legal_actions(s)
+        if s in self.env.goal_states:
+            legal_acts = [A_STOP] + self.env.legal_actions(s)
+        else:
+            legal_acts = self.env.legal_actions(s) + [A_STOP]
         it = dropwhile(drop_func,
                        product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
                                legal_acts))
@@ -419,5 +470,5 @@ if __name__ == '__main__':
 
     print("Num. of backtracks: {}".format(planner.num_backtracking))
     print("Num. of steps taken: {}".format(planner.num_steps))
-    print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
-    print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))
+    # print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
+    # print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))
