@@ -22,8 +22,8 @@ S_FAIL = "fail"
 A_STOP = "stop"
 
 # verbose flag
-v = False
-# v = True
+# v = False
+v = True
 
 
 class PandorControllerFound(Exception):
@@ -279,7 +279,7 @@ class PAndOrPlanner:
             (self.backtracking and (not any(history == bt_item.history
                                             for bt_item in self.backtrack_stack))):
             q_next, action = self.contr[q, obs]
-            if action not in self.env.legal_actions(s):
+            if action not in self.env.legal_actions(s) and action != A_STOP:
                 self.lpc_upper_bound -= l
                 logging.info("OR: illegal action {} in state {}".format(action, s))
                 return
@@ -408,10 +408,13 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    env = environments.BridgeWalk(4)
+    # env = environments.BridgeWalk(4)
+    env = environments.WalkThroughFlapProb()
+
+    # print(env.init_states_p)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.7)
+    success = planner.synth_plan(states_bound=1, lpc_desired=0.55)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
