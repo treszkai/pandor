@@ -167,7 +167,7 @@ class WalkThroughFlap(Environment):
             return [min(state + action, 3)]
 
 
-class WalkThroughFlapProb(Environment):
+class WalkThroughFlapProb(NoisyEnv):
     """ Environment to test AND backtracking
     States: {0(goal), 1(init0), 2(init1), 3(goal)}
     Actions: Left/Right, but Left in 2 leaves you in 2.
@@ -190,9 +190,10 @@ class WalkThroughFlapProb(Environment):
             return [-1, +1]
 
     def get_obs(self, state):
-        return state == -1
+        if state == -1: return "begin"
+        return state in self.goal_states
 
-    def next_states(self, state, action):
+    def next_states_p(self, state, action):
         if action == "begin":
             return [(1, 0.5), (2, .5)]
         if action == -1:
@@ -202,7 +203,6 @@ class WalkThroughFlapProb(Environment):
                 return [(max(state + action, 0), 1.0)]
         if action == 1:
             return [(min(state + action, 3), 1.0)]
-
 
 
 class TreeChop(Environment):

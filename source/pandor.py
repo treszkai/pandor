@@ -308,7 +308,7 @@ class PAndOrPlanner:
             (self.backtracking and (not any(history == bt_item.history
                                             for bt_item in self.backtrack_stack))):
             q_next, action = self.contr[q, obs]
-            if action not in self.env.legal_actions(s):
+            if (action not in self.env.legal_actions(s)) and not (action is A_STOP):
                 self.alpha['fail'][len(history) - 1] += p
                 logging.info("OR: illegal action {} in state {}".format(action, s))
                 return
@@ -357,7 +357,7 @@ class PAndOrPlanner:
                 # the controller transition and action should already be defined
                 assert (q, obs) in self.contr.transitions
                 q_next_last, action_last = self.contr[q, obs]
-                assert action_last in self.env.legal_actions(s)
+                assert action_last in self.env.legal_actions(s) or action_last is A_STOP
 
                 logging.info("OR: redoing: (%s,%s) -> (%s,%s)",
                              q, self.env.str_obs(obs),
