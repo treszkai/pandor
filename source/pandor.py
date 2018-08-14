@@ -22,8 +22,8 @@ S_FAIL = "fail"
 A_STOP = "stop"
 
 # verbose flag
-v = False
-# v = True
+# v = False
+v = True
 
 
 class PandorControllerFound(Exception):
@@ -100,7 +100,7 @@ class HistoryItem:
         """ self.l == 99 is a wildcard"""
         return self.q == other.q and \
                self.s == other.s and \
-               (self.l == 99 or self.l == other.l)
+               (self.l == 99 or other.l == 99 or self.l == other.l)
 
 
 class StackItem:
@@ -137,7 +137,7 @@ class PAndOrPlanner:
         # counters for stats
         self.num_backtracking = 0
         self.num_steps = 0
-        MAX_HISTORY_LENGTH = 1000
+        MAX_HISTORY_LENGTH = 10
         self.alpha = {'win': [0.] * MAX_HISTORY_LENGTH,
                       'fail': [0.] * MAX_HISTORY_LENGTH,
                       'loop': [0.] * MAX_HISTORY_LENGTH,
@@ -240,6 +240,7 @@ class PAndOrPlanner:
 
             if lpc_lower_bound >= self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
+                likelihoods = self.calc_lambda(history)
                 raise PandorControllerFound
             elif lpc_upper_bound < self.lpc_desired:
                 logging.info("AND: fail at history %s", history) if v else 0
@@ -459,10 +460,11 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    env = environments.BridgeWalk(4)
+    # env = environments.BridgeWalk(4)
+    env = environments.WalkThroughFlapProb()
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.7)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.8)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:
@@ -470,5 +472,6 @@ if __name__ == '__main__':
 
     print("Num. of backtracks: {}".format(planner.num_backtracking))
     print("Num. of steps taken: {}".format(planner.num_steps))
+
     # print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
     # print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))

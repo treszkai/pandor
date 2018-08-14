@@ -195,7 +195,7 @@ class WalkThroughFlapProb(NoisyEnv):
 
     def next_states_p(self, state, action):
         if action == "begin":
-            return [(1, 0.5), (2, .5)]
+            return [(1, 0.3), (2, .7)]
         if action == -1:
             if state == 2:
                 return [(2,.9), (1,.1)]
