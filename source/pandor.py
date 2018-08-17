@@ -189,8 +189,7 @@ class PAndOrPlanner:
             return dropwhile(lambda x: x[0] != self.backtrack_stack[-1].history[len(history)].s,
                              iter(sl_next))
 
-        for x in 'win', 'fail', 'noter', 'loop':
-            self.alpha[x][len(history)] = 0.
+        self.reset_alpha(history)
 
         if self.backtracking:
             it = get_backtracked_iterator()
@@ -210,21 +209,8 @@ class PAndOrPlanner:
 
                 logging.info("AND: not fail at history %s", history) if v else 0
 
-                # cumulate alpha values from last layer
-                n = len(history)
-
-                if len(history) == 1:
-                    p_this = history[0].l
-                else:
-                    p_this = history[-1].l / history[-2].l
-
-                for x in 'win', 'fail', 'noter':
-                    self.alpha[x][n-1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n-1])
-
-                # for x in 'win', 'fail', 'noter', 'loop':
-                #     self.alpha[x][n] = 0.
-                self.alpha['loop'][n-1] = 0.
-
+                self.cumulate_alpha(history)
+                self.reset_alpha(history)
                 return AND_UNKNOWN
 
             if self.backtracking:
@@ -261,13 +247,21 @@ class PAndOrPlanner:
                     # list_it = list(it)  # for debugging
                     # it = iter(list_it)
                     logging.info("AND: Backtracking left") if v else 0
+                    self.cumulate_alpha(history)
+                    self.reset_alpha(history)
                 else:
                     logging.info("AND: Backtracking up") if v else 0
+                    self.cumulate_alpha(history)
+                    self.reset_alpha(history)
                     return AND_FAILURE
                 # We set self.backtracking = False in or_step
                 #   when we start doing business as usual:
                 #   i.e. either when we arrive in an OR node from up
                 #     or when we arrive in it from the left
+
+    def reset_alpha(self, history):
+        for x in 'win', 'fail', 'noter', 'loop':
+            self.alpha[x][len(history)] = 0.
 
     def or_step(self, q, s, p, history):
         """
@@ -422,6 +416,23 @@ class PAndOrPlanner:
         logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
         return
 
+    def cumulate_alpha(self, history):
+        # cumulate alpha values from last layer
+        n = len(history)
+
+        if len(history) == 1:
+            p_this = history[0].l
+        else:
+            p_this = history[-1].l / history[-2].l
+
+        for x in 'win', 'fail', 'noter':
+            self.alpha[x][n - 1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n - 1])
+
+        # for x in 'win', 'fail', 'noter', 'loop':
+        #     self.alpha[x][n] = 0.
+        self.alpha['loop'][n - 1] = 0.
+
+
     def calc_lambda(self, history):
         assert len(history) >= 1
 
@@ -460,11 +471,12 @@ if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    # env = environments.BridgeWalk(4)
-    env = environments.WalkThroughFlapProb()
+    env = environments.BridgeWalk(4)
+    # env = environments.WalkThroughFlapProb()
+    # env = environments.ProbHallAone()
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.8)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
 
     time.sleep(1)  # Wait for mesages of logging module
     if success:

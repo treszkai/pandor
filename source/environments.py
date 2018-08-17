@@ -17,6 +17,9 @@ class Environment:
     def goal_states(self):
         raise NotImplementedError
 
+    def is_goal_state(self, state):
+        return state in self.goal_states
+
     def legal_actions(self, state):
         raise NotImplementedError
 
@@ -78,7 +81,7 @@ class NoisyEnv(Environment):
 
 
 class WalkAB(Environment):
-    """ Environment of Fig. 1 of BPG2009
+    """ Environment of Fig. 1 of BPG2009 (Hall-A one-dim)
     States: {(n, visB): n ∈ {1,2,3,4,5}, visB ∈ {True, False} }
     Action set: {-1, +1} = {left, right}
     Action effects:
@@ -203,6 +206,110 @@ class WalkThroughFlapProb(NoisyEnv):
                 return [(max(state + action, 0), 1.0)]
         if action == 1:
             return [(min(state + action, 3), 1.0)]
+
+
+class ProbHallAone(NoisyEnv):
+    """ Environment of Fig. 1 of BPG2009 (Hall-A one-dim)
+    States: {(n, visB): n ∈ {1,2,3,4,5}, visB ∈ {True, False} }
+    Action set: {-1, +1} = {left, right}
+    Action effects:
+        - left( (n,visB) )  = ( max(n-1, 1), visB )
+        - right( (n,visB) ) = ( min(n+1, 5), visB )
+    Observables: (A, B) = (n == 1, n == 5)
+    Init states: { (1, False), (2, False) }
+    Goal states: { (1, True) }
+    """
+
+    @staticmethod
+    def str_state(s):
+        return "({}, {})".format(s[0], 'T' if s[1] else 'F')
+
+    @staticmethod
+    def str_action(a):
+        if a == -1:
+            return "Left"
+        elif a == 1:
+            return "Right"
+        else:
+            assert False, f"Nonsense action: {a}"
+
+    @staticmethod
+    def str_obs(o):
+        return "({}, {})".format(" A" if o[0] else "¬A",
+                                 " B" if o[1] else "¬B")
+
+    @property
+    def init_states_p(self):
+        return [((1,False),1.)]
+
+    @property
+    def goal_states(self):
+        return [(1, True)]
+
+    def legal_actions(self, state):
+        return [-1, +1]
+
+    def get_obs(self, state):
+        n = state[0]
+        return n == 1, n == 5
+
+    def next_states_p(self, state, action):
+        n, vis_b = state
+        vis_b |= action == +1 and n == 4
+        n_ = n + action
+        if n_ < 1:
+            n = 1
+        elif n_ > 5:
+            n = 5
+        else:
+            n = n_
+        return [((n, vis_b),1.)]
+
+
+# class HallR(Environment):
+#     """ Modification of the Hall-R problem (Bonet et al. 2009)
+#     Goal: walk around a square-shaped hall.
+#     States: {0,1,2,...11} x {true,false}^12 x {up,down,left,right}
+#     Init: ⟨0,f,f,...,f⟩
+#     Goals: ⟨*,t,t,...,t,*⟩
+#     Actions: {fwd,turnright,turnleft}
+#     Obs: {0,3,6,9,hall}x{facingwall,facinghall}
+#     """
+#
+#     DIR_RIGHT='r'
+#     g = 2**12-1
+#
+#     @property
+#     def init_states(self):
+#         return [(0,0,self.DIR_RIGHT)]
+#
+#     # @property
+#     # def goal_states(self):
+#     #     return self.g
+#
+#     def is_goal_state(self, state):
+#         return state[1] == self.g
+#
+#     def legal_actions(self, state):
+#         if state == -1:
+#             return ["begin"]
+#         else:
+#             return [-1, +1]
+#
+#     def get_obs(self, state):
+#         if state == -1: return "begin"
+#         return state in self.goal_states
+#
+#     def next_states_p(self, state, action):
+#         if action == "begin":
+#             return [(1, 0.3), (2, .7)]
+#         if action == -1:
+#             if state == 2:
+#                 return [(2,.9), (1,.1)]
+#             else:
+#                 return [(max(state + action, 0), 1.0)]
+#         if action == 1:
+#             return [(min(state + action, 3), 1.0)]
 
 
 class TreeChop(Environment):
