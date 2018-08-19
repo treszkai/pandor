@@ -381,22 +381,43 @@ class PAndOrPlanner:
 
         self.alpha['loop'][n - 1] = 0.
 
-    def calc_lambda(self, history):
+    def calc_lambda(self, history, epsilon=1e-6):
         assert len(history) >= 1
 
         n = len(history)
-        likelihoods = {}
+        likelihoods = {'maybe-noter': 0.}
         for x in 'win', 'fail', 'noter':
             likelihoods[x] = self.alpha[x][n]
+
+        p_k = 1.
+
         for k in range(n-1, -1, -1):
+            p_kplusone = p_k
+
             if k == 0:
                 p_k = history[k].l
             else:
                 p_k = history[k].l / history[k-1].l
 
-            for key in likelihoods:
-                likelihoods[key] = self.alpha[key][k] + \
-                                    p_k * likelihoods[key] / (1 - self.alpha['loop'][k])
+            likelihoods['maybe-noter'] = p_kplusone * likelihoods['maybe-noter'] + self.alpha['loop'][k]
+
+            if likelihoods['maybe-noter'] > 1 - epsilon:
+                # possibly self.alpha['loop'][k] == 1 here
+                # for every key in 'win', 'fail', 'noter', likelihoods[key] == 0.
+                #  avoid division by zero
+                for key in 'win', 'fail', 'noter':
+                    assert likelihoods[key] == 0.
+                    likelihoods[key] = self.alpha[key][k]
+
+                likelihoods['noter'] += p_k
+                likelihoods['maybe-noter'] = 0
+            else:
+                for key in 'win', 'fail', 'noter':
+                    likelihoods[key] = self.alpha[key][k] + \
+                                        p_k * likelihoods[key] / (1 - self.alpha['loop'][k])
+
+        del likelihoods['maybe-noter']
+
         return likelihoods
 
     def revert_variables(self):
