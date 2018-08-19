@@ -5,11 +5,10 @@ Based on the Prolog implementation in Hu and De Giacomo: A Generic Technique for
 """
 
 
+from controller import MealyController
 import environments
 
 import logging
-from collections import OrderedDict
-
 import time
 from itertools import dropwhile
 from itertools import product
@@ -23,63 +22,16 @@ class PandorControllerNotFound(Exception):
     pass
 
 
-class MealyController:
-    """ An N-bounded Mealy machine
-    States: 0, 1, 2, ... k-1  where k <= N
-    Observations
-    """
-    def __init__(self, bound):
-        self.bound = bound
-        self.transitions = OrderedDict()
-
-    @property
-    def num_states(self):
-        """ Counts the number of states already defined
-        (returns 1 for the empty controller)
-        """
-        return len(set(k for k, _ in self.transitions.values())) or 1
-
-    @property
-    def init_state(self):
-        return 0
-
-    def __getitem__(self, item):
-        """
-        :type item: tuple of (contr_state, observation)
-        """
-        return self.transitions[item]
-
-    def __setitem__(self, key, value):
-        q, obs = key
-        q_next, act = value
-
-        assert q < self.num_states and q_next <= self.num_states, \
-            "Invalid controller state transition: %s → %s".format(key, value)
-
-        # Note: unused, I think.
-        if q_next >= self.bound:
-            raise PandorControllerNotFound("Too many controller states")
-
-        self.transitions[key] = value
-
-    def __str__(self):
-        n = self.num_states
-        s = f"States: {n}\n"
-        for i in sorted(self.transitions.items(), key=lambda x: x[0][0] * n + x[1][0]):
-            s += f"{i}\n"
-        return s
-
-
 class AndOrPlanner:
     def __init__(self, env):
         self.env = env
         # attributes used by synth_plan() - def'd here only to suppress warnings
         self.contr, self.backtracking, self.backtrack_stack = None, None, None
 
-    def synth_plan(self, bound):
+    def synth_plan(self, states_bound):
         self.backtracking = False
         self.backtrack_stack = []
-        self.contr = MealyController(bound)
+        self.contr = MealyController(states_bound)
         return self.and_step(self.contr.init_state, self.env.init_states, [])
 
     # Note: history and controller could be moved from function arguments to class properties
@@ -249,13 +201,27 @@ class AndOrPlanner:
         return False
 
 
+def main():
+    env = environments.ProbHallAone()
+
+    planner = AndOrPlanner(env)
+    success = planner.synth_plan(states_bound=2)
+
+    if v:
+        time.sleep(1)  # Wait for mesages of logging module
+        if success:
+            for (q,o),(q_next,a) in planner.contr.transitions.items():
+                print("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
+        else:
+            print("No controller found")
+
+
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
 
-    # planner = AndOrPlanner(env=environments.WalkThroughFlap())
-    planner = AndOrPlanner(env=environments.Climber())
-    planner.synth_plan(bound=1)
-
-    time.sleep(1)
-    print(planner.contr)
+    if 0:
+        v = False
+        print(timeit.timeit('main()', number=100, setup="from __main__ import main"))
+    else:
+        main()

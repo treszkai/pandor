@@ -6,10 +6,10 @@ Based on ./dandor.py.
 
 """
 
+from controller import MealyController
 import environments
 
 import logging
-from collections import OrderedDict
 import timeit
 import time
 from itertools import dropwhile, product
@@ -33,56 +33,6 @@ class PandorControllerFound(Exception):
 
 class PandorControllerNotFound(Exception):
     pass
-
-
-class MealyController:
-    """ An N-bounded Mealy machine
-    States: 0, 1, 2, ... k-1  where k <= N
-    Observations
-    """
-    def __init__(self, bound):
-        self.bound = bound
-        self.transitions = OrderedDict()
-
-    @property
-    def num_states(self):
-        """ Counts the number of states already defined
-        (returns 1 for the empty controller)
-        """
-
-        if len(self.transitions) == 0:
-            return 1
-        else:
-            return max(q for q, _ in self.transitions.values()) + 1
-
-    @property
-    def init_state(self):
-        return 0
-
-    def __getitem__(self, item):
-        """
-        :type item: tuple of (contr_state, observation)
-        """
-        return self.transitions[item]
-
-    def __setitem__(self, key, value):
-        q, obs = key
-        q_next, act = value
-
-        assert q < self.num_states and q_next <= self.num_states, \
-            "Invalid controller state transition: {} → {}".format(key, value)
-
-        if not q_next < self.bound:
-            assert q_next < self.bound
-
-        self.transitions[key] = value
-
-    def __str__(self):
-        n = self.num_states
-        s = f"States: {n}\n"
-        for i in sorted(self.transitions.items(), key=lambda x: x[0][0] * n + x[1][0]):
-            s += f"{i}\n"
-        return s
 
 
 class HistoryItem:
@@ -227,6 +177,7 @@ class PAndOrPlanner:
             if lpc_lower_bound >= self.lpc_desired:
                 logging.info("AND: succeed at history %s", history) if v else 0
                 likelihoods = self.calc_lambda(history)
+                print(likelihoods) if v else 0
                 raise PandorControllerFound
             elif lpc_upper_bound < self.lpc_desired:
                 logging.info("AND: fail at history %s", history) if v else 0
@@ -467,9 +418,9 @@ class PAndOrPlanner:
 
 
 def main():
-    env = environments.BridgeWalk(4)
+    # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    # env = environments.ProbHallAone()
+    env = environments.ProbHallAone()
 
     planner = PAndOrPlanner(env)
     success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
@@ -477,11 +428,13 @@ def main():
     if v:
         time.sleep(1)  # Wait for mesages of logging module
         if success:
-            print(planner.contr)
+            for (q,o),(q_next,a) in planner.contr.transitions.items():
+                print("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
+        else:
+            print("No controller found")
+
         print("Num. of steps taken: {}".format(planner.num_steps))
         print("Num. of backtracks: {}".format(planner.num_backtracking))
-        # print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
-        # print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))
 
 
 if __name__ == '__main__':

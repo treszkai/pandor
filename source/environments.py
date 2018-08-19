@@ -231,16 +231,21 @@ class ProbHallAone(NoisyEnv):
         elif a == 1:
             return "Right"
         else:
-            assert False, f"Nonsense action: {a}"
+            return a
 
     @staticmethod
     def str_obs(o):
-        return "({}, {})".format(" A" if o[0] else "¬A",
-                                 " B" if o[1] else "¬B")
+        assert not(o[0] and o[1])
+        if o[0]:
+            return "A"
+        elif o[1]:
+            return "B"
+        else:
+            return "-"
 
     @property
-    def init_states_p(self):
-        return [((1,False),1.)]
+    def init_states(self):
+        return [(1, False)]
 
     @property
     def goal_states(self):
@@ -265,6 +270,9 @@ class ProbHallAone(NoisyEnv):
             n = n_
         return [((n, vis_b),1.)]
 
+    def next_states(self, state, action):
+        sp_list = self.next_states_p(state, action)
+        return [s for s,p in sp_list]
 
 # class HallR(Environment):
 #     """ Modification of the Hall-R problem (Bonet et al. 2009)
@@ -392,6 +400,7 @@ class Climber(NoisyEnv):
             return [(C.S_DOWN, 1.)]
         else:
             return [(state, 1.)]
+
 
 class BridgeWalk(NoisyEnv):
     A_LEFT = 'left'
