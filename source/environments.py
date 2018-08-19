@@ -268,7 +268,11 @@ class ProbHallAone(NoisyEnv):
             n = 5
         else:
             n = n_
-        return [((n, vis_b),1.)]
+        next_state = (n, vis_b)
+        if state == next_state:
+            return [(state, 1.0)]
+        else:
+            return [(state, 0.9), (next_state, 0.1)]
 
     def next_states(self, state, action):
         sp_list = self.next_states_p(state, action)
