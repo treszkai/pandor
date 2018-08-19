@@ -10,7 +10,7 @@ import environments
 
 import logging
 from collections import OrderedDict
-
+import timeit
 import time
 from itertools import dropwhile, product
 
@@ -151,7 +151,7 @@ class PAndOrPlanner:
         try:
             self.and_step(self.contr.init_state, self.env.init_states_p, [], first_and_step=True)
         except PandorControllerFound:
-            print("Controller found with max ", states_bound, "states.")
+            print("Controller found with max ", states_bound, "states.") if v else 0
             return True
         except PandorControllerNotFound:
             print("No controller found with max ", states_bound, "states.")
@@ -467,10 +467,7 @@ class PAndOrPlanner:
         return it
 
 
-if __name__ == '__main__':
-    if v:
-        logging.basicConfig(level=logging.INFO)
-
+def main():
     env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
     # env = environments.ProbHallAone()
@@ -478,12 +475,22 @@ if __name__ == '__main__':
     planner = PAndOrPlanner(env)
     success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
 
-    time.sleep(1)  # Wait for mesages of logging module
-    if success:
-        print(planner.contr)
+    if v:
+        time.sleep(1)  # Wait for mesages of logging module
+        if success:
+            print(planner.contr)
+        print("Num. of steps taken: {}".format(planner.num_steps))
+        print("Num. of backtracks: {}".format(planner.num_backtracking))
+        # print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
+        # print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))
 
-    print("Num. of backtracks: {}".format(planner.num_backtracking))
-    print("Num. of steps taken: {}".format(planner.num_steps))
 
-    # print("LPC upper: {:.3f}".format(planner.lpc_upper_bound))
-    # print("LPC lower: {:.3f}".format(planner.lpc_lower_bound))
+if __name__ == '__main__':
+    if v:
+        logging.basicConfig(level=logging.INFO)
+
+    if 0:
+        v = False
+        print(timeit.timeit('main()', number=100, setup="from __main__ import main"))
+    else:
+        main()
