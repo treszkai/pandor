@@ -13,6 +13,7 @@ from collections import OrderedDict
 import timeit
 import time
 from itertools import dropwhile, product
+import copy
 
 
 AND_FAILURE = -1
@@ -137,11 +138,10 @@ class PAndOrPlanner:
         # counters for stats
         self.num_backtracking = 0
         self.num_steps = 0
-        MAX_HISTORY_LENGTH = 10
-        self.alpha = {'win': [0.] * MAX_HISTORY_LENGTH,
-                      'fail': [0.] * MAX_HISTORY_LENGTH,
-                      'loop': [0.] * MAX_HISTORY_LENGTH,
-                      'noter': [0.] * MAX_HISTORY_LENGTH}
+        self.alpha = {'win': [],
+                      'fail': [],
+                      'loop': [],
+                      'noter': []}
 
         # set_test_controller(self.contr)
 
@@ -260,8 +260,12 @@ class PAndOrPlanner:
                 #     or when we arrive in it from the left
 
     def reset_alpha(self, history):
-        for x in 'win', 'fail', 'noter', 'loop':
-            self.alpha[x][len(history)] = 0.
+        if len(self.alpha['win']) < len(history) + 1:
+            for x in self.alpha:
+                self.alpha[x] += [0.] * 10
+        else:
+            for x in self.alpha:
+                self.alpha[x][len(history)] = 0.
 
     def or_step(self, q, s, p, history):
         """
@@ -319,10 +323,7 @@ class PAndOrPlanner:
             it = self.get_mealy_qa_iterator(s)
 
             # store a new checkpoint iff we're not backtracking currently
-            alpha_copy = {}
-            for key in self.alpha:
-                alpha_copy[key] = self.alpha[key][:]
-            self.backtrack_stack.append(StackItem(history[:], alpha_copy))
+            self.backtrack_stack.append(StackItem(history[:], copy.deepcopy(self.alpha)))
             logging.info("OR: checkpoint at q: %s, s: %s\n    with history %s",
                          q, self.env.str_state(s), history) if v else 0
 
@@ -413,8 +414,7 @@ class PAndOrPlanner:
         self.revert_variables()
         self.backtrack_stack.pop()
         self.alpha['fail'][len(history) - 1] += p
-        logging.info("OR: all extensions failed, new upper bound: %0.3f", self.lpc_upper_bound) if v else 0
-        return
+        logging.info("OR: all extensions failed") if v else 0
 
     def cumulate_alpha(self, history):
         # cumulate alpha values from last layer
@@ -428,10 +428,7 @@ class PAndOrPlanner:
         for x in 'win', 'fail', 'noter':
             self.alpha[x][n - 1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n - 1])
 
-        # for x in 'win', 'fail', 'noter', 'loop':
-        #     self.alpha[x][n] = 0.
         self.alpha['loop'][n - 1] = 0.
-
 
     def calc_lambda(self, history):
         assert len(history) >= 1
@@ -452,8 +449,10 @@ class PAndOrPlanner:
         return likelihoods
 
     def revert_variables(self):
-        for key in self.alpha:
-            self.alpha[key] = self.backtrack_stack[-1].alpha[key]
+        self.alpha = copy.deepcopy(self.backtrack_stack[-1].alpha)
+        # self.alpha = self.backtrack_stack[-1].alpha
+        # for key in self.alpha:
+        #     self.alpha[key] = self.backtrack_stack[-1].alpha[key]
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
         if s in self.env.goal_states:
