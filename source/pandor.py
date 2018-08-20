@@ -217,14 +217,6 @@ class PAndOrPlanner:
                 #   i.e. either when we arrive in an OR node from up
                 #     or when we arrive in it from the left
 
-    def reset_alpha(self, history):
-        if len(self.alpha['win']) < len(history) + 1:
-            for x in self.alpha:
-                self.alpha[x] += [0.] * 10
-        else:
-            for x in self.alpha:
-                self.alpha[x][len(history)] = 0.
-
     def or_step(self, q, s, p, history):
         """
         :param p: probability of next state transition
@@ -373,6 +365,14 @@ class PAndOrPlanner:
         self.backtrack_stack.pop()
         self.alpha['fail'][len(history) - 1] += p
         logging.info("OR: all extensions failed") if v else 0
+
+    def reset_alpha(self, history):
+        if len(self.alpha['win']) < len(history) + 1:
+            for x in self.alpha:
+                self.alpha[x] += [0.] * 10
+        else:
+            for x in self.alpha:
+                self.alpha[x][len(history)] = 0.
 
     def cumulate_alpha(self, history):
         # cumulate alpha values from last layer
