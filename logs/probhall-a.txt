@@ -2,9 +2,9 @@
 INFO:root:AND: at history []
 INFO:root:AND: Simulating s: (1, F), q: 0
 INFO:root:OR: checkpoint at q: 0, s: (1, F)
-    with history [(q: 0, s: (1, False), l: 1.000)]
+    with history [(q: 0, s: (1, False), p: 1.0)]
 INFO:root:OR: Added:   (0,A) -> (0,Left)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0)]
 INFO:root:AND: Simulating s: (1, F), q: 0
 INFO:root:OR: repeated state
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -12,17 +12,17 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: [] at (q 0, s (1, False)) with len 1
 INFO:root:OR: Deleted: (0,A) -> (0,Left)
 INFO:root:OR: Added:   (0,A) -> (0,Right)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0)]
 INFO:root:AND: Simulating s: (2, F), q: 0
 INFO:root:OR: checkpoint at q: 0, s: (2, F)
-    with history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+    with history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:OR: Added:   (0,-) -> (0,Left)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:AND: Simulating s: (2, F), q: 0
 INFO:root:OR: loop to level 1
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -30,7 +30,7 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:AND: Simulating s: (1, F), q: 0
 INFO:root:OR: loop to level 0
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -38,12 +38,12 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: [] at (q 0, s (2, False)) with len 2
 INFO:root:OR: Deleted: (0,-) -> (0,Left)
 INFO:root:OR: Added:   (0,-) -> (0,Right)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:AND: Simulating s: (2, F), q: 0
 INFO:root:OR: loop to level 1
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -51,14 +51,14 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:AND: Simulating s: (3, T), q: 0
 INFO:root:OR: checkpoint at q: 0, s: (3, T)
-    with history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+    with history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:OR: Added:   (0,B) -> (0,Left)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Simulating s: (2, T), q: 0
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 0, s: (2, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (2, T), q: 0
 INFO:root:OR: loop to level 3
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -66,7 +66,7 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 0, s: (2, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (3, T), q: 0
 INFO:root:OR: loop to level 2
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -74,7 +74,7 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 0, s: (2, True), l: 0.500)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: AND returned -1 and now backtracking
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -82,12 +82,12 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: [] at (q 0, s (3, True)) with len 3
 INFO:root:OR: Deleted: (0,B) -> (0,Left)
 INFO:root:OR: Added:   (0,B) -> (0,Right)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Simulating s: (3, T), q: 0
 INFO:root:OR: repeated state
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -95,12 +95,12 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: [] at (q 0, s (3, True)) with len 3
 INFO:root:OR: Deleted: (0,B) -> (0,Right)
 INFO:root:OR: Added:   (0,B) -> (0,stop)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Simulating s: (f, T), q: 0
 INFO:root:OR: terminated in NOT goal state
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -108,19 +108,19 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Backtracking up
 INFO:root:OR: Backstep: [] at (q 0, s (3, True)) with len 3
 INFO:root:OR: Deleted: (0,B) -> (0,stop)
 INFO:root:OR: Added:   (0,B) -> (1,Left)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND: Simulating s: (2, T), q: 1
 INFO:root:OR: checkpoint at q: 1, s: (2, T)
-    with history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500)]
+    with history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0)]
 INFO:root:OR: Added:   (1,-) -> (0,Left)
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (2, T), q: 0
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (2, True), p: 0.5)]
 INFO:root:AND: Simulating s: (2, T), q: 0
 INFO:root:OR: loop to level 4
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -128,7 +128,7 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (2, True), p: 0.5)]
 INFO:root:AND: Simulating s: (3, T), q: 0
 INFO:root:OR: loop to level 2
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -136,18 +136,18 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (2, True), p: 0.5)]
 INFO:root:OR: AND returned 0
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (1, T), q: 0
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (1, True), l: 0.250)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (1, True), p: 0.5)]
 INFO:root:AND: Simulating s: (2, T), q: 0
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (1, True), l: 0.250), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (1, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (2, T), q: 0
 INFO:root:OR: loop to level 5
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0]
@@ -155,7 +155,7 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.25, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (1, True), l: 0.250), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (1, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:AND: Simulating s: (3, T), q: 0
 INFO:root:OR: loop to level 2
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0]
@@ -163,55 +163,55 @@ DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (1, True), l: 0.250), (q: 0, s: (2, True), l: 0.250)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (1, True), p: 0.5), (q: 0, s: (2, True), p: 1.0)]
 INFO:root:OR: AND returned 0
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500), (q: 0, s: (1, True), l: 0.250)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0), (q: 0, s: (1, True), p: 0.5)]
 INFO:root:OR: AND returned 0
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500), (q: 1, s: (2, True), l: 0.500)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 1.0)]
 INFO:root:OR: AND step didn't fail
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000), (q: 0, s: (3, True), l: 0.500)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:OR: AND step didn't fail
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000), (q: 0, s: (2, False), l: 1.000)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 1.0)]
 INFO:root:OR: AND step didn't fail
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['loop'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 INFO:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-INFO:root:AND: not fail at history [(q: 0, s: (1, False), l: 1.000)]
+INFO:root:AND: not fail at history [(q: 0, s: (1, False), p: 1.0)]
 INFO:root:OR: AND step didn't fail
 DEBUG:root:AND: (before calc) alpha['loop'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (before calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 Traceback (most recent call last):
-  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 482, in <module>
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 476, in <module>
     main()
-  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 460, in main
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 454, in main
     success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
   File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 102, in synth_plan
     self.and_step(self.contr.init_state, self.env.init_states_p, [], first_and_step=True)
   File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 177, in and_step
     likelihoods = self.calc_lambda(history)
-  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 392, in calc_lambda
+  File "/Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py", line 390, in calc_lambda
     assert len(history) >= 1
 AssertionError
 

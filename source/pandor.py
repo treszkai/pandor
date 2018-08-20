@@ -36,22 +36,22 @@ class PandorControllerNotFound(Exception):
 
 
 class HistoryItem:
-    def __init__(self, q, s, l):
+    def __init__(self, q, s, p):
         self.q = q
         self.s = s
-        self.l = l
+        self.p = p
 
     def __str__(self):
-        return f"(q: {self.q}, s: {self.s}, l: {self.l:0.3f})"
+        return f"(q: {self.q}, s: {self.s}, p: {self.p:0.1f})"
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
-        """ self.l == 99 is a wildcard"""
+        """ self.p == 99 is a wildcard"""
         return self.q == other.q and \
                self.s == other.s and \
-               (self.l == 99 or other.l == 99 or self.l == other.l)
+               (self.p == 99 or other.p == 99 or self.p == other.p)
 
 
 class StackItem:
@@ -222,7 +222,6 @@ class PAndOrPlanner:
         :param p: probability of next state transition
         :return: None
         """
-        l = (history[-1].l * p) if len(history) > 0 else p
         # for debugging/stats only
         q_next_last, action_last = None, None
         self.num_steps += 1
@@ -238,18 +237,20 @@ class PAndOrPlanner:
             logging.info("OR: terminated in NOT goal state") if v else 0
             return
 
-        elif HistoryItem(q, s, l) in history:
-            self.alpha['noter'][len(history)] += p
-            logging.info("OR: repeated state") if v else 0
-            return
-
         elif HistoryItem(q, s, 99) in history:
-            looping_timestep = history.index(HistoryItem(q,s,99))
-            self.alpha['loop'][looping_timestep] += l / history[looping_timestep].l
-            logging.info("OR: loop to level %d", looping_timestep) if v else 0
+            looping_timestep = history.index(HistoryItem(q, s, 99))
+            l_loop = p
+            for h_item in history[looping_timestep + 1:]:
+                l_loop *= h_item.p  # TODO fix_this
+            if l_loop == 1.:
+                self.alpha['noter'][len(history)] += 1.
+                logging.info("OR: repeated state") if v else 0
+            else:
+                self.alpha['loop'][looping_timestep] += l_loop
+                logging.info("OR: loop to level %d", looping_timestep) if v else 0
             return
 
-        history.append(HistoryItem(q, s, l))
+        history.append(HistoryItem(q, s, p))
         obs = self.env.get_obs(s)
 
         # if not backtracking or we did not make a nondet choice last time here
@@ -348,7 +349,7 @@ class PAndOrPlanner:
                 len_history = len(self.backtrack_stack[-1].history)
 
                 logging.info("OR: Backstep: %s at (q {}, s {}) with len {}".format(q,s, len_history),
-                             [ (x.q, self.env.str_state(x.s), x.l) for x in history[len_history:] ]) if v else 0
+                             [ (x.q, self.env.str_state(x.s), x.p) for x in history[len_history:] ]) if v else 0
 
                 # # it's enough to clip the history if we're backtracking in the or_step
                 # del history[len_history:]
@@ -378,10 +379,7 @@ class PAndOrPlanner:
         # cumulate alpha values from last layer
         n = len(history)
 
-        if len(history) == 1:
-            p_this = history[0].l
-        else:
-            p_this = history[-1].l / history[-2].l
+        p_this = history[0].p
 
         for x in 'win', 'fail', 'noter':
             self.alpha[x][n - 1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n - 1])
@@ -400,11 +398,7 @@ class PAndOrPlanner:
 
         for k in range(n-1, -1, -1):
             p_kplusone = p_k
-
-            if k == 0:
-                p_k = history[k].l
-            else:
-                p_k = history[k].l / history[k-1].l
+            p_k = history[k].p
 
             likelihoods['maybe-noter'] = p_kplusone * likelihoods['maybe-noter'] + self.alpha['loop'][k]
 
