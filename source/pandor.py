@@ -163,6 +163,8 @@ class PAndOrPlanner:
                 self.reset_alpha(history)
                 return AND_UNKNOWN
 
+            logging.info("AND: at history %s", history) if v else 0
+
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
             else:
@@ -170,7 +172,12 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
+            logging.debug("AND: (before calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
+            logging.debug("AND: (before calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
             likelihoods = self.calc_lambda(history)
+            logging.debug("AND: (after  calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
+            logging.debug("AND: (after  calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
+            logging.info("AND: likelihoods: %s", likelihoods) if v else 0
             lpc_lower_bound = likelihoods['win']
             lpc_upper_bound = 1 - likelihoods['fail'] - likelihoods['noter']
 
@@ -411,6 +418,12 @@ class PAndOrPlanner:
 
                 likelihoods['noter'] += p_k
                 likelihoods['maybe-noter'] = 0
+
+                # fix it for future calls too:
+                self.alpha['noter'][k] += p_k
+                for k2 in range(k, n):
+                    self.alpha['loop'][k2] = 0
+
             else:
                 for key in 'win', 'fail', 'noter':
                     likelihoods[key] = self.alpha[key][k] + \
@@ -460,7 +473,7 @@ def main():
 
 if __name__ == '__main__':
     if v:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.DEBUG)
 
     if 0:
         v = False
