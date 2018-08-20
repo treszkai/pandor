@@ -210,15 +210,19 @@ class WalkThroughFlapProb(NoisyEnv):
 
 class ProbHallAone(NoisyEnv):
     """ Environment of Fig. 1 of BPG2009 (Hall-A one-dim)
-    States: {(n, visB): n ∈ {1,2,3,4,5}, visB ∈ {True, False} }
+    States: {(n, visB): n ∈ {1,2,3,4}, visB ∈ {True, False} }
     Action set: {-1, +1} = {left, right}
     Action effects:
         - left( (n,visB) )  = ( max(n-1, 1), visB )
         - right( (n,visB) ) = ( min(n+1, 5), visB )
-    Observables: (A, B) = (n == 1, n == 5)
+    Observables: (A, B) = (n == 1, n == 4)
     Init states: { (1, False), (2, False) }
     Goal states: { (1, True) }
     """
+
+    def __init__(self, length=3):
+        self.length = length
+        super().__init__()
 
     @staticmethod
     def str_state(s):
@@ -255,24 +259,26 @@ class ProbHallAone(NoisyEnv):
         return [-1, +1]
 
     def get_obs(self, state):
-        n = state[0]
-        return n == 1, n == 5
+        n, _ = state
+        return n == 1, n == self.length
 
     def next_states_p(self, state, action):
         n, vis_b = state
-        vis_b |= action == +1 and n == 4
-        n_ = n + action
-        if n_ < 1:
+
+        n += action
+        if n < 1:
             n = 1
-        elif n_ > 5:
-            n = 5
-        else:
-            n = n_
+        elif n > self.length:
+            n = self.length
+
+        vis_b |= n == self.length
         next_state = (n, vis_b)
-        if state == next_state:
-            return [(state, 1.0)]
+        # first and last cells are not noisy. TODO: make them noisy
+        if state == next_state or state[0] == 1 or state[0] == self.length:
+            return [(next_state, 1.0)]
         else:
-            return [(state, 0.9), (next_state, 0.1)]
+            # return [(next_state, 1.0)]
+            return [(state, 0.5), (next_state, 0.5)]
 
     def next_states(self, state, action):
         sp_list = self.next_states_p(state, action)
