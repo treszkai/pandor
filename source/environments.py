@@ -273,8 +273,9 @@ class ProbHallAone(NoisyEnv):
 
         vis_b |= n == self.length
         next_state = (n, vis_b)
-        # first and last cells are not noisy. TODO: make them noisy
-        if state == next_state or state[0] == 1 or state[0] == self.length:
+
+        # if state == next_state or state[0] == 1 or state[0] == self.length:
+        if state == next_state:
             return [(next_state, 1.0)]
         else:
             # return [(next_state, 1.0)]

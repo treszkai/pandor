@@ -14,6 +14,7 @@ import timeit
 import time
 from itertools import dropwhile, product
 import copy
+import numpy as np
 
 
 AND_FAILURE = -1
@@ -59,9 +60,9 @@ class StackItem:
         self.history = history
         self.alpha = alpha
 
-    def __eq__(self, other):
-        return self.history == other.history and \
-               all(self.alpha[key] == other.alpha[key] for key in self.alpha)
+    # def __eq__(self, other):
+    #     return self.history == other.history and \
+    #            all(self.alpha[key] == other.alpha[key] for key in self.alpha)
 
 
 def set_test_controller(cont):
@@ -88,10 +89,10 @@ class PAndOrPlanner:
         # counters for stats
         self.num_backtracking = 0
         self.num_steps = 0
-        self.alpha = {'win': [],
-                      'fail': [],
-                      'loop': [],
-                      'noter': []}
+        self.alpha = {'win': [0.],
+                      'fail': [0.],
+                      'noter': [0.],
+                      'loop': np.array([[0.]])}
 
         # set_test_controller(self.contr)
 
@@ -172,10 +173,10 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
-            logging.debug("AND: (before calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
+            # logging.debug("AND: (before calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
             logging.debug("AND: (before calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
             likelihoods = self.calc_lambda(history)
-            logging.debug("AND: (after  calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
+            # logging.debug("AND: (after  calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
             logging.debug("AND: (after  calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
             logging.info("AND: likelihoods: %s", likelihoods) if v else 0
             lpc_lower_bound = likelihoods['win']
@@ -241,13 +242,13 @@ class PAndOrPlanner:
             looping_timestep = history.index(HistoryItem(q, s, 99))
             l_loop = p
             for h_item in history[looping_timestep + 1:]:
-                l_loop *= h_item.p  # TODO fix_this
+                l_loop *= h_item.p
             if l_loop == 1.:
                 self.alpha['noter'][len(history)] += 1.
                 logging.info("OR: repeated state") if v else 0
             else:
-                self.alpha['loop'][looping_timestep] += l_loop
-                logging.info("OR: loop to level %d", looping_timestep) if v else 0
+                self.alpha['loop'][looping_timestep, len(history)-1] += p
+                logging.info("OR: loop to level %d with prob %.1f", looping_timestep, p) if v else 0
             return
 
         history.append(HistoryItem(q, s, p))
@@ -369,69 +370,83 @@ class PAndOrPlanner:
 
     def reset_alpha(self, history):
         if len(self.alpha['win']) < len(history) + 1:
-            for x in self.alpha:
+            # extend the size of alpha vectors
+            for x in 'win', 'fail', 'noter':
                 self.alpha[x] += [0.] * 10
+            n_old, _ = self.alpha['loop'].shape
+            alpha_loop_new = np.zeros((n_old+10, n_old+10))
+            alpha_loop_new[:n_old, :n_old] = self.alpha['loop']
+            self.alpha['loop'] = alpha_loop_new
         else:
-            for x in self.alpha:
+            for x in 'win', 'fail', 'noter':
                 self.alpha[x][len(history)] = 0.
+            self.alpha['loop'][len(history),:] = 0.
+            self.alpha['loop'][:,len(history)] = 0.
 
     def cumulate_alpha(self, history):
-        # cumulate alpha values from last layer
-        n = len(history)
+        # only works if there's a single first step
+        assert len(history) >= 1
 
-        p_this = history[0].p
+        # cumulate alpha values from last layer
+        n = len(history) - 1
+
+        p_this = history[-1].p
 
         for x in 'win', 'fail', 'noter':
-            self.alpha[x][n - 1] += p_this * self.alpha[x][n] / (1 - self.alpha['loop'][n - 1])
+            self.alpha[x][n] += p_this * self.alpha[x][n+1] / (1 - self.alpha['loop'][n,n])
 
-        self.alpha['loop'][n - 1] = 0.
+        for k in range(n):
+            self.alpha['loop'][k,n-1] += p_this * self.alpha['loop'][k,n] / (1 - self.alpha['loop'][n,n])
+            self.alpha['loop'][k,n] = 0.
+
+        self.alpha['loop'][n,n] = 0.
 
     def calc_lambda(self, history, epsilon=1e-6):
         assert len(history) >= 1
 
-        n = len(history)
-        likelihoods = {'maybe-noter': 0.}
+        # history[0] .. history[n]
+        n = len(history) - 1
+        likelihoods_loop = np.empty(n+1)
+        likelihoods_loop[:] = np.nan
+
+        likelihoods = {}
         for x in 'win', 'fail', 'noter':
-            likelihoods[x] = self.alpha[x][n]
+            likelihoods[x] = self.alpha[x][n+1]
 
-        p_k = 1.
-
-        for k in range(n-1, -1, -1):
-            p_kplusone = p_k
+        for k in range(n, -1, -1):
             p_k = history[k].p
 
-            likelihoods['maybe-noter'] = p_kplusone * likelihoods['maybe-noter'] + self.alpha['loop'][k]
+            likelihoods_loop[k] = 0.
+            for m in range(n, k, -1):  # m = n .. k+1
+                likelihoods_loop[k] += self.alpha['loop'][k,m] / (1 - likelihoods_loop[m])
+                likelihoods_loop[k] *= history[m].p
+            likelihoods_loop[k] += self.alpha['loop'][k,k]
 
-            if likelihoods['maybe-noter'] > 1 - epsilon:
-                # possibly self.alpha['loop'][k] == 1 here
+            if likelihoods_loop[k] > 1. - epsilon:
+                # in this case, the whole tree below k loops back to history[k], so
                 # for every key in 'win', 'fail', 'noter', likelihoods[key] == 0.
-                #  avoid division by zero
+                # And as likelihoods_loop[k] ~= 1 here,
+                #  avoid division by zero.
                 for key in 'win', 'fail', 'noter':
                     assert likelihoods[key] == 0.
                     likelihoods[key] = self.alpha[key][k]
 
                 likelihoods['noter'] += p_k
-                likelihoods['maybe-noter'] = 0
+                likelihoods_loop[k] = 0.
 
                 # fix it for future calls too:
                 self.alpha['noter'][k] += p_k
-                for k2 in range(k, n):
-                    self.alpha['loop'][k2] = 0
+                self.alpha['loop'][k:n+1, k:n+1] = 0.
 
             else:
                 for key in 'win', 'fail', 'noter':
                     likelihoods[key] = self.alpha[key][k] + \
-                                        p_k * likelihoods[key] / (1 - self.alpha['loop'][k])
-
-        del likelihoods['maybe-noter']
+                                        p_k * likelihoods[key] / (1. - likelihoods_loop[k])
 
         return likelihoods
 
     def revert_variables(self):
         self.alpha = copy.deepcopy(self.backtrack_stack[-1].alpha)
-        # self.alpha = self.backtrack_stack[-1].alpha
-        # for key in self.alpha:
-        #     self.alpha[key] = self.backtrack_stack[-1].alpha[key]
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
         if s in self.env.goal_states:
