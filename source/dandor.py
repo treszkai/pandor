@@ -15,7 +15,8 @@ from itertools import product
 
 
 # verbose flag
-v = True
+# v = True
+v = False
 
 
 class PandorControllerNotFound(Exception):
@@ -94,7 +95,7 @@ class AndOrPlanner:
 
     def or_step(self, q, env_state, history):
         if not self.backtracking:
-            if env_state in self.env.goal_states:
+            if self.env.is_goal_state(env_state):
                 return True
 
             if (q, env_state) in history:
@@ -202,23 +203,26 @@ class AndOrPlanner:
 
 
 def main():
-    env = environments.ProbHallAone()
+    env = environments.ProbHallArect(noisy=False)
 
     planner = AndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2)
+    success = planner.synth_plan(states_bound=3)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module
-        if success:
-            for (q,o),(q_next,a) in planner.contr.transitions.items():
-                print("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
-        else:
-            print("No controller found")
+
+    if success:
+        for (q,o),(q_next,a) in planner.contr.transitions.items():
+            logging.warning("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
+    else:
+        logging.warning("No controller found")
 
 
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.INFO)
+    else:
+        logging.basicConfig(level=logging.WARNING)
 
     if 0:
         v = False

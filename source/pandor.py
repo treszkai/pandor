@@ -123,10 +123,11 @@ class PAndOrPlanner:
             sl_next = self.env.init_states_p
         else:
             s = history[-1].s
-            if action is A_STOP and s in self.env.goal_states:
-                sl_next = [(S_WIN, 1.0)]
-            elif action is A_STOP and s not in self.env.goal_states:
-                sl_next = [(S_FAIL, 1.0)]
+            if action is A_STOP:
+                if self.env.is_goal_state(s):
+                    sl_next = [(S_WIN, 1.0)]
+                else:
+                    sl_next = [(S_FAIL, 1.0)]
             else:
                 sl_next = self.env.next_states_p(s, action)
 
@@ -457,7 +458,7 @@ class PAndOrPlanner:
         self.alpha = copy.deepcopy(self.backtrack_stack[-1].alpha)
 
     def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
-        if s in self.env.goal_states:
+        if self.env.is_goal_state(s):
             legal_acts = [A_STOP] + self.env.legal_actions(s)
         else:
             legal_acts = self.env.legal_actions(s) + [A_STOP]
@@ -469,28 +470,31 @@ class PAndOrPlanner:
 
 
 def main():
-    env = environments.BridgeWalk(4)
+    # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    # env = environments.ProbHallAone()
+    env = environments.ProbHallAone(noisy=False)
 
     planner = PAndOrPlanner(env)
     success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module
-        if success:
-            for (q,o),(q_next,a) in planner.contr.transitions.items():
-                print("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
-        else:
-            print("No controller found")
 
-        print("Num. of steps taken: {}".format(planner.num_steps))
-        print("Num. of backtracks: {}".format(planner.num_backtracking))
+    if success:
+        for (q,o),(q_next,a) in planner.contr.transitions.items():
+            logging.warning("({},{}) → ({},{})".format(q, env.str_obs(o), q_next, env.str_action(a)))
+    else:
+        logging.warning("No controller found")
+
+    logging.info("Num. of steps taken: {}".format(planner.num_steps))
+    logging.info("Num. of backtracks: {}".format(planner.num_backtracking))
 
 
 if __name__ == '__main__':
     if v:
         logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.WARNING)
 
     if 0:
         v = False

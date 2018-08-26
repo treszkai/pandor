@@ -4,7 +4,7 @@ class Environment:
     def __init__(self):
         assert type(self.init_states) is list
         s = self.init_states[0]
-        assert type(self.goal_states) is list
+        assert type(self.is_goal_state(s)) is bool
         assert type(self.legal_actions(s)) is list
         a = self.legal_actions(s)[0]
         assert type(self.next_states(s, a)) is list
@@ -209,7 +209,7 @@ class WalkThroughFlapProb(NoisyEnv):
 
 
 class ProbHallAone(NoisyEnv):
-    """ Environment of Fig. 1 of BPG2009 (Hall-A one-dim)
+    """ Noisy versioin of Fig. 1 of BPG2009 (Hall-A one-dim)
     States: {(n, visB): n ∈ {1,2,3,4}, visB ∈ {True, False} }
     Action set: {-1, +1} = {left, right}
     Action effects:
@@ -220,8 +220,9 @@ class ProbHallAone(NoisyEnv):
     Goal states: { (1, True) }
     """
 
-    def __init__(self, length=3):
+    def __init__(self, length=3, noisy=True):
         self.length = length
+        self.noisy = noisy
         super().__init__()
 
     @staticmethod
@@ -274,16 +275,149 @@ class ProbHallAone(NoisyEnv):
         vis_b |= n == self.length
         next_state = (n, vis_b)
 
-        # if state == next_state or state[0] == 1 or state[0] == self.length:
-        if state == next_state:
-            return [(next_state, 1.0)]
+        if self.noisy:
+            # if state == next_state or state[0] == 1 or state[0] == self.length:
+            if state == next_state:
+                return [(next_state, 1.0)]
+            else:
+                # return [(next_state, 1.0)]
+                return [(state, 0.5), (next_state, 0.5)]
         else:
-            # return [(next_state, 1.0)]
-            return [(state, 0.5), (next_state, 0.5)]
+            return [(next_state, 1.0)]
 
     def next_states(self, state, action):
         sp_list = self.next_states_p(state, action)
         return [s for s,p in sp_list]
+
+
+class ProbHallArect(NoisyEnv):
+    """ Noisy version of (Hall-A n-by-n) by BPG2009
+    States: (top,right,bot,left) x (1..n-1) x visA x ... x visD
+    Action set: {left, right, up, down}
+    Actions have 0.5 probability of succeeding
+    Observables: A,B,C,D,–, depending on whether it's in a corner or not.
+    Init states: top x 1 x true x false x false x false
+    Goal states: * x * x true x true x true x true
+    """
+
+    A_LEFT = "←"
+    A_RIGHT = "→"
+    A_UP = "↑"
+    A_DOWN = "↓"
+
+    SIDE_TOP = 0
+    SIDE_RIGHT = 10
+    SIDE_BOTTOM = 20
+    SIDE_LEFT = 30
+
+    def __init__(self, length=3, noisy=True):
+        self.length = length
+        self.noisy = noisy
+        super().__init__()
+
+    @staticmethod
+    def str_state(s):
+        return "{}+{}{}{}{}".format(s[0] + s[1], 'A' if s[2] else 'a',
+            'B' if s[3] else 'b', 'C' if s[4] else 'c', 'd' if s[5] else 'd')
+
+    @staticmethod
+    def str_action(a):
+        return a
+
+    @staticmethod
+    def str_obs(o):
+        return o
+
+    @property
+    def init_states(self):
+        return [(self.SIDE_TOP, 1, False, False, False, False)]
+
+    def is_goal_state(self, state):
+        return state[2] and state[3] and state[4] and state[5]
+
+    def legal_actions(self, state):
+        return [self.A_LEFT, self.A_DOWN, self.A_RIGHT, self.A_UP]
+
+    def get_obs(self, state):
+        if state[1] == 1:
+            if state[0] is self.SIDE_TOP:
+                return "A"
+            elif state[0] is self.SIDE_RIGHT:
+                return "B"
+            elif state[0] is self.SIDE_BOTTOM:
+                return "C"
+            elif state[0] is self.SIDE_LEFT:
+                return "D"
+        else:
+            return "-"
+
+    def next_states_p(self, state, action):
+        side, n, vis_a, vis_b, vis_c, vis_d = state
+
+        if side is self.SIDE_TOP:
+            if action is self.A_RIGHT:
+                n += 1
+            elif action is self.A_LEFT:
+                n -= 1
+            elif action is self.A_DOWN and n == 1:
+                n = self.length
+                side = self.SIDE_LEFT
+        elif side is self.SIDE_RIGHT:
+            if action is self.A_DOWN:
+                n += 1
+            elif action is self.A_UP:
+                n -= 1
+            elif action is self.A_LEFT and n == 1:
+                n = self.length
+                side = self.SIDE_TOP
+        elif side is self.SIDE_BOTTOM:
+            if action is self.A_LEFT:
+                n += 1
+            elif action is self.A_RIGHT:
+                n -= 1
+            elif action is self.A_UP and n == 1:
+                n = self.length
+                side = self.SIDE_RIGHT
+        elif side is self.SIDE_LEFT:
+            if action is self.A_UP:
+                n += 1
+            elif action is self.A_DOWN:
+                n -= 1
+            elif action is self.A_RIGHT and n == 1:
+                n = self.length
+                side = self.SIDE_BOTTOM
+
+        # don't change state if n == 0 (attempted move against the corner)
+        if n == 0:
+            n = 1
+
+        # change sides if arrived at corner
+        if n == self.length + 1:
+            n = 1
+            side += 10
+            side %= 40
+
+        if n == 1:
+            vis_a |= side is self.SIDE_TOP
+            vis_b |= side is self.SIDE_RIGHT
+            vis_c |= side is self.SIDE_BOTTOM
+            vis_d |= side is self.SIDE_LEFT
+
+        next_state = (side, n, vis_a, vis_b, vis_c, vis_d)
+
+        if self.noisy:
+            if state == next_state or n == 1:  # TODO: corners not noisy
+            # if state == next_state:
+                return [(next_state, 1.0)]
+            else:
+                return [(state, 0.5), (next_state, 0.5)]
+        else:
+            return [(next_state, 1.0)]
+
+    def next_states(self, state, action):
+        sp_list = self.next_states_p(state, action)
+        return [s for s,p in sp_list]
+
 
 # class HallR(Environment):
 #     """ Modification of the Hall-R problem (Bonet et al. 2009)
