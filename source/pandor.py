@@ -164,7 +164,7 @@ class PAndOrPlanner:
                 self.reset_alpha(history)
                 return AND_UNKNOWN
 
-            logging.info("AND: at history %s", history) if v else 0
+            logging.debug("AND: at history %s", history) if v else 0
 
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
@@ -178,7 +178,7 @@ class PAndOrPlanner:
             likelihoods = self.calc_lambda(history)
             # logging.debug("AND: (after  calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
             logging.debug("AND: (after  calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
-            logging.info("AND: likelihoods: %s", likelihoods) if v else 0
+            logging.debug("AND: likelihoods: %s", likelihoods) if v else 0
             lpc_lower_bound = likelihoods['win']
             lpc_upper_bound = 1 - likelihoods['fail'] - likelihoods['noter']
 
@@ -362,10 +362,11 @@ class PAndOrPlanner:
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
-        # self.backtracking = True
+        # revert the controller extension from this OR-step
         self.revert_variables()
         self.backtrack_stack.pop()
-        self.alpha['fail'][len(history) - 1] += p
+        # hack to ensure we backtrack to the last choice point:
+        self.alpha['fail'][0] += 1  # ensures that likelihoods['fail'] ≥ 1
         logging.info("OR: all extensions failed") if v else 0
 
     def reset_alpha(self, history):
@@ -427,21 +428,28 @@ class PAndOrPlanner:
                 # for every key in 'win', 'fail', 'noter', likelihoods[key] == 0.
                 # And as likelihoods_loop[k] ~= 1 here,
                 #  avoid division by zero.
-                for key in 'win', 'fail', 'noter':
-                    assert likelihoods[key] == 0.
-                    likelihoods[key] = self.alpha[key][k]
 
-                likelihoods['noter'] += p_k
                 likelihoods_loop[k] = 0.
 
                 # fix it for future calls too:
                 self.alpha['noter'][k] += p_k
-                self.alpha['loop'][k:n+1, k:n+1] = 0.
+                self.alpha['loop'][k:n + 1, k:n + 1] = 0.
+                assert np.all(self.alpha['loop'][:k, k:n + 1] == 0.)
+
+                for key in 'win', 'fail', 'noter':
+                    assert likelihoods[key] == 0.
+                    likelihoods[key] = self.alpha[key][k]
 
             else:
                 for key in 'win', 'fail', 'noter':
                     likelihoods[key] = self.alpha[key][k] + \
                                         p_k * likelihoods[key] / (1. - likelihoods_loop[k])
+
+            assert np.all(0. <= likelihoods_loop[k])
+            assert np.all(likelihoods_loop[k] <= 1.)
+
+        for key in likelihoods:
+            assert 0. <= likelihoods[key] <= 1.
 
         return likelihoods
 
@@ -461,9 +469,9 @@ class PAndOrPlanner:
 
 
 def main():
-    # env = environments.BridgeWalk(4)
+    env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    env = environments.ProbHallAone()
+    # env = environments.ProbHallAone()
 
     planner = PAndOrPlanner(env)
     success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
