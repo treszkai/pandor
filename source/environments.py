@@ -297,7 +297,7 @@ class ProbHallArect(NoisyEnv):
     Actions have 0.5 probability of succeeding
     Observables: A,B,C,D,–, depending on whether it's in a corner or not.
     Init states: top x 1 x true x false x false x false
-    Goal states: * x * x true x true x true x true
+    Goal states: top x 1 x true x true x true x true
     """
 
     A_LEFT = "←"
@@ -317,8 +317,11 @@ class ProbHallArect(NoisyEnv):
 
     @staticmethod
     def str_state(s):
-        return "{}+{}{}{}{}".format(s[0] + s[1], 'A' if s[2] else 'a',
-            'B' if s[3] else 'b', 'C' if s[4] else 'c', 'd' if s[5] else 'd')
+        if type(s) is str:
+            return s
+        else:
+            return "{}+{}{}{}{}".format(s[0] + s[1], 'A' if s[2] else 'a',
+                'B' if s[3] else 'b', 'C' if s[4] else 'c', 'D' if s[5] else 'd')
 
     @staticmethod
     def str_action(a):
@@ -332,8 +335,9 @@ class ProbHallArect(NoisyEnv):
     def init_states(self):
         return [(self.SIDE_TOP, 1, False, False, False, False)]
 
-    def is_goal_state(self, state):
-        return state[2] and state[3] and state[4] and state[5]
+    @property
+    def goal_states(self):
+        return [(self.SIDE_TOP, 1, True, True, True, True)]
 
     def legal_actions(self, state):
         return [self.A_LEFT, self.A_DOWN, self.A_RIGHT, self.A_UP]
