@@ -10,6 +10,7 @@ import environments
 
 import logging
 import time
+import timeit
 from itertools import dropwhile
 from itertools import product
 
@@ -203,7 +204,7 @@ class AndOrPlanner:
 
 
 def main():
-    env = environments.ProbHallArect(noisy=False)
+    env = environments.ProbHallArect(length=3, noisy=False)
 
     planner = AndOrPlanner(env)
     success = planner.synth_plan(states_bound=3)
@@ -224,8 +225,8 @@ if __name__ == '__main__':
     else:
         logging.basicConfig(level=logging.WARNING)
 
-    if 0:
+    if True:
         v = False
-        print(timeit.timeit('main()', number=100, setup="from __main__ import main"))
+        print(timeit.timeit('main()', number=1, setup="from __main__ import main"))
     else:
         main()

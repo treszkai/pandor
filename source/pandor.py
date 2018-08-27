@@ -24,8 +24,8 @@ S_FAIL = "fail"
 A_STOP = "stop"
 
 # verbose flag
-# v = False
-v = True
+v = False
+# v = True
 
 
 class PandorControllerFound(Exception):
@@ -170,7 +170,10 @@ class PAndOrPlanner:
             if self.backtracking:
                 logging.info("AND: Redoing s: %s", self.env.str_state(s_k)) if v else 0
             else:
-                logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
+                try:
+                    logging.info("AND: Simulating s: %s, q: %s", self.env.str_state(s_k), q) if v else 0
+                except:
+                    pass
 
             self.or_step(q, s_k, p_k, history[:])
 
@@ -449,8 +452,9 @@ class PAndOrPlanner:
             assert np.all(0. <= likelihoods_loop[k])
             assert np.all(likelihoods_loop[k] <= 1.)
 
-        for key in likelihoods:
+        for key in 'win', 'noter':
             assert 0. <= likelihoods[key] <= 1.
+        assert 0. <= likelihoods['fail']    # mind the hack at end of or_step
 
         return likelihoods
 
@@ -472,10 +476,11 @@ class PAndOrPlanner:
 def main():
     # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    env = environments.ProbHallAone(noisy=False)
+    # env = environments.ProbHallAone(noisy=False)
+    env = environments.ProbHallArect(length=3, noisy=True)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.99)
+    success = planner.synth_plan(states_bound=4, lpc_desired=0.9999)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module
@@ -486,8 +491,8 @@ def main():
     else:
         logging.warning("No controller found")
 
-    logging.info("Num. of steps taken: {}".format(planner.num_steps))
-    logging.info("Num. of backtracks: {}".format(planner.num_backtracking))
+    logging.warning("Num. of steps taken: {}".format(planner.num_steps))
+    logging.warning("Num. of backtracks: {}".format(planner.num_backtracking))
 
 
 if __name__ == '__main__':
@@ -496,8 +501,8 @@ if __name__ == '__main__':
     else:
         logging.basicConfig(level=logging.WARNING)
 
-    if 0:
+    if 1:
         v = False
-        print(timeit.timeit('main()', number=100, setup="from __main__ import main"))
+        print(timeit.timeit('main()', number=1, setup="from __main__ import main"))
     else:
         main()

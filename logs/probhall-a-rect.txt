@@ -1,0 +1,24 @@
+WARNING:root:(0,A) → (0,↓)
+WARNING:root:(0,-) → (0,↓)
+WARNING:root:(0,D) → (1,→)
+WARNING:root:(1,D) → (0,↑)
+WARNING:root:(1,-) → (0,→)
+WARNING:root:(0,C) → (1,←)
+WARNING:root:(1,C) → (2,←)
+WARNING:root:(2,C) → (0,↑)
+WARNING:root:(2,-) → (2,←)
+WARNING:root:(2,D) → (3,↑)
+WARNING:root:(3,D) → (0,↑)
+WARNING:root:(3,-) → (1,↑)
+WARNING:root:(1,A) → (1,→)
+WARNING:root:(0,B) → (1,←)
+WARNING:root:(1,B) → (2,←)
+WARNING:root:(2,B) → (0,↓)
+WARNING:root:(2,A) → (0,stop)
+WARNING:root:Num. of steps taken: 367360
+WARNING:root:Num. of backtracks: 117242
+
+1 run on ProbHall-A-rect-cornersnoisytoo(3x3) (length=2)
+201.08457481421003
+
+Process finished with exit code 0
