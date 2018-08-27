@@ -177,6 +177,9 @@ class PAndOrPlanner:
 
             self.or_step(q, s_k, p_k, history[:])
 
+            if len(history) == 1:
+                pass
+
             # logging.debug("AND: (before calc) alpha['loop'] = %s", self.alpha['loop']) if v else 0
             logging.debug("AND: (before calc) alpha['noter'] = %s", self.alpha['noter']) if v else 0
             likelihoods = self.calc_lambda(history)
@@ -276,7 +279,8 @@ class PAndOrPlanner:
         # otherwise we make a nondet choice
         if not self.backtracking:
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
-            it = self.get_mealy_qa_iterator(s)
+            tr_list = self.get_mealy_qa_iterator(s)
+            self.contr.iterators[q,obs] = tr_list
 
             # store a new checkpoint iff we're not backtracking currently
             self.backtrack_stack.append(StackItem(history[:], copy.deepcopy(self.alpha)))
@@ -292,6 +296,7 @@ class PAndOrPlanner:
 
                 t = self.contr.transitions.popitem()
                 assert (q, obs) == t[0]
+                assert self.contr.iterators[q, obs][0] == t[1]
 
                 q_next_last, action_last = t[1]
 
@@ -299,12 +304,11 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next_last, self.env.str_action(action_last)) if v else 0
 
-                it = self.get_mealy_qa_iterator(s,
-                                                q_next_last,
-                                                lambda x: x[1] != action_last)
+                tr_list = self.contr.iterators[q, obs]
 
                 # burn the controller extension that caused the trouble earlier
-                _ = next(it)
+                del tr_list[0]
+
             else:
                 # the controller transition and action should already be defined
                 assert (q, obs) in self.contr.transitions
@@ -315,20 +319,21 @@ class PAndOrPlanner:
                              q, self.env.str_obs(obs),
                              q_next_last, self.env.str_action(action_last)) if v else 0
 
-                it = self.get_mealy_qa_iterator(s,
-                                                q_next_last,
-                                                lambda x: x[1] != action_last)
+                tr_list = self.contr.iterators[q, obs]
 
         # non-det branching of q',a
         # save function arguments for bracktracking (history is already in backtrack_stack)
         s_saved = s
         q_saved = q
 
-        # list_it = list(it)  # for debugging
-        # it = iter(list_it)
-
         # important: q_next first, so we only add new states when necessary
-        for q_next, action in it:
+        while True:  # iterate over tr_list (but it's modified in the body of the loop so can't use a for loop)
+            if len(tr_list) == 0:
+                del self.contr.iterators[q, obs]
+                break
+            else:
+                q_next, action = tr_list[0]
+
             # extend controller if not backtracking
             if not self.backtracking:
                 self.contr[q, obs] = q_next, action
@@ -356,17 +361,14 @@ class PAndOrPlanner:
                 logging.info("OR: Backstep: %s at (q {}, s {}) with len {}".format(q,s, len_history),
                              [ (x.q, self.env.str_state(x.s), x.p) for x in history[len_history:] ]) if v else 0
 
-                # # it's enough to clip the history if we're backtracking in the or_step
-                # del history[len_history:]
-                # but it's not needed here, is it. see lines below the for loop
-
                 t = self.contr.transitions.popitem()
+                assert self.contr.iterators[q, obs][0] == t[1]
+                del self.contr.iterators[q,obs][0]
 
                 logging.info("OR: Deleted: (%s,%s) -> (%s,%s)",
                              t[0][0], self.env.str_obs(t[0][1]),
                              t[1][0], self.env.str_action(t[1][1])) if v else 0
 
-        # revert the controller extension from this OR-step
         self.revert_variables()
         self.backtrack_stack.pop()
         # hack to ensure we backtrack to the last choice point:
@@ -407,8 +409,6 @@ class PAndOrPlanner:
         self.alpha['loop'][n,n] = 0.
 
     def calc_lambda(self, history, epsilon=1e-6):
-        assert len(history) >= 1
-
         # history[0] .. history[n]
         n = len(history) - 1
         likelihoods_loop = np.empty(n+1)
@@ -461,26 +461,25 @@ class PAndOrPlanner:
     def revert_variables(self):
         self.alpha = copy.deepcopy(self.backtrack_stack[-1].alpha)
 
-    def get_mealy_qa_iterator(self, s, q_next_last=0, drop_func=lambda x: False):
+    def get_mealy_qa_iterator(self, s):
         if self.env.is_goal_state(s):
             legal_acts = [A_STOP] + self.env.legal_actions(s)
         else:
             legal_acts = self.env.legal_actions(s) + [A_STOP]
-        it = dropwhile(drop_func,
-                       product(range(q_next_last, min(self.contr.bound, self.contr.num_states + 1)),
-                               legal_acts))
+        it = product(range(min(self.contr.bound, self.contr.num_states + 1)), legal_acts)
 
-        return it
+        list_it = list(it)
+        return list_it
 
 
 def main():
     # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    # env = environments.ProbHallAone(noisy=False)
-    env = environments.ProbHallArect(length=3, noisy=True)
+    env = environments.ProbHallAone(noisy=True)
+    # env = environments.ProbHallArect(length=2, noisy=True)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=4, lpc_desired=0.9999)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.9999)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module

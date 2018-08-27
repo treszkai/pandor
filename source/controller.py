@@ -9,6 +9,7 @@ class MealyController:
     def __init__(self, bound):
         self.bound = bound
         self.transitions = OrderedDict()
+        self.iterators = {}
 
     @property
     def num_states(self):
