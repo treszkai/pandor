@@ -340,19 +340,24 @@ class ProbHallArect(NoisyEnv):
         return [(self.SIDE_TOP, 1, True, True, True, True)]
 
     def legal_actions(self, state):
+        # return [self.A_LEFT, self.A_RIGHT, self.A_DOWN, self.A_UP]
         if state[1] == 1:
             if state[0] is self.SIDE_TOP:
                 return [self.A_DOWN, self.A_RIGHT]
             elif state[0] is self.SIDE_RIGHT:
                 return [self.A_LEFT, self.A_DOWN]
             elif state[0] is self.SIDE_BOTTOM:
-                return [self.A_LEFT, self.A_UP]
+                return [self.A_UP, self.A_LEFT]
             elif state[0] is self.SIDE_LEFT:
                 return [self.A_RIGHT, self.A_UP]
-        elif state[0] is self.SIDE_TOP or state[0] is self.SIDE_BOTTOM:
+        elif state[0] is self.SIDE_TOP:
             return [self.A_LEFT, self.A_RIGHT]
-        else:
+        elif state[0] is self.SIDE_BOTTOM:
+            return [self.A_RIGHT, self.A_LEFT]
+        elif state[0] is self.SIDE_LEFT:
             return [self.A_DOWN, self.A_UP]
+        else:
+            return [self.A_UP, self.A_DOWN]
 
     def get_obs(self, state):
         if state[1] == 1:

@@ -15,7 +15,7 @@ import time
 from itertools import dropwhile, product
 import copy
 import numpy as np
-# import random
+import random
 
 AND_FAILURE = -1
 AND_UNKNOWN = 0
@@ -486,18 +486,22 @@ class PAndOrPlanner:
         # reversed
         # legal_acts.sort(key=exists_trans_with_same_obs_and_action)
 
-        q_list = [*range(self.contr.num_states - 1, -1, -1)]
-        q_list.sort(key=exists_trans_with_same_obs_and_next_state)
+        q_list = range(self.contr.num_states - 1, -1, -1)
+        # q_list.sort(key=exists_trans_with_same_obs_and_next_state)
 
-        # list for existing states
+        # list for already existing next states
         tr_list = [(q_next, action) for q_next in q_list
                                     for action in legal_acts]
+
+
+        # random.shuffle(tr_list)
         # reversed: that's cool.
         # tr_list.sort(key=exists_trans_with_same_obs_and_next_state)
 
         # list for a new state
-        if self.contr.num_states < self.contr.bound:
-            tr_list = [(self.contr.num_states, action) for action in legal_acts] + tr_list
+        n = self.contr.num_states
+        if n < self.contr.bound:
+            tr_list = [(n, action) for action in legal_acts] + tr_list
 
         return tr_list
 
@@ -508,7 +512,7 @@ def main():
     # env = environments.ProbHallAone(noisy=True)
     env = environments.ProbHallArect(length=3, noisy=True)
 
-    # random.seed(0)
+    random.seed(1)
 
     planner = PAndOrPlanner(env)
     success = planner.synth_plan(states_bound=4, lpc_desired=0.9999)

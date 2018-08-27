@@ -22,3 +22,29 @@ WARNING:root:Num. of backtracks: 117242
 201.08457481421003
 
 Process finished with exit code 0
+
+
+========================
+
+/Users/L/miniconda3/bin/python /Users/L/Sync/Documents/Edinburgh/Dissertation/pandor/source/pandor.py
+WARNING:root:(0,A) → (0,→)
+WARNING:root:(0,-) → (0,→)
+WARNING:root:(0,B) → (1,↓)
+WARNING:root:(1,B) → (0,←)
+WARNING:root:(1,-) → (1,↓)
+WARNING:root:(1,C) → (0,←)
+WARNING:root:(0,C) → (2,←)
+WARNING:root:(2,C) → (0,←)
+WARNING:root:(2,-) → (2,←)
+WARNING:root:(2,D) → (0,→)
+WARNING:root:(0,D) → (1,↑)
+WARNING:root:(1,D) → (3,↑)
+WARNING:root:(3,D) → (0,→)
+WARNING:root:(3,-) → (3,↑)
+WARNING:root:(3,A) → (0,stop)
+WARNING:root:Num. of steps taken: 10280
+WARNING:root:Num. of backtracks: 1114
+
+1 run on ProbHall-A-rect-cornersnoisytoo(4x4) (length=3)
+4.620209563989192 sec
+But this is with the ideally shaped legal action lists (q_next not ideal though!)
