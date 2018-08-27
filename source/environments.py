@@ -422,8 +422,8 @@ class ProbHallArect(NoisyEnv):
         next_state = (side, n, vis_a, vis_b, vis_c, vis_d)
 
         if self.noisy:
-            if state == next_state or n == 1:  # if corners not noisy
-            # if state == next_state:
+            # if state == next_state or n == 1:  # if corners not noisy
+            if state == next_state:
                 return [(next_state, 1.0)]
             else:
                 return [(state, 0.5), (next_state, 0.5)]

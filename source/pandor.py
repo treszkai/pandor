@@ -470,10 +470,11 @@ class PAndOrPlanner:
                     pass
             return 0
 
-        def exists_trans_with_same_obs_and_next_state(qa):
+        def exists_trans_with_same_obs_and_next_state(q_next):
             for q in range(self.contr.bound):
                 try:
-                    return self.contr.transitions[q,obs][0] == qa[0]
+                    if self.contr.transitions[q,obs][0] == q_next:
+                        return 1
                 except KeyError:
                     pass
             return 0
@@ -483,27 +484,29 @@ class PAndOrPlanner:
 
         legal_acts = [A_STOP] + self.env.legal_actions(s)
         # reversed
-        legal_acts.sort(key=exists_trans_with_same_obs_and_action)
+        # legal_acts.sort(key=exists_trans_with_same_obs_and_action)
+
+        q_list = [*range(self.contr.num_states - 1, -1, -1)]
+        q_list.sort(key=exists_trans_with_same_obs_and_next_state)
 
         # list for existing states
-        tr_list = [(q_next, action) for q_next in range(self.contr.num_states - 1, -1, -1)
+        tr_list = [(q_next, action) for q_next in q_list
                                     for action in legal_acts]
         # reversed: that's cool.
-        tr_list.sort(key=exists_trans_with_same_obs_and_next_state)
+        # tr_list.sort(key=exists_trans_with_same_obs_and_next_state)
 
         # list for a new state
         if self.contr.num_states < self.contr.bound:
-            tr_list += [(self.contr.num_states, action) for action in legal_acts]
+            tr_list = [(self.contr.num_states, action) for action in legal_acts] + tr_list
 
         return tr_list
-
 
 
 def main():
     # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
     # env = environments.ProbHallAone(noisy=True)
-    env = environments.ProbHallArect(length=2, noisy=True)
+    env = environments.ProbHallArect(length=3, noisy=True)
 
     # random.seed(0)
 
