@@ -15,7 +15,7 @@ import time
 from itertools import dropwhile, product
 import copy
 import numpy as np
-
+# import random
 
 AND_FAILURE = -1
 AND_UNKNOWN = 0
@@ -279,7 +279,7 @@ class PAndOrPlanner:
         # otherwise we make a nondet choice
         if not self.backtracking:
             # no (q_next,act) defined for (q,obs) ⇒ define new one with this iterator
-            tr_list = self.get_mealy_qa_iterator(s)
+            tr_list = self.get_mealy_qa_iterator(s, obs)
             self.contr.iterators[q,obs] = tr_list
 
             # store a new checkpoint iff we're not backtracking currently
@@ -296,7 +296,7 @@ class PAndOrPlanner:
 
                 t = self.contr.transitions.popitem()
                 assert (q, obs) == t[0]
-                assert self.contr.iterators[q, obs][0] == t[1]
+                assert self.contr.iterators[q, obs][-1] == t[1]
 
                 q_next_last, action_last = t[1]
 
@@ -307,7 +307,7 @@ class PAndOrPlanner:
                 tr_list = self.contr.iterators[q, obs]
 
                 # burn the controller extension that caused the trouble earlier
-                del tr_list[0]
+                tr_list.pop()
 
             else:
                 # the controller transition and action should already be defined
@@ -332,7 +332,7 @@ class PAndOrPlanner:
                 del self.contr.iterators[q, obs]
                 break
             else:
-                q_next, action = tr_list[0]
+                q_next, action = tr_list[-1]
 
             # extend controller if not backtracking
             if not self.backtracking:
@@ -362,8 +362,8 @@ class PAndOrPlanner:
                              [ (x.q, self.env.str_state(x.s), x.p) for x in history[len_history:] ]) if v else 0
 
                 t = self.contr.transitions.popitem()
-                assert self.contr.iterators[q, obs][0] == t[1]
-                del self.contr.iterators[q,obs][0]
+                assert self.contr.iterators[q, obs][-1] == t[1]
+                self.contr.iterators[q,obs].pop()
 
                 logging.info("OR: Deleted: (%s,%s) -> (%s,%s)",
                              t[0][0], self.env.str_obs(t[0][1]),
@@ -461,25 +461,54 @@ class PAndOrPlanner:
     def revert_variables(self):
         self.alpha = copy.deepcopy(self.backtrack_stack[-1].alpha)
 
-    def get_mealy_qa_iterator(self, s):
-        if self.env.is_goal_state(s):
-            legal_acts = [A_STOP] + self.env.legal_actions(s)
-        else:
-            legal_acts = self.env.legal_actions(s) + [A_STOP]
-        it = product(range(min(self.contr.bound, self.contr.num_states + 1)), legal_acts)
+    def get_mealy_qa_iterator(self, s, obs):
+        def exists_trans_with_same_obs_and_action(a):
+            for q in range(self.contr.bound):
+                try:
+                    return self.contr.transitions[q,obs][1] == a
+                except KeyError:
+                    pass
+            return 0
 
-        list_it = list(it)
-        return list_it
+        def exists_trans_with_same_obs_and_next_state(qa):
+            for q in range(self.contr.bound):
+                try:
+                    return self.contr.transitions[q,obs][0] == qa[0]
+                except KeyError:
+                    pass
+            return 0
+
+        if self.env.is_goal_state(s):
+            return [(0, A_STOP)]
+
+        legal_acts = [A_STOP] + self.env.legal_actions(s)
+        # reversed
+        legal_acts.sort(key=exists_trans_with_same_obs_and_action)
+
+        # list for existing states
+        tr_list = [(q_next, action) for q_next in range(self.contr.num_states - 1, -1, -1)
+                                    for action in legal_acts]
+        # reversed: that's cool.
+        tr_list.sort(key=exists_trans_with_same_obs_and_next_state)
+
+        # list for a new state
+        if self.contr.num_states < self.contr.bound:
+            tr_list += [(self.contr.num_states, action) for action in legal_acts]
+
+        return tr_list
+
 
 
 def main():
     # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    env = environments.ProbHallAone(noisy=True)
-    # env = environments.ProbHallArect(length=2, noisy=True)
+    # env = environments.ProbHallAone(noisy=True)
+    env = environments.ProbHallArect(length=2, noisy=True)
+
+    # random.seed(0)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=2, lpc_desired=0.9999)
+    success = planner.synth_plan(states_bound=4, lpc_desired=0.9999)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module

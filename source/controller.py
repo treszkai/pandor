@@ -39,8 +39,7 @@ class MealyController:
         assert q < self.num_states and q_next <= self.num_states, \
             "Invalid controller state transition: {} → {}".format(key, value)
 
-        if not q_next < self.bound:
-            assert q_next < self.bound
+        assert q_next < self.bound
 
         self.transitions[key] = value
 
