@@ -220,7 +220,7 @@ class ProbHallAone(NoisyEnv):
     Goal states: { (1, True) }
     """
 
-    def __init__(self, length=3, noisy=True):
+    def __init__(self, length=4, noisy=True):
         self.length = length
         self.noisy = noisy
         super().__init__()
@@ -257,7 +257,7 @@ class ProbHallAone(NoisyEnv):
         return [(1, True)]
 
     def legal_actions(self, state):
-        return [-1, +1]
+        return [1, -1]
 
     def get_obs(self, state):
         n, _ = state

@@ -24,8 +24,8 @@ S_FAIL = "fail"
 A_STOP = "stop"
 
 # verbose flag
-v = False
-# v = True
+# v = False
+v = True
 
 
 class PandorControllerFound(Exception):
@@ -509,13 +509,13 @@ class PAndOrPlanner:
 def main():
     # env = environments.BridgeWalk(4)
     # env = environments.WalkThroughFlapProb()
-    # env = environments.ProbHallAone(noisy=True)
-    env = environments.ProbHallArect(length=3, noisy=True)
+    env = environments.ProbHallAone(noisy=True)
+    # env = environments.ProbHallArect(length=3, noisy=True)
 
     random.seed(1)
 
     planner = PAndOrPlanner(env)
-    success = planner.synth_plan(states_bound=4, lpc_desired=0.9999)
+    success = planner.synth_plan(states_bound=2, lpc_desired=0.9999)
 
     if v:
         time.sleep(1)  # Wait for mesages of logging module
@@ -536,7 +536,7 @@ if __name__ == '__main__':
     else:
         logging.basicConfig(level=logging.WARNING)
 
-    if 1:
+    if 0:
         v = False
         print(timeit.timeit('main()', number=1, setup="from __main__ import main"))
     else:
