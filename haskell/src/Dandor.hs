@@ -7,8 +7,9 @@ import Config
 import Environment
 import Controller
 import Data.Maybe
+import Debug.Trace as Trace
 
-data CombinedState = QS ContState EnvState deriving (Eq)
+data CombinedState = QS ContState EnvState deriving (Eq, Show)
 
 synthController :: Controller
 synthController = head $ andStep emptyController initialQ [initialState] emptyHist
@@ -18,6 +19,8 @@ synthController = head $ andStep emptyController initialQ [initialState] emptyHi
 
 orStep :: Controller -> ContState -> EnvState -> [CombinedState] -> [Controller]
 orStep c q s hl
+  | traceShow ("orStep  c={" ++ show c ++ "} q={" ++ show q ++
+               "}  s={" ++ show s ++ "} hl={" ++ show hl ++ "}") False = []
   | isGoalState s = [c]
   -- | isFail s = [] TODO?
   | (QS q s) `elem` hl = []
@@ -36,5 +39,8 @@ orStep c q s hl
     k = min (numContStates c) (numStatesBound - 1)
 
 andStep :: Controller -> ContState -> [EnvState] -> [CombinedState] -> [Controller]
+andStep c q sl hl
+  | traceShow ("andStep c={" ++ show c ++ "} q={" ++ show q ++
+               "} sl={" ++ show sl ++ "} hl={" ++ show hl ++ "}") False = []
 andStep c _ [] _ = [c]
 andStep c q (s:sl) hl = concat [andStep c' q sl hl | c' <- orStep c q s hl]
