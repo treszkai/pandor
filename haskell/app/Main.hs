@@ -1,6 +1,7 @@
 module Main where
 
-import Lib
+import Dandor
 
 main :: IO ()
-main = printController detSynthPlan
+main = print synthController
+

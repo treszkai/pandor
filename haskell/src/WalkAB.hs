@@ -10,10 +10,11 @@ module WalkAB
     nextState
   ) where
 
-data EnvState = S Int Bool
-data Action = ActLeft | ActRight
-data Observation = ObsA | ObsB | ObsMiddle
+data EnvState = S Int Bool deriving (Show)
+data Action = ActLeft | ActRight deriving (Show)
+data Observation = ObsA | ObsB | ObsMiddle deriving (Show)
 
+legalActs :: [Action]
 legalActs = [ActLeft, ActRight]
 
 initialState :: EnvState
@@ -26,7 +27,7 @@ isGoalState _ = False
 observe :: EnvState -> Observation
 observe (S 0 _) = ObsA
 observe (S 3 _) = ObsB
-observe (S _ _) = ObsNeither
+observe (S _ _) = ObsMiddle
 
 nextState :: EnvState -> Action -> EnvState -- [(EnvState, Double)]
 nextState (S 0 b) ActLeft = S 0 b
