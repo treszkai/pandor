@@ -7,7 +7,7 @@ module Controller
     numContStates
   ) where
 
-import DetEnvAbstract
+import Environment
 
 newtype ContState = Q Int deriving (Eq, Show)
 -- data Controller = C [((ContState, Observation), (ContState, Action))]
@@ -21,4 +21,5 @@ contStateId :: ContState -> Int
 contStateId (Q n) = n
 
 numContStates :: Controller -> Int
-numContStates = maximum . (map (contStateId . fst . snd))
+numContStates [] = 1
+numContStates c = maximum . map (contStateId . fst . snd) $ c

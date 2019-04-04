@@ -3,5 +3,5 @@ module Main where
 import Dandor
 
 main :: IO ()
-main = print synthController
+main = print $ reverse synthController
 

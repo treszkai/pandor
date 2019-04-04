@@ -21,7 +21,7 @@ orStep :: Controller -> ContState -> EnvState -> [CombinedState] -> [Controller]
 orStep c q s hl
   | traceShow ("orStep  c={" ++ show c ++ "} q={" ++ show q ++
                "}  s={" ++ show s ++ "} hl={" ++ show hl ++ "}") False = []
-  | isGoalState s = [c]
+  | isGoalState s = traceShow ("WIN hl(rev)={" ++ show (reverse hl) ++ "}") [c]
   -- | isFail s = [] TODO?
   | (QS q s) `elem` hl = []
   | isJust maybeTransition = let (q', a) = fromJust maybeTransition
