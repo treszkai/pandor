@@ -1,0 +1,21 @@
+Controller found with max  4 states.
+(0,A) → (0,↓)
+(0,-) → (0,↓)
+(0,D) → (1,→)
+(1,D) → (0,↑)
+(1,-) → (1,→)
+(1,C) → (0,↑)
+(0,C) → (2,↑)
+(2,C) → (0,↑)
+(2,-) → (2,↑)
+(2,B) → (0,↓)
+(0,B) → (1,←)
+(1,B) → (3,←)
+(3,B) → (0,↓)
+(3,-) → (3,←)
+(3,A) → (0,stop)
+Number of steps taken: 10015
+
+6.504246 seconds
+
+Process finished with exit code 0

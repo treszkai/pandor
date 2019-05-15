@@ -1,0 +1,623 @@
+INFO:root:AND: Simulating s: (4, 0), q: 0
+INFO:root:OR: Added:   (0,False) -> (0,fwd)
+INFO:root:AND: Simulating s: (3, 0), q: 0
+INFO:root:AND: Simulating s: (2, 0), q: 0
+INFO:root:AND: Simulating s: (1, 0), q: 0
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: win, q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.07290000000000002}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 0, s: (3, 0), p: 0.9), (q: 0, s: (2, 0), p: 0.9), (q: 0, s: (1, 0), p: 0.9), (q: 0, s: (1, -1), p: 0.1)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (0,False) -> (0,left)
+INFO:root:AND: Simulating s: (4, 1), q: 0
+INFO:root:AND: Simulating s: (4, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 0, s: (4, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,False) -> (0,right)
+INFO:root:AND: Simulating s: (4, -1), q: 0
+INFO:root:AND: Simulating s: (4, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 0, s: (4, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,False) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,False) -> (1,fwd)
+INFO:root:AND: Simulating s: (3, 0), q: 1
+INFO:root:OR: Added:   (1,False) -> (0,fwd)
+INFO:root:AND: Simulating s: (2, 0), q: 0
+INFO:root:AND: Simulating s: (1, 0), q: 1
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: win, q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:AND: Simulating s: (1, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.07290000000000002}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (2, 0), p: 0.9), (q: 1, s: (1, 0), p: 0.9), (q: 0, s: (1, -1), p: 0.1), (q: 1, s: (1, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,False) -> (0,left)
+INFO:root:AND: Simulating s: (3, 1), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 1
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 1
+INFO:root:AND: Simulating s: (1, 1), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: Added:   (1,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 0, s: (0, 0), p: 1.0), (q: 0, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.81}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0), (q: 0, s: (0, 0), p: 0.9), (q: 1, s: (0, -1), p: 1.0), (q: 0, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 0, s: (0, 0), p: 1.0), (q: 0, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: win, q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, -1), q: 1
+INFO:root:AND: Simulating s: (4, -1), q: 0
+INFO:root:AND: Simulating s: (4, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.9, 'fail': 0.0, 'noter': 0.1}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, -1), p: 0.1), (q: 0, s: (4, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0), (q: 1, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,False) -> (0,right)
+INFO:root:AND: Simulating s: (3, -1), q: 0
+INFO:root:AND: Simulating s: (3, -1), q: 1
+INFO:root:AND: Simulating s: (3, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 0, s: (3, -1), p: 1.0), (q: 1, s: (3, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,False) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,False) -> (1,fwd)
+INFO:root:AND: Simulating s: (2, 0), q: 1
+INFO:root:AND: Simulating s: (1, 0), q: 1
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:OR: Added:   (1,True) -> (0,stop)
+INFO:root:AND: Simulating s: win, q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:AND: Simulating s: (1, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.6561000000000001, 'fail': 0.0, 'noter': 0.07290000000000002}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 1, s: (2, 0), p: 0.9), (q: 1, s: (1, 0), p: 0.9), (q: 1, s: (1, -1), p: 0.1)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (1,False) -> (1,left)
+INFO:root:AND: Simulating s: (3, 1), q: 1
+INFO:root:AND: Simulating s: (3, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 1, s: (3, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,False) -> (1,right)
+INFO:root:AND: Simulating s: (3, -1), q: 1
+INFO:root:AND: Simulating s: (3, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9), (q: 1, s: (3, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,False) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.9, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (3, 0), p: 0.9)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (0,False) -> (1,left)
+INFO:root:AND: Simulating s: (4, 1), q: 1
+INFO:root:OR: Added:   (1,False) -> (0,fwd)
+INFO:root:AND: Simulating s: (3, 1), q: 0
+INFO:root:AND: Simulating s: (3, 1), q: 1
+INFO:root:AND: Simulating s: (2, 1), q: 0
+INFO:root:AND: Simulating s: (2, 1), q: 1
+INFO:root:AND: Simulating s: (1, 1), q: 0
+INFO:root:AND: Simulating s: (1, 1), q: 1
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: Added:   (0,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 0, s: (0, 0), p: 1.0), (q: 0, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: Added:   (1,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.9}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 0), p: 1.0), (q: 1, s: (0, 0), p: 0.9), (q: 0, s: (0, -1), p: 1.0), (q: 1, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0), (q: 1, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (0,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: Added:   (1,True) -> (0,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,left)
+INFO:root:AND: Simulating s: (0, 1), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,right)
+INFO:root:AND: Simulating s: (0, 0), q: 0
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 0, s: (0, 0), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (0,stop)
+INFO:root:AND: Simulating s: fail, q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,fwd)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,left)
+INFO:root:AND: Simulating s: (0, 1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:AND: Simulating s: (0, -1), q: 1
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0), (q: 1, s: (0, -1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,True) -> (1,stop)
+INFO:root:AND: Simulating s: fail, q: 1
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 1), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: all extensions failed
+INFO:root:OR: Added:   (0,True) -> (1,right)
+INFO:root:AND: Simulating s: (0, 0), q: 1
+INFO:root:OR: Added:   (1,True) -> (0,stop)
+INFO:root:AND: Simulating s: win, q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0), (q: 1, s: (0, 0), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0), (q: 0, s: (0, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0), (q: 1, s: (1, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0), (q: 0, s: (1, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0), (q: 1, s: (2, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0), (q: 0, s: (2, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0), (q: 1, s: (3, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0), (q: 0, s: (3, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0), (q: 1, s: (4, 1), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (4, 0), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history []
+Controller found with max  2 states.
+(0,False) → (1,left)
+(1,False) → (0,fwd)
+(0,True) → (1,right)
+(1,True) → (0,stop)
+Number of steps taken: 124
+
+0.045900 seconds
+
+Process finished with exit code 0

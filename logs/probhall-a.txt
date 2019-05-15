@@ -1,0 +1,230 @@
+INFO:root:AND: Simulating s: (1, F), q: 0
+INFO:root:OR: Added:   (0,A) -> (0,Left)
+INFO:root:AND: Simulating s: (1, F), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,A) -> (0,Right)
+INFO:root:AND: Simulating s: (1, F), q: 0
+INFO:root:OR: loop to level 0 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (2, F), q: 0
+INFO:root:OR: Added:   (0,-) -> (0,Left)
+INFO:root:AND: Simulating s: (2, F), q: 0
+INFO:root:OR: loop to level 1 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (1, F), q: 0
+INFO:root:OR: loop to level 0 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,-) -> (0,Right)
+INFO:root:AND: Simulating s: (2, F), q: 0
+INFO:root:OR: loop to level 1 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (3, F), q: 0
+INFO:root:AND: Simulating s: (3, F), q: 0
+INFO:root:OR: loop to level 2 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: Added:   (0,B) -> (0,Left)
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:OR: loop to level 4 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.5, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 0, s: (3, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,B) -> (0,Right)
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: repeated state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,B) -> (0,stop)
+INFO:root:AND: Simulating s: (f, T), q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (0,B) -> (1,Left)
+INFO:root:AND: Simulating s: (4, T), q: 1
+INFO:root:OR: Added:   (1,B) -> (0,Left)
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:OR: loop to level 5 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (3, T), q: 1
+INFO:root:OR: Added:   (1,-) -> (0,Left)
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:OR: loop to level 5 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (2, T), q: 0
+INFO:root:AND: Simulating s: (2, T), q: 0
+INFO:root:OR: loop to level 5 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:OR: loop to level 6 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,-) -> (0,Right)
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:AND: Simulating s: (3, T), q: 0
+INFO:root:OR: loop to level 5 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (4, T), q: 0
+INFO:root:OR: loop to level 3 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,-) -> (0,stop)
+INFO:root:AND: Simulating s: (f, T), q: 0
+INFO:root:OR: terminated in NOT goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 1.0, 'noter': 0.0}
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5)]
+INFO:root:AND (do nothing)
+INFO:root:OR: Added:   (1,-) -> (1,Left)
+INFO:root:AND: Simulating s: (3, T), q: 1
+INFO:root:OR: loop to level 4 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (2, T), q: 1
+INFO:root:AND: Simulating s: (2, T), q: 1
+INFO:root:OR: loop to level 5 with prob 0.5
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: Simulating s: (1, T), q: 1
+INFO:root:OR: Added:   (1,A) -> (0,stop)
+INFO:root:AND: Simulating s: (w, T), q: 0
+INFO:root:OR: terminated in goal state
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 0.5), (q: 1, s: (1, True), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5), (q: 1, s: (2, True), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history [(q: 0, s: (1, False), p: 1.0)]
+DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+DEBUG:root:AND: likelihoods: {'win': 1.0, 'fail': 0.0, 'noter': 0.0}
+INFO:root:AND: succeed at history []
+Controller found with max  2 states.
+(0,A) → (0,Right)
+(0,-) → (0,Right)
+(0,B) → (1,Left)
+(1,B) → (0,Left)
+(1,-) → (1,Left)
+(1,A) → (0,stop)
+Number of steps taken: 40
+
+0.022904 seconds
+
+Process finished with exit code 0
