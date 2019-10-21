@@ -6,6 +6,7 @@ Pandor:
 Probabilistic AND-OR search algorithm for a finite-state controller in a stochastic environment
 """
 
+import argparse
 import logging
 import timeit
 import time
@@ -25,8 +26,7 @@ A_STOP = "stop"
 PRINT_WAIT_SECONDS = 1
 
 # verbose flag
-# v = False
-v = True
+v = False
 
 
 class PandorControllerNotFound(ValueError):
@@ -318,16 +318,44 @@ class PAndOrPlanner:
                                  for action in legal_acts]
 
 
-def main():
-    # env, states_bound = environments.BridgeWalk(4), 2
-    # env, states_bound = environments.WalkThroughFlapProb(), 1
-    env, states_bound = environments.ProbHallAone(noisy=True), 2
-    # env, states_bound = environments.ProbHallArect(length=3, noisy=True), 4
+def parse_args():
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument('--env',
+                           choices=['BridgeWalk',
+                                    'WalkThroughFlapProb',
+                                    'ProbHallAone',
+                                    'ProbHallArect'],
+                           help='Environment to run')
+    argparser.add_argument('--max_states',
+                           type=int,
+                           help='Maximum number of controller states')
+    argparser.add_argument('--lpc_desired',
+                           type=float,
+                           default=0.9999)
+    argparser.add_argument('-v', '--verbose',
+                           action='store_true')
+    argparser.add_argument('--no-timeit',
+                           action='store_true')
+    argparser.add_argument('--timeit-repeat',
+                           type=int,
+                           default=1)
 
+    argparser.add_argument('env_args', type=int, nargs='*')
+
+    args = argparser.parse_args()
+
+    env_cls = getattr(environments, args.env)
+    env = env_cls(*args.env_args)
+
+    return args, env
+
+
+def main(args, env):
     planner = PAndOrPlanner(env)
 
     try:
-        good_cont, good_alpha = planner.synth_plan(states_bound, lpc_desired=0.9999)
+        good_cont, good_alpha = planner.synth_plan(args.max_states,
+                                                   lpc_desired=args.lpc_desired)
 
         time.sleep(PRINT_WAIT_SECONDS)  # Wait for mesages of logging module
         for (q, o), (q_next, a) in good_cont.transitions.items():
@@ -341,10 +369,18 @@ def main():
 
 
 if __name__ == '__main__':
-    if v:
-        logging.basicConfig(level=logging.DEBUG)
+    args, env = parse_args()
 
-    if 1:
-        print('\n{:04f} seconds'.format(timeit.timeit('main()', number=1, setup="from __main__ import main") - PRINT_WAIT_SECONDS))
+    if args.verbose:
+        v = True
+        logging.basicConfig(level=logging.DEBUG)
     else:
-        main()
+        v = False
+
+    if args.no_timeit:
+        main(args, env)
+    else:
+        seconds_taken = (timeit.timeit(lambda: main(args, env),
+                                       number=args.timeit_repeat)
+                         / args.timeit_repeat) - PRINT_WAIT_SECONDS
+        print('\n{:f} seconds'.format(seconds_taken))
