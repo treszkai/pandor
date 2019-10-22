@@ -1,0 +1,51 @@
+\def\xshiftfigure{55mm}
+\def\xdistancefromedge{10mm}
+\def\figheight{30mm}
+
+% \coordinate (BL) at (-\xshiftfigure,-\figheight);
+% \coordinate (UR) at (2*\xshiftfigure,0);
+% \draw[black!10] (BL) grid[step=1mm] (UR);
+% \draw[black!30] (BL) grid[step=1cm] (UR);
+
+\tikzset{every edge/.style={->,draw}}
+
+\begin{scope}[xshift=-\xshiftfigure]
+
+    \node at (5mm,-5mm) {(1)};
+
+    \node[state,initial] (s_0) at (1.5*\xdistancefromedge,-15mm) {$s_0$};
+
+    \node[state,accepting] (s_goal) at (\xshiftfigure-\xdistancefromedge,-8mm) {goal};
+    \node[state] (s_nongoal) at (\xshiftfigure-\xdistancefromedge,-22mm) [align=center,inner sep=1mm] {not\\goal};
+
+    \draw (s_0) edge[out=0,in=225,in looseness=0.4] node [midway,yshift=1.5ex,xshift=-2ex] {\texttt{flip}/0.5} (s_goal);
+    \draw (s_0) edge[out=0,in=135,in looseness=0.4] node [midway,swap,yshift=-1.5ex,xshift=-2ex] {\texttt{flip}/0.5} (s_nongoal);
+
+\end{scope}
+
+\begin{scope}[xshift=0cm]
+    \node at (5mm,-5mm) {(2)};
+
+    \node[state,initial] (2-0) at (1.5*\xdistancefromedge,-\figheight/2) {$s_0$};
+
+    \node[state,accepting] (2-goal) at (\xshiftfigure-\xdistancefromedge,-\figheight/2) {goal};
+
+    \draw (2-0) edge[loop above] node[above right,xshift=-7mm] {{\tt no-op}/1.0} (2-0);
+    \draw (2-0) edge node[above] {\texttt{flip}/0.5}
+                         node[above,yshift=-9mm] {\texttt{flip}/0.5} (2-goal);
+    \draw (2-0) edge[out=0,in=-30,loop] (2-0);
+
+\end{scope}
+
+\begin{scope}[xshift=\xshiftfigure]
+    \node at (5mm,-5mm) {(3)};
+
+    \node[state,initial] (3-0) at (\xdistancefromedge,-\figheight*2/3) {$s_0$};
+    \node[state] (3-1) at (\xshiftfigure/2,-\figheight*2/3) {$s_1$};
+    \node[state] (3-2) at (\xshiftfigure-\xdistancefromedge,-\figheight*2/3) {$s_2$};
+
+    \draw (3-0) edge node[below] {} (3-1);
+    \draw (3-1) edge node[below] {} (3-2);
+    \draw (3-2) edge[out=120,in=60] node[below] {{\tt a}/0.5} (3-1);
+    \draw (3-2) edge[out=120,in=60] node[above] {{\tt a}/0.5} (3-0);
+\end{scope}

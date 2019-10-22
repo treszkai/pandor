@@ -1,0 +1,104 @@
+% !TEX root = ../tikz-env-bridgewalk.tex
+
+
+\begin{scope}[xshift=0mm,yshift=-20mm]
+    \draw[help lines] (0,0) grid[step=2cm] (10,6);
+\end{scope}
+
+\begin{scope}[xshift=5mm,yshift=10mm]
+
+    % start
+    \draw (-1,0) edge[->] (-0.3,0);
+
+    \path[->] (0,0.2) to node[above,rotate=90,help lines] {\tiny \texttt{(0,1)}} (0,0.8);
+    \path[->] (0,-0.2) to node[above,rotate=90,help lines,text depth=0pt] {\tiny \texttt{(0,-1)}} (0,-0.8);
+    \path[->] (0.2,0) to node[above,near start,help lines,text depth=0pt] {\tiny \texttt{(-1,0)}} (0.8,0);
+
+    \foreach \x in {0,...,3} {
+
+        \begin{scope}[xshift=\x*2cm,yshift=0cm]
+            \draw[fill] (0,0) circle[radius=1mm];
+
+            \draw[->] (0,0.2) to (0,0.8);
+            \draw[->] (0,-0.2) to (0,-0.8);
+            \draw[->] (0.2,0) to  node [above,near end] {0.9} (1.2,0);
+            \draw[->] (0.2,0) to[out=0,in=90] node [right,very near end] {0.1} (0.8,-0.8);
+
+        \end{scope}
+
+        \begin{scope}[xshift=\x*2cm,yshift=2cm]
+            \draw[fill] (0,0) circle[radius=1mm];
+
+            \draw[->] (0,-0.2) to (0,-0.8);
+            \draw[->] (0.2,0) to (0.8,0);
+            \draw[->] (0,0.2) .. controls (0,1.0) and (60:1.0) .. (60:0.2);
+        \end{scope}
+    }
+
+    \foreach \x in {0,...,4} {
+        \begin{scope}[xshift=\x*2cm,yshift=-2cm]
+            % \draw[fill] (0,0) circle[radius=1mm];
+
+            \node at (0,0) {$\skull$};
+            \draw[->] (20:0.2) .. controls (20:1.0) and (-20:1.0) .. (-20:0.2);
+
+
+        \end{scope}
+    }
+
+    \begin{scope}[xshift=4*2cm,yshift=2cm]
+        \draw[fill] (0,0) circle[radius=1mm];
+
+        \draw[->] (0,-0.2) to (0,-0.8);
+        \draw[->] (0.2,0) .. controls (10:1.0) and (-20:1.0) .. (-20:0.2);
+        \draw[->] (0,0.2) .. controls (0,1.0) and (60:1.0) .. (60:0.2);
+    \end{scope}
+
+
+    % Goal state
+    \begin{scope}[xshift={4*2cm},yshift=0cm]
+        \draw[fill] (0,0) circle[radius=1mm];
+
+        \draw[->] (0,0.2) to (0,0.8);
+        \draw[->] (0,-0.2) to (0,-0.8);
+        \draw[->] (0.2,0) .. controls (10:1.0) and (-20:1.0) .. (-20:0.2);
+
+        \node [above left] at (1.5,-1) {\textbf{Goal}};
+    \end{scope}
+
+\end{scope}
+
+\tikzset{every node/.style={text=black}}
+
+\draw[help lines,|<->|] (0,-2.5) % node[left] {Observations:}
+  -- node[below,midway] {$\lnot$AtGoal} (7.9,-2.5);
+
+\draw[help lines,|<->|] (8.1,-2.5) -- node[below,midway] {AtGoal} (10,-2.5);
+
+\foreach \x in {4,...,0}
+    \foreach \y in {-1,0,1}
+        \node [help lines,below left] at ({2*(4-\x+1)},{2*(\y+1)}) {$\scriptstyle (\x,\y)$};
+        
+\begin{scope}[xshift=12cm, yshift=2.5cm]
+    % LC > 0.7 , N = 2, action order: l,f,r
+    % LC > 0.99, N = 2
+    \node[state,initial] (q_0) {$q_0$};
+    \node[state] (q_1) [right=2.3cm of q_0] {$q_1$};
+    \path[->] (q_0) edge[bend left=15] node[above,align=center]
+        {$\lnot$AtGoal / $\uparrow$\\
+         AtGoal / $\downarrow$} (q_1);
+    \path[->] (q_1) edge[bend left=15] node[below,align=center]
+        {$\lnot$AtGoal / $\rightarrow$\\
+         AtGoal / \Xstop} (q_0);
+\end{scope}
+
+\begin{scope}[xshift=12cm, yshift=-1cm]
+% LC > 0.7 , N = 2
+\node[state,initial] (q_0) {$q_0$};
+\node[state] (q_1) [right=2.3cm of q_0] {$q_1$};
+\path[->] (q_0) edge[loop above] node {AtGoal / \texttt{stop}} (q_0);
+\path[->] (q_0) edge[bend left=15] node[above] {$\lnot$AtGoal / $→$} (q_1);
+\path[->] (q_1) edge[bend left=15] node[below,align=center]
+    {$\lnot$AtGoal / $\uparrow$\\[1ex]
+     AtGoal / $\downarrow$} (q_0);
+\end{scope}

@@ -1,0 +1,162 @@
+% ========================
+
+\usepackage{newunicodechar}
+
+\newunicodechar{α}{\alpha}
+\newunicodechar{γ}{\gamma}
+\newunicodechar{δ}{\delta}
+\newunicodechar{ε}{\varepsilon}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{ω}{\omega}
+
+\newunicodechar{Δ}{\Delta}
+\newunicodechar{Π}{\Pi}
+\newunicodechar{Ω}{\Omega}
+
+\newunicodechar{→}{\rightarrow}
+\newunicodechar{⇒}{\Rightarrow}
+\newunicodechar{⟨}{\langle}
+\newunicodechar{⟩}{\rangle}
+\newunicodechar{≤}{\le}
+\newunicodechar{≥}{\ge}
+
+\newunicodechar{∈}{\in}
+
+% =========================
+
+\newcommand{\TER}{\mathbf{TER}}
+\newcommand{\PC}{\mathbf{PC}}
+\newcommand{\LPC}{\mathbf{LPC}}
+% \newcommand{\LPCalt}{\mathbf{LG}}
+\newcommand{\LTER}{\mathbf{LTER}}
+\newcommand{\LTERPC}{\mathbf{LGT}}
+\newcommand{\LGT}{\mathbf{LGT}}
+\newcommand{\BND}{\mathbf{BND}}
+\newcommand{\ACYC}{\mathbf{ACYC}}
+\newcommand{\ONE}{\mathbf{ONE}}
+
+\newcommand{\LPCupper}{\overline{{\mathit{LPC}}}}
+\newcommand{\LPClower}{\underline{{\mathit{LPC}}}}
+\newcommand{\LPCdesired}{{\mathit{LPC}}^{\star}}
+\newcommand{\LTERupper}{\overline{{\mathit{LTER}}}}
+\newcommand{\LTERlower}{\underline{{\mathit{LTER}}}}
+\newcommand{\LTERdesired}{{\mathit{LTER}}^{\star}}
+\newcommand{\LTERPCdesired}{{\mathit{LGT}}^{\star}}
+\newcommand{\LTERPCupper}{\overline{{\mathit{LGT}}}}
+\newcommand{\LTERPClower}{\underline{{\mathit{LGT}}}}
+\newcommand{\LGTdesired}{{\mathit{LGT}}^{\star}}
+\newcommand{\LGTupper}{\overline{{\mathit{LGT}}}}
+\newcommand{\LGTlower}{\underline{{\mathit{LGT}}}}
+
+\newcommand{\Graph}{{G}}
+
+\newcommand{\Env}{\mathcal{E}}
+\newcommand{\States}{\mathcal{S}}
+\newcommand{\Stts}{\mathcal{S}}
+\newcommand{\Acts}{\mathcal{A}}
+\newcommand{\Actions}{\mathcal{A}}
+\newcommand{\Obss}{\mathcal{O}}
+\newcommand{\Observations}{\mathcal{O}}
+\newcommand{\Goals}{\mathcal{G}}
+\newcommand{\Problem}{\mathcal{P}}
+\newcommand{\Prob}{\mathcal{P}}
+\newcommand{\GenProb}{\overline{\mathcal{P}}}
+\newcommand{\Cont}{\mathcal{C}}
+
+\newcommand{\Xgood}{{\mathrm{good}}}
+\newcommand{\Xloop}{{\mathrm{loop}}}
+\newcommand{\Xgoal}{{\mathrm{goal}}}
+\newcommand{\Xcurrent}{{\mathrm{curr}}}
+\newcommand{\Xcurr}{{\mathrm{curr}}}
+\newcommand{\Xfail}{{\mathrm{fail}}}
+\newcommand{\Xnoter}{{\mathrm{noter}}}
+
+\newcommand{\Xand}{{\mathsf{and}}}
+\newcommand{\Xor}{{\mathsf{or}}}
+\newcommand{\Xtrue}{{\mathsf{true}}}
+\newcommand{\Xfalse}{{\mathsf{false}}}
+\newcommand{\Xstop}{\text{\texttt{stop}}}
+\newcommand{\Xright}{\text{\texttt{left}}}
+\newcommand{\Xleft}{\text{\texttt{right}}}
+\newcommand{\Xswin}{s_{\mathrm{win}}}
+\newcommand{\Xsfail}{s_{\mathrm{fail}}}
+\newcommand{\XSP}{\mathit{SP}}
+
+\newcommand{\ie}{i.e., }
+\newcommand{\eg}{e.g., }
+
+\newcommand{\Pandor}{\textsc{Pandor}\ }
+
+\usepackage{amsthm}
+
+% \newtheorem{lemma}[theorem]{Lemma}  % follow theorem's numbering
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}  % bold heading, normal body
+\newtheorem{definition}{Definition}
+\newtheorem{problem}{Problem}
+% \newtheorem{proposition}{Proposition}
+
+\theoremstyle{definition}  % bold heading, normal body, no numbering
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{remark}  % italic heading, normal body, no numbering
+\newtheorem*{remark}{Remark}
+
+
+\newcommand{\Xsensed}{\mathit{sensed}}
+\newcommand{\Xend}{\mathit{end}}
+\newcommand{\Xlen}{\mathit{len}}
+\newcommand{\Xundef}{\mathsf{undef}}
+\newcommand{\Xstart}{\mathsf{start}}
+
+\newcommand{\given}{\ |\ }
+\newcommand{\parm}{\mathord{\color{black!50}\bullet}}
+
+% ========================
+
+%%% TikZ setup
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,graphs,automata}
+\usetikzlibrary{shapes.multipart}
+% \usetikzlibrary{external}
+% \tikzexternalize
+
+% AAAI wants at least 0.5pt lines
+\tikzset{every picture/.style={line width=0.5pt}}
+\tikzset{>=stealth}
+
+\def\XcrossedEdgeFromParent#1#2{
+  [style=edge from parent,#1]
+  (\tikzparentnode\tikzparentanchor) to #2 node [sloped] {\textsf{x}} (\tikzchildnode\tikzchildanchor)
+}
+
+\tikzset{and/.style={draw,circle,fill=black,minimum size=6pt,inner sep=0pt,solid}}
+\tikzset{or/.style={draw,circle,fill=white,minimum size=8pt,inner sep=0pt,solid}}
+\tikzset{failed node/.style={label=below:{\Lightning}}}
+\tikzset{failed child/.style={edge from parent macro=\XcrossedEdgeFromParent}}
+\tikzset{unexplored/.style={dashed}}
+\tikzset{active/.style={red,very thick}}
+\tikzset{myautomata/.style={shorten >=1pt}} %node distance=30mm
+\tikzset{initial text={}}  % for initial state of automata
+\tikzset{mysplit/.style={rectangle split,rectangle split parts=#1,rectangle split horizontal,draw,rectangle split part align=base,anchor=base,draw=gray}}
+
+%%  one-shot commands for captions etc.
+
+\newcommand{\asdfghjkasdasdasda}{\tikz{\node[and]{};}}
+\newcommand{\asdfghjkasdasdasdb}{\tikz{\node[or]{};}}
+\newcommand{\asdfghjkasdasdasdc}{\raisebox{-0.4ex}[0pt][0pt]{\tikz{\node[or,double distance=1.5pt] {};}}}
+\newcommand{\asdfghjkasdasdasdd}{\tikz[baseline] \node[mysplit=3] {A\nodepart{two}--\nodepart{three}B};}
+\newcommand{\asdfghjkasdasdasde}{\tikz[baseline] \node[mysplit=6] {A\nodepart{two}--\nodepart{three}--\nodepart{four}--\nodepart{five}--\nodepart{six}B};}
+
+%% Skulls for the BridgeWalk environment
+
+\usepackage{skull}
+
+% ========================
+
+\newcommand{\interfuncstrut}{\rule{0pt}{3ex}}

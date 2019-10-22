@@ -1,0 +1,23 @@
+\small
+
+\def\x{8mm}
+
+\begin{scope}[xshift=-2.5*\x]
+    \draw (0,0) grid[step=\x] (\x*5,\x);
+
+    \node at (\x/2,\x/2) {\bf A};
+    \foreach \i in {1,2,3}
+        \node at ({(\i+0.5)*\x},\x/2) {\bf $-$};
+    \node at (4.5*\x,0.5*\x) {\bf B};
+\end{scope}
+
+\begin{scope}[xshift=60mm]
+\node[state, initial] at (0mm,0mm) (q0) {$q_0$};
+\node[state] at (50mm,0mm) (q1) {$q_1$};
+
+\draw[->] (q0) edge[loop above] node[align=center,xshift=1mm] {$A :\ \rightarrow$\\$- :\  \rightarrow$} (q0);
+\draw[->] (q0) edge[bend left=8] node[above] {$B :\ \leftarrow$} (q1);
+\draw[->] (q1) edge[loop above] node {$- :\ \leftarrow$} (q1);
+\draw[->] (q1) edge[bend left=8] node[below,align=center] {$A : \Xstop$\\ $B: \ \leftarrow$} (q0);
+
+\end{scope}

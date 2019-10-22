@@ -1,0 +1,65 @@
+\small
+
+\def\x{8mm}
+
+\begin{scope}[xshift=-2.5*\x,yshift=-3mm]
+    \draw (0,0) grid[step=\x] (\x*5,\x);
+    \draw (0,-\x*4) grid[step=\x] (\x,0);
+    \draw (\x,-\x*4) grid[step=\x] (\x*5,-\x*3);
+    \draw (4*\x,-3*\x) grid[step=\x] (\x*5,0);
+
+    \foreach \i in {1,2,3} {
+        \node at ({(\i+0.5)*\x},\x/2) {\bf $-$};
+        \node at ({(\i+0.5)*\x},{-3.5*\x}) {\bf $-$};
+        \node at ({\x/2+4*\x},{-(\i-0.5)*\x}) {\bf $-$};
+        \node at ({\x/2},{-(\i-0.5)*\x}) {\bf $-$};
+    }
+    \node at (\x/2,\x/2) {\bf A};
+    \node at (4.5*\x,0.5*\x) {\bf B};
+    \node at (4.5*\x,-3.5*\x) {\bf C};
+    \node at (0.5*\x,-3.5*\x) {\bf D};
+\end{scope}
+
+
+\begin{scope}[xshift=60mm]
+% \tikzset{every state/.style={inner sep=0mm,minimum size=5mm}}
+
+\node[state,initial] at (0mm,0mm) (q0) {$q_0$};
+\node[state] at (0mm,-30mm) (q1) {$q_1$};
+\node[state] at (50mm,-30mm) (q3) {$q_3$};
+\node[state] at (50mm,0mm) (q2) {$q_2$};
+
+\draw[->] (q0) edge[loop above,min distance=4mm] node[align=center,shift={(-1mm,-1mm)}] {$A:\ \downarrow$\\$-:\  \downarrow$} (q0);
+\draw[->] (q0) edge[bend right=30] node[pos=0.7,left,align=center] {$D :\ \rightarrow$\\$B: \ \leftarrow$} (q1);
+\draw[->] (q1) edge[bend right=5] node[pos=0.3,align=center,right] {$D :\ \uparrow$\\$C:\ \uparrow$} (q0);
+\draw[->] (q1) edge[loop below] node[align=center,shift={(-1mm,-1mm)}] {$-:\ \rightarrow$} (q1);
+
+\draw[->] (q0) edge[bend left=15] node[above] {$C :\ \uparrow$} (q2);
+\draw[->] (q2) edge[bend left=5] node[pos=0.5,below,align=center] {$C :\ \uparrow$\\$B:\ \downarrow$} (q0);
+
+\draw[->] (q2) edge[loop above] node {$- / \uparrow$} (q2);
+
+\draw[->] (q1) edge[bend right=15] node[above] {$B :\ \leftarrow$} (q3);
+
+\draw[->] (q3) edge[bend left=15] node[pos=0.3,above right,align=left] {$B :\ \downarrow$\\$A :\ \Xstop$} (q0);
+
+\draw[->] (q3) edge[loop below] node[align=center] {$-:\ \leftarrow$} (q3);
+
+
+% (0,A) → (0,↓)
+% (0,-) → (0,↓)
+% (0,D) → (1,→)
+% (1,D) → (0,↑)
+% (1,-) → (1,→)
+% (1,C) → (0,↑)
+% (0,C) → (2,↑)
+% (2,C) → (0,↑)
+% (2,-) → (2,↑)
+% (2,B) → (0,↓)
+% (0,B) → (1,←)
+% (1,B) → (3,←)
+% (3,B) → (0,↓)
+% (3,-) → (3,←)
+% (3,A) → (0,stop)
+
+\end{scope}

@@ -1,0 +1,62 @@
+% \coordinate (BL) at (0,2);
+% \coordinate (UR) at (8,-2);
+% \draw[black!10] (BL) grid[step=1mm] (UR);
+% \draw[black] (BL) grid[xshift=1mm,yshift=5mm] (UR);
+
+\fontsize{8}{8}\selectfont
+
+\def\xa{10mm}
+\tikzset{level distance=\xa}
+\tikzset{sibling distance=6mm}
+
+\tikzset{fake line/.style={dashed}}
+% \tikzset{or/.append style={font=\scriptsize}}
+
+\tikzset{edge from parent/.style={-To,draw}}
+
+\node[and] {} [grow'=right,label position=right]
+child { node[or] (0) {}
+    child { node[and] {}
+        child { node[or] (1-b) {}
+            child { node[and] {}
+                child { node[or] (2-c) {}
+                    child [level distance=6mm,black] { node {$\ldots$} }
+                    edge from parent[black!70] node[above,yshift=-1mm,black] {$p_c^{(2)}$}
+                }
+                child { node[or,label=10:$\checkmark$] (2-b) {}
+                    edge from parent[black!70] node[black] {$p_b^{(2)}$}
+                }
+                child[missing]
+            }
+            edge from parent node[above] {$p_b^{(1)}$}
+        }
+        child { node[or] (1-a) {}
+            % [level distance=1.5*\xa,level 7/.style={level distance=\xa}]
+            child {  node[and] {}
+                child { node[or] (2-a) {}
+                    child { node[and] {}
+                        child { node[or] (3-c) {}
+                            child [level distance=6mm,black] { node {$\ldots$} }
+                            edge from parent[black!70] node[pos=0.7,yshift=1mm,black] {$p_c^{(3)}$}
+                        }
+                        child { node[or,double distance=1.5pt,label=$\checkmark$] (3-b) {}
+                            edge from parent[black!70] node[pos=0.7,black] {$p_b^{(3)}$}
+                        }
+                        child { node[or] (3-a) {}
+                            child [level distance=6mm,black] { node {$\ldots$} }
+                            edge from parent[black!70] node[pos=0.7,black] {$p_a^{(3)}$}
+                        }
+                    }
+                    edge from parent node[below] {$p_a^{(2)}$}
+                }
+            }
+            edge from parent node[below] {$p_a^{(1)}$}
+        }
+        child[missing]
+    }
+    edge from parent node[below] {$p^{(0)}$}
+};
+
+\draw[->] (3-a) edge[bend left,fake line] (1-a);
+\draw[->] (2-c) edge[bend right,fake line] (0);
+\draw[->] (3-c) edge[bend right,fake line] (2-a);

@@ -9,6 +9,7 @@ Repository structure:
    - `controller.py`: Class for Mealy machines.
    - `environments.py`: Definitions of environments.
  - `logs`: Logs of runs on the environments below.
+ - `tex`: LaTeX sources of the figures, using TikZ, with commands that might be needed for them defined in `local-commands.tex`.
 
 ## Test environments
 
@@ -34,11 +35,19 @@ Every action has the desired outcome with 0.5 probability and leaves the state u
 
 Goal is to walk from one end (A) to the other (B) and back. Observation: A/–/B.
 
+ProbHall-A-one for n=5:
+
+![](figs/probhall-a-one.png)
+
 ### ProbHall-A-rect
 
 Noisy version of the 2-dimensional Hall-A environment, defined in Bonet, Palacios, Geffner: _Automatic Derivation of Memoryless Policies_ (2009).
 
 Noisy action outcomes like in the 1-dim case. For details, see the BPG2009 paper.
+
+ProbHall-A-rect for n=5:
+
+![](figs/probhall-a-rect.png)
 
 ### BridgeWalk
 
