@@ -270,11 +270,10 @@ class PAndOrPlanner:
         for k in range(n, -1, -1):
             p_k = history[k].p
 
-            likelihoods_loop[k] = 0.
-            for m in range(n, k, -1):  # m = n .. k+1
-                likelihoods_loop[k] += alpha['loop'][k, m] / (1 - likelihoods_loop[m])
-                likelihoods_loop[k] *= history[m].p
-            likelihoods_loop[k] += alpha['loop'][k, k]
+            likelihoods_loop[k] = alpha['loop'][k, n]
+            for m in range(n-1, k-1, -1):  # m = n-1 .. k
+                likelihoods_loop[k] *= history[m + 1].p / (1 - likelihoods_loop[m + 1])
+                likelihoods_loop[k] += alpha['loop'][k, m]
 
             if likelihoods_loop[k] > 1. - epsilon:
                 # in this case, the whole tree below k loops back to history[k], so
@@ -326,10 +325,10 @@ def parse_args():
                                     'ProbHallAone',
                                     'ProbHallArect'],
                            help='Environment to run')
-    argparser.add_argument('--max_states',
+    argparser.add_argument('--max-states',
                            type=int,
                            help='Maximum number of controller states')
-    argparser.add_argument('--lpc_desired',
+    argparser.add_argument('--lgt-desired',
                            type=float,
                            default=0.9999)
     argparser.add_argument('-v', '--verbose',
@@ -355,7 +354,7 @@ def main(args, env):
 
     try:
         good_cont, good_alpha = planner.synth_plan(args.max_states,
-                                                   lpc_desired=args.lpc_desired)
+                                                   lpc_desired=args.lgt_desired)
 
         time.sleep(PRINT_WAIT_SECONDS)  # Wait for mesages of logging module
         for (q, o), (q_next, a) in good_cont.transitions.items():
