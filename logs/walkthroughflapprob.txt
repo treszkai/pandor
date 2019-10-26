@@ -1,3 +1,7 @@
+python pandor.py --env WalkThroughFlapProb -v --max-states 1 --lgt-desired 0.9
+INFO:root:Command-line options:
+Namespace(env='WalkThroughFlapProb', env_args=[], lgt_desired=0.9, log_info=False, max_states=1, no_timeit=False, timeit_repeat=1, verbose=True)
+
 INFO:root:AND: Simulating s: -1, q: 0
 INFO:root:OR: Added:   (0,init) -> (0,start)
 INFO:root:AND: Simulating s: 2, q: 0
@@ -50,6 +54,4 @@ Controller found with max  1 states.
 (0,True) → (0,stop)
 Number of steps taken: 9
 
-0.006525 seconds
-
-Process finished with exit code 0
+0.006102 seconds

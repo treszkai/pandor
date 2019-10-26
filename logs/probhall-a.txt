@@ -1,3 +1,7 @@
+python pandor.py --env ProbHallAone -v --max-states 2 --lgt-desired 0.999 4
+INFO:root:Command-line options:
+Namespace(env='ProbHallAone', env_args=[4], lgt_desired=0.999, max_states=2, no_timeit=False, timeit_repeat=1, verbose=True)
+
 INFO:root:AND: Simulating s: (1, F), q: 0
 INFO:root:OR: Added:   (0,A) -> (0,Left)
 INFO:root:AND: Simulating s: (1, F), q: 0
@@ -131,12 +135,9 @@ DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
 INFO:root:AND: Simulating s: (4, T), q: 0
 INFO:root:OR: loop to level 3 with prob 0.5
 DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 0.0}
-DEBUG:root:AND: (before calc) new_alpha['noter'] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: (after  calc) alpha['noter'] = [0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 DEBUG:root:AND: likelihoods: {'win': 0.0, 'fail': 0.0, 'noter': 1.0}
-INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 0.5)]
+INFO:root:AND: fail at history [(q: 0, s: (1, False), p: 1.0), (q: 0, s: (2, False), p: 0.5), (q: 0, s: (3, False), p: 0.5), (q: 0, s: (4, True), p: 0.5), (q: 1, s: (3, True), p: 0.5), (q: 0, s: (2, True), p: 0.5), (q: 0, s: (3, True), p: 0.5)]
 INFO:root:AND (do nothing)
 INFO:root:OR: Added:   (1,-) -> (0,Right)
 INFO:root:AND: Simulating s: (3, T), q: 0
@@ -225,6 +226,6 @@ Controller found with max  2 states.
 (1,A) → (0,stop)
 Number of steps taken: 40
 
-0.022904 seconds
+0.024813 seconds
 
 Process finished with exit code 0

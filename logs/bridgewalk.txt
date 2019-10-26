@@ -1,3 +1,7 @@
+python pandor.py --env BridgeWalk -v --max-states 2 --lgt-desired 0.95 4
+INFO:root:Command-line options:
+Namespace(env='BridgeWalk', env_args=[4], lgt_desired=0.95, log_info=False, max_states=2, no_timeit=False, timeit_repeat=1, verbose=True)
+
 INFO:root:AND: Simulating s: (4, 0), q: 0
 INFO:root:OR: Added:   (0,False) -> (0,fwd)
 INFO:root:AND: Simulating s: (3, 0), q: 0
@@ -618,6 +622,4 @@ Controller found with max  2 states.
 (1,True) → (0,stop)
 Number of steps taken: 124
 
-0.045900 seconds
-
-Process finished with exit code 0
+0.077399 seconds
