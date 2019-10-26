@@ -330,14 +330,21 @@ def parse_args():
                            help='Maximum number of controller states')
     argparser.add_argument('--lgt-desired',
                            type=float,
-                           default=0.9999)
+                           default=0.9999,
+                           help='LGT*, the minimum goal termination likelihood')
     argparser.add_argument('-v', '--verbose',
-                           action='store_true')
+                           action='store_true',
+                           help='Print all logging messages')
+    argparser.add_argument('--log-info',
+                           action='store_true',
+                           help='Print almost all logging messages (level INFO and above)')
     argparser.add_argument('--no-timeit',
-                           action='store_true')
+                           action='store_true',
+                           help="Don't time the execution")
     argparser.add_argument('--timeit-repeat',
                            type=int,
-                           default=1)
+                           default=1,
+                           help='Number of repeats for timing.')
 
     argparser.add_argument('env_args', type=int, nargs='*')
 
@@ -373,8 +380,13 @@ if __name__ == '__main__':
     if args.verbose:
         v = True
         logging.basicConfig(level=logging.DEBUG)
+    elif args.log_info:
+        v = False
+        logging.basicConfig(level=logging.INFO)
     else:
         v = False
+
+    logging.info(f'Command-line options:\n{args}\n')
 
     if args.no_timeit:
         main(args, env)
